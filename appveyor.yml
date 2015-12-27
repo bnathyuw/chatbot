@@ -1,0 +1,22 @@
+version: 0.0.{build}
+skip_tags: true
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- cmd: nuget restore
+build:
+  verbosity: minimal
+artifacts:
+- path: Chatbot/bin/Debug/Chatbot.exe
+  name: Executable
+deploy:
+- provider: GitHub
+  tag: 
+  release: v$(appveyor_build_version)
+  auth_token:
+    secure: rnQb2k6w14URTv8ftGELTHwyiNY9qweCZkTLRtuXlEW3S/CQ+rVLmdmYbTAiPaND
+  artifact: Executable
