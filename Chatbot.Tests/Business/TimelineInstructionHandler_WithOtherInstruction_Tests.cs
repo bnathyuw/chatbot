@@ -1,34 +1,35 @@
-﻿using Chatbot.Business;
+using Chatbot.Business;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class StatusInstructionHandler_WithOtherInstruction_Tests : IInstructionHandler
+    public class TimelineInstructionHandler_WithOtherInstruction_Tests : IInstructionHandler
     {
         private string _actualInstruction;
-        private StatusInstructionHandler _statusInstructionHandler;
+        private TimelineInstructionHandler _timelineInstructionHandler;
         private const State ExpectedState = State.Exit;
 
         [SetUp]
         public void SetUp()
         {
             _actualInstruction = null;
-            _statusInstructionHandler = new StatusInstructionHandler(null, null, null, null, this);
+            _timelineInstructionHandler = new TimelineInstructionHandler(null, this);
         }
 
-        [TestCase("exit")]
         [TestCase("Unknown instruction")]
+        [TestCase("exit")]
+        [TestCase("status")]
         public void Passes_instruction_to_successor(string instruction)
         {
-            _statusInstructionHandler.HandleInstruction(instruction);
+            _timelineInstructionHandler.HandleInstruction(instruction);
             Assert.That(_actualInstruction, Is.EqualTo(instruction));
         }
 
         [Test]
         public void Returns_state_from_successor()
         {
-            var state = _statusInstructionHandler.HandleInstruction("Unknown instruction");
+            var state = _timelineInstructionHandler.HandleInstruction("Unknown instruction");
             Assert.That(state, Is.EqualTo(ExpectedState));
         }
 

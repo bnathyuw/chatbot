@@ -50,6 +50,7 @@
     <Compile Include="Business\ExitInstructionHandler.cs" />
     <Compile Include="Business\State.cs" />
     <Compile Include="Business\StatusInstructionHandler.cs" />
+    <Compile Include="Business\TimelineInstructionHandler.cs" />
     <Compile Include="Business\UnknownInstructionHandler.cs" />
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Program.cs" />
