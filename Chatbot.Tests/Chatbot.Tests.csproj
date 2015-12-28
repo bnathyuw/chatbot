@@ -47,6 +47,7 @@
     <Compile Include="Adapters\ConsoleIo_InstructionReader_Tests.cs" />
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
     <Compile Include="Adapters\MessageStore_WithNoMessages_Tests.cs" />
+    <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
