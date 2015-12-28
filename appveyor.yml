@@ -20,3 +20,11 @@ deploy:
   auth_token:
     secure: rnQb2k6w14URTv8ftGELTHwyiNY9qweCZkTLRtuXlEW3S/CQ+rVLmdmYbTAiPaND
   artifact: Executable
+notifications:
+- provider: Slack
+  auth_token:
+    secure: p5WKK0xPqN6jj3RrPuwpuxwLUP40mRx58dOfEzO46WVh+QVB+5VhduLOVlHoj7t8dyhEA0/gsxc8qHRnw+YxBQ==
+  channel: ci
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
