@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using Chatbot.Business;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace Chatbot.Tests
+namespace Chatbot.Tests.Business
 {
     [TestFixture]
     public class UserInterface_StatusInstruction_Tests : IInstructionReader, IMessageDisplayer, IClock, IMessageCounter, IUserConnexionCounter
