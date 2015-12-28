@@ -11,6 +11,7 @@ namespace Chatbot.Tests.Business
         private string _actualMessage;
         private readonly DateTime _now = new DateTime(2015, 12, 28, 22, 30, 00);
         private string _actualUser;
+        private State _state;
 
         [SetUp]
         public void SetUp()
@@ -18,7 +19,7 @@ namespace Chatbot.Tests.Business
             _actualMessage = null;
             _actualUser = null;
             var timelineInstructionHandler = new TimelineInstructionHandler(this, null, this, this);
-            timelineInstructionHandler.HandleInstruction("Alice");
+            _state = timelineInstructionHandler.HandleInstruction("Alice");
         }
 
         [Test]
@@ -27,6 +28,10 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Displays_users_messages() => 
             Assert.That(_actualMessage, Is.EqualTo("Sample message (10 minutes ago)"));
+
+        [Test]
+        public void Returns_a_continue_state() =>
+            Assert.That(_state, Is.EqualTo(State.Continue));
 
         public void ShowMessage(string output)
         {

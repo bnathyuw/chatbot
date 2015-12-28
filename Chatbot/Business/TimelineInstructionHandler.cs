@@ -38,7 +38,7 @@ namespace Chatbot.Business
                 return _successor.HandleInstruction(instruction);
 
             DisplayUsersMessages(instruction);
-            return State.Exit;
+            return State.Continue;
         }
 
         private bool CanHandle(string instruction)
