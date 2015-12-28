@@ -44,23 +44,23 @@ namespace Chatbot.Business
             _userConnexionStore = userConnexionStore;
         }
 
-        public State ProcessInstruction()
+        public State ProcessNextInstruction()
         {
             var instruction = _instructionReader.ReadInstruction();
-            State state;
-            switch (instruction)
+            return ProcessInstruction(instruction);
+        }
+
+        private State ProcessInstruction(string instruction)
+        {
+            if (instruction == "status")
             {
-                case "status":
-                    state = HandleStatusInstruction();
-                    break;
-                case "exit":
-                    state = HandleExitInstruction();
-                    break;
-                default:
-                    state = HandleUnknownInstruction();
-                    break;
+                return HandleStatusInstruction();
             }
-            return state;
+            if (instruction == "exit")
+            {
+                return HandleExitInstruction();
+            }
+            return HandleUnknownInstruction();
         }
 
         private State HandleStatusInstruction()

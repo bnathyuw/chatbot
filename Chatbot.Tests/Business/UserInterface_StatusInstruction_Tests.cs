@@ -19,7 +19,7 @@ namespace Chatbot.Tests.Business
             _instruction = "status";
             _actualMessages = new List<string>();
             _userInterface = new UserInterface(this, this, this, this, this);
-            _state = _userInterface.ProcessInstruction();
+            _state = _userInterface.ProcessNextInstruction();
         }
 
         [TestCase("Status: ok")]

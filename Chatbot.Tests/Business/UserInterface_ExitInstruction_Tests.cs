@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         {
             _instruction = "exit";
             var userInterface = new UserInterface(this, null, null, null, null);
-            _state = userInterface.ProcessInstruction();
+            _state = userInterface.ProcessNextInstruction();
         }
 
         [Test]

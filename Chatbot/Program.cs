@@ -21,7 +21,7 @@ namespace Chatbot
             State state;
             do
             {
-                state = UserInterface.ProcessInstruction();
+                state = UserInterface.ProcessNextInstruction();
             } while (state == State.Continue);
         }
     }
