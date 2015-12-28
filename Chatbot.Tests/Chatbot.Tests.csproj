@@ -51,6 +51,7 @@
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInterface_StatusInstruction_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
