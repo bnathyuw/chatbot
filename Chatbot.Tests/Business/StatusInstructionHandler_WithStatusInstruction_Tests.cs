@@ -6,20 +6,17 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class UserInterface_StatusInstruction_Tests : IInstructionReader, IMessageDisplayer, IClock, IMessageCounter, IUserConnexionCounter
+    public class StatusInstructionHandler_WithStatusInstruction_Tests : IMessageDisplayer, IClock, IMessageCounter, IUserConnexionCounter
     {
-        private string _instruction;
         private IList<string> _actualMessages;
-        private UserInterface _userInterface;
         private State _state;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _instruction = "status";
             _actualMessages = new List<string>();
-            _userInterface = new UserInterface(this, new StatusInstructionHandler(this, this, this, this, new ExitInstructionHandler(new UnknownInstructionHandler())));
-            _state = _userInterface.ProcessNextInstruction();
+            var statusInstructionHandler = new StatusInstructionHandler(this, this, this, this, null);
+            _state = statusInstructionHandler.HandleInstruction("status");
         }
 
         [TestCase("Status: ok")]
@@ -30,8 +27,6 @@ namespace Chatbot.Tests.Business
 
         [Test]
         public void Returns_a_continue_state() => Assert.That(_state, Is.EqualTo(State.Continue));
-
-        public string ReadInstruction() => _instruction;
 
         public void ShowMessage(string output) => _actualMessages.Add(output);
 
