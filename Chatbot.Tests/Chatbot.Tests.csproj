@@ -49,7 +49,8 @@
     <Compile Include="Adapters\MessageStore_WithNoMessages_Tests.cs" />
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
-    <Compile Include="Business\UserInterface_ExitInstruction_Tests.cs" />
+    <Compile Include="Business\ExitInstructionHandler_WithExitInstruction_Tests.cs" />
+    <Compile Include="Business\ExitInstructionHandler_WithOtherInstruction_Tests.cs" />
     <Compile Include="Business\UserInterface_Tests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
