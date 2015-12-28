@@ -47,7 +47,10 @@
     <Compile Include="Adapters\MessageStore.cs" />
     <Compile Include="Adapters\SystemClock.cs" />
     <Compile Include="Adapters\UserConnexionStore.cs" />
+    <Compile Include="Business\ExitInstructionHandler.cs" />
     <Compile Include="Business\State.cs" />
+    <Compile Include="Business\StatusInstructionHandler.cs" />
+    <Compile Include="Business\UnknownInstructionHandler.cs" />
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

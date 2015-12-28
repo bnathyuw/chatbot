@@ -18,7 +18,7 @@ namespace Chatbot.Tests.Business
         {
             _instruction = "status";
             _actualMessages = new List<string>();
-            _userInterface = new UserInterface(this, this, this, this, this);
+            _userInterface = new UserInterface(this, new StatusInstructionHandler(this, this, this, this, new ExitInstructionHandler(new UnknownInstructionHandler())));
             _state = _userInterface.ProcessNextInstruction();
         }
 

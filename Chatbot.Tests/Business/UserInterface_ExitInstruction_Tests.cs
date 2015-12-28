@@ -13,7 +13,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _instruction = "exit";
-            var userInterface = new UserInterface(this, null, null, null, null);
+            var userInterface = new UserInterface(this, new StatusInstructionHandler(null, null, null, null, new ExitInstructionHandler(new UnknownInstructionHandler())));
             _state = userInterface.ProcessNextInstruction();
         }
 
