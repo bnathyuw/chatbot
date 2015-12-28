@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Chatbot.Business
@@ -14,7 +15,6 @@ namespace Chatbot.Business
         public string Text { get; set; }
         public DateTime SentOn { get; set; }
     }
-
 
     public class TimelineInstructionHandler : IInstructionHandler
     {
@@ -37,18 +37,28 @@ namespace Chatbot.Business
             if (!CanHandle(instruction))
                 return _successor.HandleInstruction(instruction);
 
-            var messages = _userMessageRetriever.RetrieveUserMessages(instruction);
-            foreach (var message in messages)
-            {
-                var timeDifference = _clock.Now - message.SentOn;
-                _messageDisplayer.ShowMessage($"{message.Text} ({timeDifference.Minutes} minutes ago)");
-            }
+            DisplayUsersMessages(instruction);
             return State.Exit;
         }
 
         private bool CanHandle(string instruction)
         {
             return _regex.IsMatch(instruction) && instruction != "exit" && instruction != "status";
+        }
+
+        private void DisplayUsersMessages(string instruction)
+        {
+            var messages = _userMessageRetriever.RetrieveUserMessages(instruction);
+            foreach (var output in messages.Select(CreateOutput))
+            {
+                _messageDisplayer.ShowMessage(output);
+            }
+        }
+
+        private string CreateOutput(Message message)
+        {
+            var timeDifference = _clock.Now - message.SentOn;
+            return $"{message.Text} ({timeDifference.Minutes} minutes ago)";
         }
     }
 }
