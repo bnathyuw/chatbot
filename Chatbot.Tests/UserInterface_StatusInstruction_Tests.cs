@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Chatbot.Business;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Chatbot.Tests
 {
@@ -22,14 +21,17 @@ namespace Chatbot.Tests
             _userInterface.ProcessInstruction();
         }
 
-        [Test]
-        public void Reports_status_ok() => Assert.That(_actualMessages, Does.Contain("Status: ok"));
+        [TestCase("Status: ok")]
+        [TestCase("Current time: 17:36, 28 December 2015")]
+        [TestCase("Messages sent: 35")]
+        [TestCase("User connexions: 46")]
+        public void Displays_expected_messages(string message) => Assert.That(_actualMessages, Does.Contain(message));
 
         public string ReadInstruction() => _instruction;
 
         public void ShowMessage(string output) => _actualMessages.Add(output);
 
-        public DateTime Now { get; }
+        public DateTime Now => new DateTime(2015, 12, 28, 17, 36, 00);
 
         public int CountMessages() => 35;
 
