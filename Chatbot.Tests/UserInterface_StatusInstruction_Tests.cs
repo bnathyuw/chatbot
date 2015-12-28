@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Chatbot.Business;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Chatbot.Tests
 {
@@ -11,6 +12,7 @@ namespace Chatbot.Tests
         private string _instruction;
         private IList<string> _actualMessages;
         private UserInterface _userInterface;
+        private State _state;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -18,7 +20,7 @@ namespace Chatbot.Tests
             _instruction = "status";
             _actualMessages = new List<string>();
             _userInterface = new UserInterface(this, this, this, this, this);
-            _userInterface.ProcessInstruction();
+            _state = _userInterface.ProcessInstruction();
         }
 
         [TestCase("Status: ok")]
@@ -26,6 +28,9 @@ namespace Chatbot.Tests
         [TestCase("Messages sent: 35")]
         [TestCase("User connexions: 46")]
         public void Displays_expected_messages(string message) => Assert.That(_actualMessages, Does.Contain(message));
+
+        [Test]
+        public void Returns_a_continue_state() => Assert.That(_state, Is.EqualTo(State.Continue));
 
         public string ReadInstruction() => _instruction;
 
