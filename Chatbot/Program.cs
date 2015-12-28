@@ -13,10 +13,8 @@ namespace Chatbot
             var systemClock = new SystemClock();
             var messageStore = new MessageStore();
             var userConnexionStore = new UserConnexionStore();
-            var unknownInstructionHandler = new UnknownInstructionHandler();
-            var exitInstructionHandler = new ExitInstructionHandler(unknownInstructionHandler);
-            var statusInstructionHandler = new StatusInstructionHandler(consoleIo, systemClock, messageStore, userConnexionStore, exitInstructionHandler);
-            UserInterface = new UserInterface(consoleIo, statusInstructionHandler);
+            var instructionHandler = InstructionHandler.With(consoleIo, systemClock, messageStore, userConnexionStore);
+            UserInterface = new UserInterface(consoleIo, instructionHandler);
         }
 
         static void Main()
