@@ -18,9 +18,9 @@ namespace Chatbot.Tests.Specs
 
             var consoleIo = this;
             var systemClock = this;
-            var messageStore = new MessageStore();
+            var messageStore = new MessageStore(this);
             var userConnexionStore = new UserConnexionStore();
-            var statusInstructionHandler = InstructionHandler.With(consoleIo, systemClock, messageStore, userConnexionStore);
+            var statusInstructionHandler = InstructionHandler.With(consoleIo, systemClock, messageStore, userConnexionStore, messageStore);
             _userInterface = new UserInterface(consoleIo, statusInstructionHandler);
         }
 

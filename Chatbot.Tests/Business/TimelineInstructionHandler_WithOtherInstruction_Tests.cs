@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void SetUp()
         {
             _actualInstruction = null;
-            _timelineInstructionHandler = new TimelineInstructionHandler(null, this);
+            _timelineInstructionHandler = new TimelineInstructionHandler(null, this, null, null);
         }
 
         [TestCase("Unknown instruction")]
