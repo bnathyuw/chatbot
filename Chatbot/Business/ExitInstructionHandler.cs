@@ -11,11 +11,12 @@ namespace Chatbot.Business
 
         public State HandleInstruction(string instruction)
         {
-            if (instruction == "exit")
-            {
-                return State.Exit;
-            }
-            return _successor.HandleInstruction(instruction);
+            if (!CanHandle(instruction))
+                return _successor.HandleInstruction(instruction);
+
+            return State.Exit;
         }
+
+        private static bool CanHandle(string instruction) => instruction == "exit";
     }
 }

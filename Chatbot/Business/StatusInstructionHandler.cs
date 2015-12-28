@@ -41,20 +41,21 @@ namespace Chatbot.Business
 
         public State HandleInstruction(string instruction)
         {
-            if (instruction == "status")
-            {
-                return HandleStatusInstruction();
-            }
-            return _successor.HandleInstruction(instruction);
+            if (!CanHandle(instruction))
+                return _successor.HandleInstruction(instruction);
+
+            ShowStatusMessage();
+            return State.Continue;
         }
 
-        private State HandleStatusInstruction()
+        private static bool CanHandle(string instruction) => instruction == "status";
+
+        private void ShowStatusMessage()
         {
             _messageDisplayer.ShowMessage("Status: ok");
             _messageDisplayer.ShowMessage($"Current time: {_clock.Now:HH:mm, d MMMM yyyy}");
             _messageDisplayer.ShowMessage($"Messages sent: {_messageStore.CountMessages()}");
             _messageDisplayer.ShowMessage($"User connexions: {_userConnexionStore.CountUserConnexions()}");
-            return State.Continue;
         }
     }
 }
