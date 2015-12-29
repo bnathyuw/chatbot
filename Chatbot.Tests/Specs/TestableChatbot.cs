@@ -10,22 +10,21 @@ namespace Chatbot.Tests.Specs
         private readonly UserInterface _userInterface;
         private string _nextInstruction;
         private readonly Queue<string> _messagesDisplayed;
-        private DateTime _now;
+        private readonly DateTime _referenceTime = new DateTime(2015, 12, 28, 20, 34, 00);
 
-        public TestableChatbot(DateTime now)
+        public TestableChatbot()
         {
             _messagesDisplayed = new Queue<string>();
-            _now = now;
             var messageStore = new MessageStore();
-            messageStore.SaveMessage(new Message { User = "Alice", Text = "I love the weather today", SentOn = _now.AddMinutes(-5) });
+            messageStore.SaveMessage(new Message { User = "Alice", Text = "I love the weather today", SentOn = _referenceTime.AddMinutes(-5) });
             var userConnexionStore = new UserConnexionStore();
             var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore);
             _userInterface = new UserInterface(this, statusInstructionHandler);
         }
 
-        public void ProcessInstruction(DateTime time, string instruction)
+        public void ProcessInstruction(string instruction, TimeSpan? timeDifference = null)
         {
-            _now = time;
+            Now = _referenceTime.Add(timeDifference ?? TimeSpan.Zero);
             _nextInstruction = instruction;
             _userInterface.ProcessNextInstruction();
         }
@@ -34,7 +33,7 @@ namespace Chatbot.Tests.Specs
 
         public void ShowMessage(string output) => _messagesDisplayed.Enqueue(output);
 
-        public DateTime Now => _now;
+        public DateTime Now { get; private set; }
 
         public string ReadInstruction() => _nextInstruction;
     }

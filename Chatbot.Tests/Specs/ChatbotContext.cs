@@ -10,17 +10,17 @@ namespace Chatbot.Tests.Specs
 
         public ChatbotContext()
         {
-            _testableChatbot = new TestableChatbot(_referenceTime);
+            _testableChatbot = new TestableChatbot();
         }
 
         public void PostAlicesMessages()
         {
-            _testableChatbot.ProcessInstruction(_referenceTime.AddMinutes(-5), "Alice -> I love the weather today");
+            _testableChatbot.ProcessInstruction("Alice -> I love the weather today", TimeSpan.FromMinutes(-5));
         }
 
         public void ViewAlicesTimeline()
         {
-            _testableChatbot.ProcessInstruction(_referenceTime, "Alice");
+            _testableChatbot.ProcessInstruction("Alice");
         }
 
         public void AssertAlicesMessages() => 
