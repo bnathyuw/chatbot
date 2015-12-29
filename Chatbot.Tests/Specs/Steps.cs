@@ -22,6 +22,6 @@ namespace Chatbot.Tests.Specs
         public void ThenIShouldSeeAlicesMessage() => _context.AssertAlicesMessages();
 
         [Then(@"I should see Bob's messages")]
-        public void ThenIShouldSeeBobSMessages() => _context.AssertBobsMessages();
+        public void ThenIShouldSeeBobsMessages() => _context.AssertBobsMessages();
     }
 }

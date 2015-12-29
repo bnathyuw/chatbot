@@ -1,17 +1,5 @@
-using System;
-
 namespace Chatbot.Business
 {
-    public interface IMessageDisplayer
-    {
-        void ShowMessage(string output);
-    }
-
-    public interface IClock
-    {
-        DateTime Now { get; }
-    }
-
     public interface IMessageCounter
     {
         int CountMessages();

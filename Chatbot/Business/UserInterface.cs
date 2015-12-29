@@ -5,6 +5,12 @@
         string ReadInstruction();
     }
 
+    public enum State
+    {
+        Continue,
+        Exit
+    }
+
     public interface IInstructionHandler
     {
         State HandleInstruction(string instruction);
