@@ -1,6 +1,6 @@
 using System;
 
-namespace Chatbot.Tests.Specs
+namespace Chatbot.Tests.Time
 {
     public static class TimespanCreator
     {

@@ -57,6 +57,7 @@
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
     <Compile Include="Business\ExitInstructionHandler_WithExitInstruction_Tests.cs" />
     <Compile Include="Business\ExitInstructionHandler_WithOtherInstruction_Tests.cs" />
+    <Compile Include="Business\MessageAgeFormatter_Tests.cs" />
     <Compile Include="Business\PostInstructionHandler_WithOtherInstruction_Tests.cs" />
     <Compile Include="Business\PostInstructionHandler_WithPostInstruction_Tests.cs" />
     <Compile Include="Business\SampleInstructions.cs" />
@@ -67,7 +68,6 @@
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Business\StatusInstructionHandler_WithStatusInstruction_Tests.cs" />
-    <Compile Include="Specs\TimespanCreator.cs" />
     <Compile Include="Specs\ChatbotContext.cs" />
     <Compile Include="Specs\Reading.feature.cs">
       <AutoGen>True</AutoGen>
@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Specs\Steps.cs" />
     <Compile Include="Specs\TestableChatbot.cs" />
+    <Compile Include="Time\TimespanCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

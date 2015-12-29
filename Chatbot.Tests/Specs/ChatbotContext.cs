@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Chatbot.Tests.Time;
+using NUnit.Framework;
 
 namespace Chatbot.Tests.Specs
 {
