@@ -57,6 +57,8 @@
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
     <Compile Include="Business\ExitInstructionHandler_WithExitInstruction_Tests.cs" />
     <Compile Include="Business\ExitInstructionHandler_WithOtherInstruction_Tests.cs" />
+    <Compile Include="Business\PostInstructionHandler_WithPostInstruction_Tests.cs" />
+    <Compile Include="Business\SampleInstructions.cs" />
     <Compile Include="Business\StatusInstructionHandler_WithOtherInstruction_Tests.cs" />
     <Compile Include="Business\TimelineInstructionHandler_WithOtherInstruction_Tests.cs" />
     <Compile Include="Business\TimelineInstructionHandler_WithTimelineInstruction_Tests.cs" />

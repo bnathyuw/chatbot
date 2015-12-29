@@ -12,7 +12,7 @@ namespace Chatbot.Tests.Business
         public void SetUp()
         {
             var exitInstructionHandler = new ExitInstructionHandler(null);
-            _state = exitInstructionHandler.HandleInstruction("exit");
+            _state = exitInstructionHandler.HandleInstruction(SampleInstructions.Exit);
         }
 
         [Test]

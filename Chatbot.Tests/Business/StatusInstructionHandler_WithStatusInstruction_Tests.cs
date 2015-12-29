@@ -16,7 +16,7 @@ namespace Chatbot.Tests.Business
         {
             _actualMessages = new List<string>();
             var statusInstructionHandler = new StatusInstructionHandler(this, this, this, this, null);
-            _state = statusInstructionHandler.HandleInstruction("status");
+            _state = statusInstructionHandler.HandleInstruction(SampleInstructions.Status);
         }
 
         [TestCase("Status: ok")]

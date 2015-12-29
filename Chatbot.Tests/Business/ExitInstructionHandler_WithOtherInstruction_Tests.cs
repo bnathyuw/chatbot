@@ -17,8 +17,10 @@ namespace Chatbot.Tests.Business
             _exitInstructionHandler = new ExitInstructionHandler(this);
         }
 
-        [TestCase("status")]
-        [TestCase("Unknown instruction")]
+        [TestCase(SampleInstructions.Status)]
+        [TestCase(SampleInstructions.Unknown)]
+        [TestCase(SampleInstructions.Timeline)]
+        [TestCase(SampleInstructions.Unknown)]
         public void Passes_instruction_to_successor(string instruction)
         {
             _exitInstructionHandler.HandleInstruction(instruction);
@@ -28,7 +30,7 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Returns_state_from_successor()
         {
-            var state = _exitInstructionHandler.HandleInstruction("Unknown instruction");
+            var state = _exitInstructionHandler.HandleInstruction(SampleInstructions.Unknown);
             Assert.That(state, Is.EqualTo(ExpectedState));
         }
 

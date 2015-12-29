@@ -49,6 +49,7 @@
     <Compile Include="Adapters\UserConnexionStore.cs" />
     <Compile Include="Business\ExitInstructionHandler.cs" />
     <Compile Include="Business\InstructionHandler.cs" />
+    <Compile Include="Business\PostInstructionHandler.cs" />
     <Compile Include="Business\State.cs" />
     <Compile Include="Business\StatusInstructionHandler.cs" />
     <Compile Include="Business\TimelineInstructionHandler.cs" />

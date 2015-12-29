@@ -17,9 +17,10 @@ namespace Chatbot.Tests.Business
             _timelineInstructionHandler = new TimelineInstructionHandler(null, this, null, null);
         }
 
-        [TestCase("Unknown instruction")]
-        [TestCase("exit")]
-        [TestCase("status")]
+        [TestCase(SampleInstructions.Unknown)]
+        [TestCase(SampleInstructions.Exit)]
+        [TestCase(SampleInstructions.Status)]
+        [TestCase(SampleInstructions.Post)]
         public void Passes_instruction_to_successor(string instruction)
         {
             _timelineInstructionHandler.HandleInstruction(instruction);
@@ -29,7 +30,7 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Returns_state_from_successor()
         {
-            var state = _timelineInstructionHandler.HandleInstruction("Unknown instruction");
+            var state = _timelineInstructionHandler.HandleInstruction(SampleInstructions.Unknown);
             Assert.That(state, Is.EqualTo(ExpectedState));
         }
 
