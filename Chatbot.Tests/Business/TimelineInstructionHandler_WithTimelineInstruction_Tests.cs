@@ -9,7 +9,7 @@ namespace Chatbot.Tests.Business
     public class TimelineInstructionHandler_WithTimelineInstruction_Tests : IMessageDisplayer, IUserMessageRetriever, IClock
     {
         private string _actualMessage;
-        private readonly DateTime _now = new DateTime(2015, 12, 28, 22, 30, 00);
+        private readonly DateTime _now = new DateTime(2015, 12, 28, 22, 30, 0);
         private string _actualUser;
         private State _state;
 

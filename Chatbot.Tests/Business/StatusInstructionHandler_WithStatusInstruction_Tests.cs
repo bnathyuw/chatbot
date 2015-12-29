@@ -30,7 +30,7 @@ namespace Chatbot.Tests.Business
 
         public void ShowMessage(string output) => _actualMessages.Add(output);
 
-        public DateTime Now => new DateTime(2015, 12, 28, 17, 36, 00);
+        public DateTime Now => new DateTime(2015, 12, 28, 17, 36, 0);
 
         public int CountMessages() => 35;
 

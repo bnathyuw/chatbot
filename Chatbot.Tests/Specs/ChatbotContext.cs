@@ -5,7 +5,7 @@ namespace Chatbot.Tests.Specs
 {
     public class ChatbotContext
     {
-        private readonly DateTime _referenceTime = new DateTime(2015, 12, 28, 20, 34, 00);
+        private readonly DateTime _referenceTime = new DateTime(2015, 12, 28, 20, 34, 0);
         private readonly TestableChatbot _testableChatbot;
 
         public ChatbotContext()

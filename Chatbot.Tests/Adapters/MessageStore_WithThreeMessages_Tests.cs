@@ -9,7 +9,7 @@ namespace Chatbot.Tests.Adapters
     [TestFixture]
     public class MessageStore_WithThreeMessages_Tests : IClock
     {
-        private readonly DateTime _now = new DateTime(2015, 12, 29, 14, 52, 00);
+        private readonly DateTime _now = new DateTime(2015, 12, 29, 14, 52, 0);
         private MessageStore _messageStore;
 
         [OneTimeSetUp]

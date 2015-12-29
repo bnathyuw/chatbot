@@ -10,7 +10,7 @@ namespace Chatbot.Tests.Specs
         private readonly UserInterface _userInterface;
         private string _nextInstruction;
         private readonly Queue<string> _messagesDisplayed;
-        private readonly DateTime _referenceTime = new DateTime(2015, 12, 28, 20, 34, 00);
+        private readonly DateTime _referenceTime = new DateTime(2015, 12, 28, 20, 34, 0);
 
         public TestableChatbot()
         {
