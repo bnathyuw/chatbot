@@ -17,20 +17,25 @@ namespace Chatbot.Business
         public string User { get; set; }
     }
 
+    public interface IMessageAgeFormatter
+    {
+        string FormatAge(Message message);
+    }
+
     public class TimelineInstructionHandler : IInstructionHandler
     {
         private readonly IMessageDisplayer _messageDisplayer;
         private readonly IInstructionHandler _successor;
         private readonly IUserMessageRetriever _userMessageRetriever;
         private readonly Regex _regex = new Regex("^[A-Za-z]*$");
-        private readonly IClock _clock;
+        private readonly IMessageAgeFormatter _messageAgeFormatter;
 
-        public TimelineInstructionHandler(IMessageDisplayer messageDisplayer, IInstructionHandler successor, IUserMessageRetriever userMessageRetriever, IClock clock)
+        public TimelineInstructionHandler(IMessageDisplayer messageDisplayer, IInstructionHandler successor, IUserMessageRetriever userMessageRetriever, IMessageAgeFormatter messageAgeFormatter)
         {
             _messageDisplayer = messageDisplayer;
             _successor = successor;
             _userMessageRetriever = userMessageRetriever;
-            _clock = clock;
+            _messageAgeFormatter = messageAgeFormatter;
         }
 
         public State HandleInstruction(string instruction)
@@ -50,17 +55,15 @@ namespace Chatbot.Business
         private void DisplayUsersMessages(string instruction)
         {
             var messages = _userMessageRetriever.RetrieveUserMessages(instruction);
-            foreach (var output in messages.Select(CreateOutput))
+            foreach (var output in messages.Select(FormatMessage))
             {
                 _messageDisplayer.ShowMessage(output);
             }
         }
 
-        private string CreateOutput(Message message)
+        private string FormatMessage(Message message)
         {
-            var timeDifference = _clock.Now - message.SentOn;
-            var unit = timeDifference.Minutes == 1 ? "minute" : "minutes";
-            return $"{message.Text} ({timeDifference.Minutes} {unit} ago)";
+            return $"{message.Text} ({_messageAgeFormatter.FormatAge(message)})";
         }
     }
 }

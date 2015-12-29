@@ -9,7 +9,6 @@ namespace Chatbot.Tests.Business
     public class TimelineInstructionHandler_WithTimelineInstruction_Tests : IMessageDisplayer, IUserMessageRetriever, IClock
     {
         private const string ExpectedUser = "Alice";
-        private string _actualMessage;
         private readonly DateTime _now = new DateTime(2015, 12, 28, 22, 30, 0);
         private string _actualUser;
         private State _state;
@@ -18,10 +17,10 @@ namespace Chatbot.Tests.Business
         [SetUp]
         public void SetUp()
         {
-            _actualMessage = null;
             _actualMessages = new List<string>();
             _actualUser = null;
-            var timelineInstructionHandler = new TimelineInstructionHandler(this, null, this, this);
+            var messageAgeFormatter = new MessageAgeFormatter(this);
+            var timelineInstructionHandler = new TimelineInstructionHandler(this, null, this, messageAgeFormatter);
             _state = timelineInstructionHandler.HandleInstruction(ExpectedUser);
         }
 
@@ -38,7 +37,6 @@ namespace Chatbot.Tests.Business
 
         public void ShowMessage(string output)
         {
-            _actualMessage = output;
             _actualMessages.Add(output);
         }
 
