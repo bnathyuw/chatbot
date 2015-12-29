@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using Chatbot.Adapters;
@@ -7,18 +7,16 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class ConsoleIo_MessageDisplayer_Tests : TextWriter
-    {
+    public class ConsoleIo_InstructionReader_PromptTests : TextWriter { 
         private TextWriter _stdOut;
-        private string _actualMessage;
-        private const string ExpectedMessage = "Expected Message";
+        private string _actualPrompt;
 
         [SetUp]
         public void SetUp()
         {
             ImpersonateStandardOut();
             var messageDisplayer = new ConsoleIo();
-            messageDisplayer.ShowMessage(ExpectedMessage);
+            messageDisplayer.ReadInstruction();
         }
 
         private void ImpersonateStandardOut()
@@ -33,12 +31,9 @@ namespace Chatbot.Tests.Adapters
         private void RestoreStandardOut() => Console.SetOut(_stdOut);
 
         [Test]
-        public void Displays_message_on_standard_out()
-        {
-            Assert.That(_actualMessage, Is.EqualTo(ExpectedMessage));
-        }
+        public void Prompts_for_input() => Assert.That(_actualPrompt, Is.EqualTo("> "));
 
-        public override void WriteLine(string value) => _actualMessage = value;
+        public override void Write(string value) => _actualPrompt = value;
 
         public override Encoding Encoding => Encoding.UTF8;
     }

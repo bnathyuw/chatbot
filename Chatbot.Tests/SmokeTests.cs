@@ -33,10 +33,10 @@ namespace Chatbot.Tests
         public void Shows_status()
         {
             _process.StandardInput.WriteLine("status");
-            Assert.That(_process.StandardOutput.ReadLine(), Is.EqualTo("Status: ok"));
-            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("^Current time: "));
-            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("^Messages sent: "));
-            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("^User connexions: "));
+            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("Status: ok"));
+            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("Current time: "));
+            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("Messages sent: "));
+            Assert.That(_process.StandardOutput.ReadLine(), Does.Match("User connexions: "));
         }
     }
 }

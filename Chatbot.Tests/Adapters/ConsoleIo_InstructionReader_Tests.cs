@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Chatbot.Adapters;
-using Chatbot.Business;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
@@ -10,14 +9,15 @@ namespace Chatbot.Tests.Adapters
     public class ConsoleIo_InstructionReader_Tests : TextReader
     {
         private TextReader _stdIn;
-        private IInstructionReader _instructionReader;
+        private string _actualInstruction;
         private const string ExpectedInstruction = "Expected Instruction";
 
         [SetUp]
         public void SetUp()
         {
             ImpersonateStandardInput();
-            _instructionReader = new ConsoleIo();
+            var instructionReader = new ConsoleIo();
+            _actualInstruction = instructionReader.ReadInstruction();
         }
 
         private void ImpersonateStandardInput()
@@ -32,8 +32,8 @@ namespace Chatbot.Tests.Adapters
         private void RestoreStandardInput() => Console.SetIn(_stdIn);
 
         [Test]
-        public void Reads_instruction_from_standard_input() => 
-            Assert.That(_instructionReader.ReadInstruction(), Is.EqualTo(ExpectedInstruction));
+        public void Reads_instruction_from_standard_input() =>
+            Assert.That(_actualInstruction, Is.EqualTo(ExpectedInstruction));
 
         public override string ReadLine() => ExpectedInstruction;
     }

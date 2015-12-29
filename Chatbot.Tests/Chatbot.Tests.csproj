@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ConsoleIo_InstructionReader_PromptTests.cs" />
     <Compile Include="Adapters\ConsoleIo_InstructionReader_Tests.cs" />
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
     <Compile Include="Adapters\MessageStore_WithNoMessages_Tests.cs" />
