@@ -67,6 +67,7 @@
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Business\StatusInstructionHandler_WithStatusInstruction_Tests.cs" />
+    <Compile Include="Specs\TimespanCreator.cs" />
     <Compile Include="Specs\ChatbotContext.cs" />
     <Compile Include="Specs\Reading.feature.cs">
       <AutoGen>True</AutoGen>

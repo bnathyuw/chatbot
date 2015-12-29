@@ -29,6 +29,10 @@ namespace Chatbot.Tests.Adapters
         public void Retrieves_all_a_users_messages(string user, int expectedMessageCount) =>
             Assert.That(_messageStore.RetrieveUserMessages(user).Count(), Is.EqualTo(expectedMessageCount));
 
+        [Test]
+        public void Retrieves_most_recent_message_first() =>
+            Assert.That(_messageStore.RetrieveUserMessages("Bob").First().Text, Is.EqualTo("Message 3"));
+
         public DateTime Now => _now;
     }
 }

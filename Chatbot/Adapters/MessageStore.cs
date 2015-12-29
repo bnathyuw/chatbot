@@ -10,7 +10,7 @@ namespace Chatbot.Adapters
 
         public int CountMessages() => _messages.Count;
 
-        public IEnumerable<Message> RetrieveUserMessages(string user) => _messages.Where(m => m.User == user);
+        public IEnumerable<Message> RetrieveUserMessages(string user) => _messages.Where(m => m.User == user).OrderByDescending(m => m.SentOn);
 
         public void SaveMessage(Message message) => _messages.Add(message);
     }

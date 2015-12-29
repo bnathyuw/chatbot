@@ -12,13 +12,16 @@ namespace Chatbot.Tests.Specs
             _context = context;
         }
 
-        [Given(@"Alice has posted to Chatbot")]
-        public void GivenAliceHasPostedToChatbot() => _context.PostAlicesMessages();
+        [Given(@"[a-zA-Z]* has posted to Chatbot")]
+        public void GivenUserHasPostedToChatbot() => _context.SetUpMessages();
 
-        [When(@"I view Alice's timeline")]
-        public void WhenIViewAlicesTimeline() => _context.ViewAlicesTimeline();
+        [When(@"I view ([a-zA-Z]*)'s timeline")]
+        public void WhenIViewUsersTimeline(string user) => _context.ViewUsersTimeline(user);
 
         [Then(@"I should see Alice's message")]
         public void ThenIShouldSeeAlicesMessage() => _context.AssertAlicesMessages();
+
+        [Then(@"I should see Bob's messages")]
+        public void ThenIShouldSeeBobSMessages() => _context.AssertBobsMessages();
     }
 }

@@ -59,7 +59,8 @@ namespace Chatbot.Business
         private string CreateOutput(Message message)
         {
             var timeDifference = _clock.Now - message.SentOn;
-            return $"{message.Text} ({timeDifference.Minutes} minutes ago)";
+            var unit = timeDifference.Minutes == 1 ? "minute" : "minutes";
+            return $"{message.Text} ({timeDifference.Minutes} {unit} ago)";
         }
     }
 }

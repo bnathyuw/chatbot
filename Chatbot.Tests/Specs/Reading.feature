@@ -7,3 +7,8 @@ Scenario: View Alice's timeline
 	Given Alice has posted to Chatbot
 	When I view Alice's timeline
 	Then I should see Alice's message
+
+Scenario: View Bob's timeline
+	Given Bob has posted to Chatbot
+	When I view Bob's timeline
+	Then I should see Bob's messages

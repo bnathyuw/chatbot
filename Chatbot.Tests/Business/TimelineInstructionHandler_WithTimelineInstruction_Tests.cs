@@ -13,11 +13,13 @@ namespace Chatbot.Tests.Business
         private readonly DateTime _now = new DateTime(2015, 12, 28, 22, 30, 0);
         private string _actualUser;
         private State _state;
+        private List<string> _actualMessages;
 
         [SetUp]
         public void SetUp()
         {
             _actualMessage = null;
+            _actualMessages = new List<string>();
             _actualUser = null;
             var timelineInstructionHandler = new TimelineInstructionHandler(this, null, this, this);
             _state = timelineInstructionHandler.HandleInstruction(ExpectedUser);
@@ -26,9 +28,9 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Retrieves_messages_for_the_user_specified() => Assert.That(_actualUser, Is.EqualTo(ExpectedUser));
 
-        [Test]
-        public void Displays_users_messages() => 
-            Assert.That(_actualMessage, Is.EqualTo("Sample message (10 minutes ago)"));
+        [TestCase("Sample message (10 minutes ago)")]
+        [TestCase("Another message (1 minute ago)")]
+        public void Displays_users_messages(string message) => Assert.That(_actualMessages, Does.Contain(message));
 
         [Test]
         public void Returns_a_continue_state() =>
@@ -37,12 +39,14 @@ namespace Chatbot.Tests.Business
         public void ShowMessage(string output)
         {
             _actualMessage = output;
+            _actualMessages.Add(output);
         }
 
         public IEnumerable<Message> RetrieveUserMessages(string user)
         {
             _actualUser = user;
             yield return new Message {Text = "Sample message", SentOn = _now.AddMinutes(-10)};
+            yield return new Message {Text = "Another message", SentOn = _now.AddMinutes(-1)};
         }
 
         public DateTime Now => _now;
