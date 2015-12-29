@@ -16,7 +16,7 @@ namespace Chatbot.Tests.Business
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var postInstructionHandler = new PostInstructionHandler(this, this);
+            var postInstructionHandler = new PostInstructionHandler(this, this, null);
             _state = postInstructionHandler.HandleInstruction($"{ExpectedUser} -> {ExpectedText}");
         }
 

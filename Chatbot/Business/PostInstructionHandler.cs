@@ -2,33 +2,45 @@
 
 namespace Chatbot.Business
 {
+    public interface IMessageSaver
+    {
+        void SaveMessage(Message message);
+    }
+
     public class PostInstructionHandler : IInstructionHandler
     {
         private readonly IClock _clock;
         private readonly IMessageSaver _messageSaver;
+        private readonly IInstructionHandler _successor;
+        private readonly Regex _regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
 
-        public PostInstructionHandler(IClock clock, IMessageSaver messageSaver)
+        public PostInstructionHandler(IClock clock, IMessageSaver messageSaver, IInstructionHandler successor)
         {
             _clock = clock;
             _messageSaver = messageSaver;
+            _successor = successor;
         }
 
         public State HandleInstruction(string instruction)
         {
-            var regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
+            var match = _regex.Match(instruction);
 
-            var match = regex.Match(instruction);
-            var user = match.Groups["user"].Value;
-            var text = match.Groups["text"].Value;
-            var sentOn = _clock.Now;
-            var message = new Message {User = user, Text = text, SentOn = sentOn};
+            if (!match.Success)
+                return _successor.HandleInstruction(instruction);
+
+            var message = ParseMessage(match);
             _messageSaver.SaveMessage(message);
             return State.Continue;
         }
-    }
 
-    public interface IMessageSaver
-    {
-        void SaveMessage(Message message);
+        private Message ParseMessage(Match match)
+        {
+            return new Message
+            {
+                User = match.Groups["user"].Value,
+                Text = match.Groups["text"].Value,
+                SentOn = _clock.Now
+            };
+        }
     }
 }
