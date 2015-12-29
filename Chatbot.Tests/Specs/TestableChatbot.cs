@@ -12,16 +12,15 @@ namespace Chatbot.Tests.Specs
         private readonly Queue<string> _messagesDisplayed;
         private DateTime _now;
 
-        public TestableChatbot()
+        public TestableChatbot(DateTime now)
         {
             _messagesDisplayed = new Queue<string>();
-
-            var consoleIo = this;
-            var systemClock = this;
-            var messageStore = new MessageStore(this);
+            _now = now;
+            var messageStore = new MessageStore();
+            messageStore.SaveMessage(new Message { User = "Alice", Text = "I love the weather today", SentOn = _now.AddMinutes(-5) });
             var userConnexionStore = new UserConnexionStore();
-            var statusInstructionHandler = InstructionHandler.With(consoleIo, systemClock, messageStore, userConnexionStore, messageStore);
-            _userInterface = new UserInterface(consoleIo, statusInstructionHandler);
+            var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore);
+            _userInterface = new UserInterface(this, statusInstructionHandler);
         }
 
         public void ProcessInstruction(DateTime time, string instruction)

@@ -51,6 +51,7 @@
     <Compile Include="Adapters\ConsoleIo_InstructionReader_PromptTests.cs" />
     <Compile Include="Adapters\ConsoleIo_InstructionReader_Tests.cs" />
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
+    <Compile Include="Adapters\MessageStore_WithThreeMessages_Tests.cs" />
     <Compile Include="Adapters\MessageStore_WithNoMessages_Tests.cs" />
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />

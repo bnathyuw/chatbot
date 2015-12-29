@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Chatbot.Business;
 
 namespace Chatbot.Adapters
 {
     public class MessageStore : IMessageCounter, IUserMessageRetriever
     {
-        private readonly IClock _clock;
+        private readonly List<Message> _messages = new List<Message>();
 
-        public MessageStore(IClock clock)
-        {
-            _clock = clock;
-        }
+        public int CountMessages() => _messages.Count;
 
-        public int CountMessages() => 0;
-        public IEnumerable<Message> RetrieveUserMessages(string user)
-        {
-            yield return new Message {Text = "I love the weather today", SentOn = _clock.Now.AddMinutes(-5)};
-        }
+        public IEnumerable<Message> RetrieveUserMessages(string user) => _messages.Where(m => m.User == user);
+
+        public void SaveMessage(Message message) => _messages.Add(message);
     }
 }

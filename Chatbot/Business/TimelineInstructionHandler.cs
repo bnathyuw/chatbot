@@ -14,6 +14,7 @@ namespace Chatbot.Business
     {
         public string Text { get; set; }
         public DateTime SentOn { get; set; }
+        public string User { get; set; }
     }
 
     public class TimelineInstructionHandler : IInstructionHandler

@@ -10,7 +10,7 @@ namespace Chatbot.Tests.Specs
 
         public ChatbotContext()
         {
-            _testableChatbot = new TestableChatbot();
+            _testableChatbot = new TestableChatbot(_referenceTime);
         }
 
         public void PostAlicesMessages()
