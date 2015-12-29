@@ -16,9 +16,8 @@ namespace Chatbot.Tests.Specs
         {
             _messagesDisplayed = new Queue<string>();
             var messageStore = new MessageStore();
-            messageStore.SaveMessage(new Message { User = "Alice", Text = "I love the weather today", SentOn = _referenceTime.AddMinutes(-5) });
             var userConnexionStore = new UserConnexionStore();
-            var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore);
+            var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore, messageStore);
             _userInterface = new UserInterface(this, statusInstructionHandler);
         }
 

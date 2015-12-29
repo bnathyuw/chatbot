@@ -4,7 +4,7 @@ using Chatbot.Business;
 
 namespace Chatbot.Adapters
 {
-    public class MessageStore : IMessageCounter, IUserMessageRetriever
+    public class MessageStore : IMessageCounter, IUserMessageRetriever, IMessageSaver
     {
         private readonly List<Message> _messages = new List<Message>();
 
