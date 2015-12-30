@@ -18,7 +18,7 @@ namespace Chatbot.Tests.Specs
         [When(@"I view ([a-zA-Z]*)'s timeline")]
         public void WhenIViewUsersTimeline(string user) => _context.ViewUsersTimeline(user);
 
-        [Then(@"I should see Alice's message")]
+        [Then(@"I should see Alice's messages")]
         public void ThenIShouldSeeAlicesMessage() => _context.AssertAlicesMessages();
 
         [Then(@"I should see Bob's messages")]
