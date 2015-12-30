@@ -23,6 +23,7 @@ namespace Chatbot.Tests.Specs
 
         public void ProcessInstruction(string instruction, TimeSpan? timeDifference = null)
         {
+            Console.WriteLine($"  > {instruction}");
             Now = _referenceTime.Add(timeDifference ?? TimeSpan.Zero);
             _nextInstruction = instruction;
             _userInterface.ProcessNextInstruction();
@@ -30,7 +31,11 @@ namespace Chatbot.Tests.Specs
 
         public string GetMessage() => _messagesDisplayed.Dequeue();
 
-        public void ShowMessage(string output) => _messagesDisplayed.Enqueue(output);
+        public void ShowMessage(string output)
+        {
+            Console.WriteLine($"  {output}");
+            _messagesDisplayed.Enqueue(output);
+        }
 
         public DateTime Now { get; private set; }
 
