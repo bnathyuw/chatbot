@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Chatbot.Business;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Chatbot.Tests.Business
 {
@@ -20,6 +21,7 @@ namespace Chatbot.Tests.Business
         private string _actualUser;
         private IEnumerable<string> _actualUsers;
         private IList<string> _actualMessages;
+        private State _actualState;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -28,7 +30,7 @@ namespace Chatbot.Tests.Business
             _actualUsers = new List<string>();
             _actualMessages = new List<string>();
             var wallInstructionHandler = new WallInstructionHandler(null, this, this, this, this);
-            wallInstructionHandler.HandleInstruction("Daphne wall");
+            _actualState = wallInstructionHandler.HandleInstruction("Daphne wall");
         }
 
         [Test]
@@ -49,6 +51,9 @@ namespace Chatbot.Tests.Business
         [TestCase("Gita - Message 5 (age of Message 5)")]
         public void Displays_the_mssages(string expectedMessage)
             => Assert.That(_actualMessages, Does.Contain(expectedMessage));
+
+        [Test]
+        public void Returns_continue_state() => Assert.That(_actualState, Is.EqualTo(State.Continue));
 
         public IEnumerable<string> RetrieveUserFollowList(string user)
         {

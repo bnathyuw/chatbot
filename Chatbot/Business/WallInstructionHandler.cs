@@ -48,7 +48,7 @@ namespace Chatbot.Business
                 _messageDisplayer.ShowMessage($"{message.User} - {message.Text} ({age})");
             }
 
-            return State.Exit;
+            return State.Continue;
         }
     }
 }
