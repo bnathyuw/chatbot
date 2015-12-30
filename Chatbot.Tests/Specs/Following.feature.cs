@@ -19,21 +19,21 @@ namespace Chatbot.Tests.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Reading")]
-    public partial class ReadingFeature
+    [NUnit.Framework.DescriptionAttribute("Following")]
+    public partial class FollowingFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Reading.feature"
+#line 1 "Following.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Reading", "In order to be part of the Chatbot community\r\nAs a Chatbot subscriber\r\nI want to " +
-                    "read other users\' timelines", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Following", "In order to keep up to date on my friend\'s lives\nAs a Chatbot user\nI want to have" +
+                    " a convenient way of seeing all the posts by my friends", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -66,20 +66,22 @@ namespace Chatbot.Tests.Specs
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I can view Alice and Bob\'s timelines")]
-        [NUnit.Framework.TestCaseAttribute("Alice", null)]
-        [NUnit.Framework.TestCaseAttribute("Bob", null)]
-        public virtual void ICanViewAliceAndBobSTimelines(string user, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Charlie can subscribe to Alice’s timeline, and view an aggregated list of all sub" +
+            "scriptions")]
+        public virtual void CharlieCanSubscribeToAliceSTimelineAndViewAnAggregatedListOfAllSubscriptions()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I can view Alice and Bob\'s timelines", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Charlie can subscribe to Alice’s timeline, and view an aggregated list of all sub" +
+                    "scriptions", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.Given(string.Format("{0} has posted to Chatbot", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("Alice and Charlie have posted to Chatbot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
- testRunner.When(string.Format("I view {0}\'s timeline", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("Charlie has followed Alice", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 9
- testRunner.Then(string.Format("I should see {0}\'s messages", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("Charlie views his wall", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 10
+ testRunner.Then("he should see Alice and Charlie\'s messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

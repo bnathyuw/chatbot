@@ -65,10 +65,17 @@
     <Compile Include="Business\TimelineInstructionHandler_WithOtherInstruction_Tests.cs" />
     <Compile Include="Business\TimelineInstructionHandler_WithTimelineInstruction_Tests.cs" />
     <Compile Include="Business\UserInterface_Tests.cs" />
+    <Compile Include="Business\WallInstructionHandler_WithOtherInstruction_Tests.cs" />
+    <Compile Include="Business\WallInstructionHandler_WithWallInstruction_Tests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Business\StatusInstructionHandler_WithStatusInstruction_Tests.cs" />
     <Compile Include="Specs\ChatbotContext.cs" />
+    <Compile Include="Specs\Following.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Following.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Reading.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +88,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\Following.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Following.feature.cs</LastGenOutput>
+    </None>
     <None Include="Specs\Reading.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Reading.feature.cs</LastGenOutput>

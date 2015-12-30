@@ -20,6 +20,12 @@ namespace Chatbot.Tests.Business
         public void Formats_minutes_correctly(int minutes, string expectedAge) =>
             Assert.That(_messageAgeFormatter.FormatAge(MessageSent(minutes.MinutesAgo())), Is.EqualTo(expectedAge));
 
+        [TestCase(1, "1 second ago")]
+        [TestCase(2, "2 seconds ago")]
+        [TestCase(15, "15 seconds ago")]
+        public void Formats_seconds_correctly(int seconds, string expectedAge) =>
+            Assert.That(_messageAgeFormatter.FormatAge(MessageSent(seconds.SecondsAgo())), Is.EqualTo(expectedAge));
+
         private Message MessageSent(TimeSpan age) => new Message {SentOn = _now.Add(age)};
 
         public DateTime Now => _now;

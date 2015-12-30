@@ -17,9 +17,15 @@ namespace Chatbot.Tests.Specs
             _testableChatbot.ProcessInstruction("Alice -> I love the weather today", 5.MinutesAgo());
             _testableChatbot.ProcessInstruction("Bob -> Damn! We lost!", 2.MinutesAgo());
             _testableChatbot.ProcessInstruction("Bob -> Good game though.", 1.MinuteAgo());
+            _testableChatbot.ProcessInstruction("Charlie -> I'm in New York today! Anyone want to have a coffee?", 2.SecondsAgo());
         }
 
         public void ViewUsersTimeline(string user) => _testableChatbot.ProcessInstruction(user);
+
+        public void UserFollowsAnother(string follower, string followee) => 
+            _testableChatbot.ProcessInstruction($"{follower} follows {followee}");
+
+        public void ViewUsersWall(string user) => _testableChatbot.ProcessInstruction($"{user} wall");
 
         public void AssertAlicesMessages() =>
             Assert.That(_testableChatbot.GetMessage(), Is.EqualTo("I love the weather today (5 minutes ago)"));
@@ -28,6 +34,12 @@ namespace Chatbot.Tests.Specs
         {
             Assert.That(_testableChatbot.GetMessage(), Is.EqualTo("Good game though. (1 minute ago)"));
             Assert.That(_testableChatbot.GetMessage(), Is.EqualTo("Damn! We lost! (2 minutes ago)"));
+        }
+
+        public void AssertAliceAndCharliesMessages()
+        {
+            Assert.That(_testableChatbot.GetMessage(), Is.EqualTo("Charlie - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"));
+            Assert.That(_testableChatbot.GetMessage(), Is.EqualTo("Alice - I love the weather today (5 minutes ago)"));
         }
     }
 }
