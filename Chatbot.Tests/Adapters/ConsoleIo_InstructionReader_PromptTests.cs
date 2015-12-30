@@ -1,37 +1,37 @@
 using System;
 using System.IO;
-using System.Text;
 using Chatbot.Adapters;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class ConsoleIo_InstructionReader_PromptTests : TextWriter
+    public class ConsoleIo_InstructionReader_PromptTests
     {
         private TextWriter _stdOut;
-        private string _actualPrompt;
         private TextReader _stdIn;
+        private StringWriter _testOut;
 
         [SetUp]
         public void SetUp()
         {
-            ImpersonateStandardOut();
+            InterceptStandardOut();
             StubStandardIn();
             var messageDisplayer = new ConsoleIo();
             messageDisplayer.ReadInstruction();
         }
 
-        private void ImpersonateStandardOut()
+        private void InterceptStandardOut()
         {
             _stdOut = Console.Out;
-            Console.SetOut(this);
+            _testOut = new StringWriter();
+            Console.SetOut(_testOut);
         }
 
         private void StubStandardIn()
         {
             _stdIn = Console.In;
-            Console.SetIn(new Reader());
+            Console.SetIn(new StringReader(""));
         }
 
         [TearDown]
@@ -46,18 +46,6 @@ namespace Chatbot.Tests.Adapters
         private void RestoreStandardIn() => Console.SetIn(_stdIn);
 
         [Test]
-        public void Prompts_for_input() => Assert.That(_actualPrompt, Is.EqualTo("> "));
-
-        public override void Write(string value) => _actualPrompt = value;
-
-        public override Encoding Encoding => Encoding.UTF8;
-
-        private class Reader : TextReader
-        {
-            public override string ReadLine()
-            {
-                return "";
-            }
-        }
+        public void Prompts_for_input() => Assert.That(_testOut.ToString(), Is.EqualTo("> "));
     }
 }

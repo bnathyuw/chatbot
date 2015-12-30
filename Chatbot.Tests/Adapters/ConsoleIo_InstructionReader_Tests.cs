@@ -6,35 +6,47 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class ConsoleIo_InstructionReader_Tests : TextReader
+    public class ConsoleIo_InstructionReader_Tests
     {
         private TextReader _stdIn;
         private string _actualInstruction;
+        private TextWriter _stdOut;
         private const string ExpectedInstruction = "Expected Instruction";
 
         [SetUp]
         public void SetUp()
         {
-            ImpersonateStandardInput();
+            StubStandardIn();
+            StubStandardOut();
             var instructionReader = new ConsoleIo();
             _actualInstruction = instructionReader.ReadInstruction();
         }
 
-        private void ImpersonateStandardInput()
+        private void StubStandardIn()
         {
             _stdIn = Console.In;
-            Console.SetIn(this);
+            Console.SetIn(new StringReader(ExpectedInstruction));
+        }
+
+        private void StubStandardOut()
+        {
+            _stdOut = Console.Out;
+            Console.SetOut(new StringWriter());
         }
 
         [TearDown]
-        public void TearDown() => RestoreStandardInput();
+        public void TearDown()
+        {
+            RestoreStandardInput();
+            RestoreStandardOutput();
+        }
 
         private void RestoreStandardInput() => Console.SetIn(_stdIn);
+
+        private void RestoreStandardOutput() => Console.SetOut(_stdOut);
 
         [Test]
         public void Reads_instruction_from_standard_input() =>
             Assert.That(_actualInstruction, Is.EqualTo(ExpectedInstruction));
-
-        public override string ReadLine() => ExpectedInstruction;
     }
 }

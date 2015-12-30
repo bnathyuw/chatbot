@@ -1,30 +1,30 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using Chatbot.Adapters;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class ConsoleIo_MessageDisplayer_Tests : TextWriter
+    public class ConsoleIo_MessageDisplayer_Tests
     {
         private TextWriter _stdOut;
-        private string _actualMessage;
+        private StringWriter _testOut;
         private const string ExpectedMessage = "Expected Message";
 
         [SetUp]
         public void SetUp()
         {
-            ImpersonateStandardOut();
+            InterceptStandardOut();
             var messageDisplayer = new ConsoleIo();
             messageDisplayer.ShowMessage(ExpectedMessage);
         }
 
-        private void ImpersonateStandardOut()
+        private void InterceptStandardOut()
         {
             _stdOut = Console.Out;
-            Console.SetOut(this);
+            _testOut = new StringWriter();
+            Console.SetOut(_testOut);
         }
 
         [TearDown]
@@ -33,13 +33,6 @@ namespace Chatbot.Tests.Adapters
         private void RestoreStandardOut() => Console.SetOut(_stdOut);
 
         [Test]
-        public void Displays_message_on_standard_out()
-        {
-            Assert.That(_actualMessage, Is.EqualTo(ExpectedMessage));
-        }
-
-        public override void WriteLine(string value) => _actualMessage = value;
-
-        public override Encoding Encoding => Encoding.UTF8;
+        public void Displays_message_on_standard_out() => Assert.That(_testOut.ToString(), Does.StartWith(ExpectedMessage));
     }
 }
