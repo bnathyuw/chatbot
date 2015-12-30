@@ -1,4 +1,6 @@
-﻿namespace Chatbot.Business
+﻿using System;
+
+namespace Chatbot.Business
 {
     public class MessageAgeFormatter : IMessageAgeFormatter
     {
@@ -11,16 +13,27 @@
 
         public string FormatAge(Message message)
         {
-            var timeDifference = _clock.Now - message.SentOn;
+            var timeDifference = GetTimeDifference(message);
 
-            string unit;
             if (timeDifference.Minutes > 0)
-            {
-                unit = timeDifference.Minutes == 1 ? "minute" : "minutes";
-                return $"{timeDifference.Minutes} {unit} ago";
-            }
-            unit = timeDifference.Seconds == 1 ? "second" : "seconds";
-            return $"{timeDifference.Seconds} {unit} ago";
+                return FormatWithUnit(timeDifference.Minutes, "minute");
+
+            return FormatWithUnit(timeDifference.Seconds, "second");
+        }
+
+        private TimeSpan GetTimeDifference(Message message)
+        {
+            return _clock.Now - message.SentOn;
+        }
+
+        private static string FormatWithUnit(int count, string unitName)
+        {
+            return $"{count} {PluraliseIfNecessary(count, unitName)} ago";
+        }
+
+        private static string PluraliseIfNecessary(int count, string unitName)
+        {
+            return count == 1 ? unitName : unitName + "s";
         }
     }
 }
