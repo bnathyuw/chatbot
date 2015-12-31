@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class MessageStore_WithMessages_Tests
+    public class InMemoryMessages_Tests
     {
         private readonly DateTime _now = new DateTime(2015, 12, 29, 14, 52, 0);
         private InMemoryMessages _messages;

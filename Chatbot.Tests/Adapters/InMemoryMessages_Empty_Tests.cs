@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class MessageStore_WithNoMessages_Tests
+    public class InMemoryMessages_Empty_Tests
     {
         private InMemoryMessages _messages;
 

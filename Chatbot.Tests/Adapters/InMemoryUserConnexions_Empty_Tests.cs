@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class UserConnexionStore_WithNoConnexions_Tests
+    public class InMemoryUserConnexions_Empty_Tests
     {
         private InMemoryUserConnexions _userConnexions;
 
