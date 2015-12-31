@@ -60,6 +60,7 @@
     <Compile Include="Business\ExitCommandHandlerWithOtherCommandTests.cs" />
     <Compile Include="Business\FollowCommandHandler_WithFollowCommand_Tests.cs" />
     <Compile Include="Business\FollowCommandHandlerWithOtherCommandTests.cs" />
+    <Compile Include="Business\FormattedMessageDisplayer_Tests.cs" />
     <Compile Include="Business\MessageAgeFormatter_Tests.cs" />
     <Compile Include="Business\PostCommandHandlerWithOtherCommandTests.cs" />
     <Compile Include="Business\PostCommandHandler_WithPostCommand_Tests.cs" />
