@@ -22,8 +22,8 @@ namespace Chatbot.Tests.Specs
 
         public void ViewUsersTimeline(string user) => _testableChatbot.ProcessInstruction(user);
 
-        public void UserFollowsAnother(string follower, string followee) => 
-            _testableChatbot.ProcessInstruction($"{follower} follows {followee}");
+        public void UserFollowsAnother(string follower, string followed) => 
+            _testableChatbot.ProcessInstruction($"{follower} follows {followed}");
 
         public void ViewUsersWall(string user) => _testableChatbot.ProcessInstruction($"{user} wall");
 
