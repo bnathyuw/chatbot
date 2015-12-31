@@ -55,6 +55,7 @@
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions_Tests.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions_Empty_Tests.cs" />
+    <Compile Include="Business\ClockTime_Tests.cs" />
     <Compile Include="Business\ExitCommandHandler_WithExitCommand_Tests.cs" />
     <Compile Include="Business\ExitCommandHandlerWithOtherCommandTests.cs" />
     <Compile Include="Business\FollowCommandHandler_WithFollowCommand_Tests.cs" />
