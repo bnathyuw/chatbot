@@ -4,7 +4,7 @@ using Chatbot.Business;
 
 namespace Chatbot.Adapters
 {
-    public class UserConnexionStore : IUserConnexionCounter, IFollowedUserRetriever
+    public class UserConnexionStore : IUserConnexionCounter, IFollowedUserRetriever, IUserConnexionSaver
     {
         private readonly ISet<UserConnexion> _userConnexions = new HashSet<UserConnexion>();
 

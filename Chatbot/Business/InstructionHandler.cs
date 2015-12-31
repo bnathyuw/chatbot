@@ -2,10 +2,7 @@ namespace Chatbot.Business
 {
     public static class InstructionHandler
     {
-        public static IInstructionHandler With(IMessageDisplayer messageDisplayer, IClock clock,
-            IMessageCounter messageCounter, IUserConnexionCounter userConnexionCounter,
-            IUserMessageRetriever userMessageRetriever, IMessageSaver messageSaver,
-            IMultipleUserMessageRetriever multipleUserMessageRetriever, IFollowedUserRetriever followedUserRetriever)
+        public static IInstructionHandler With(IMessageDisplayer messageDisplayer, IClock clock, IMessageCounter messageCounter, IUserConnexionCounter userConnexionCounter, IUserMessageRetriever userMessageRetriever, IMessageSaver messageSaver, IMultipleUserMessageRetriever multipleUserMessageRetriever, IFollowedUserRetriever followedUserRetriever, IUserConnexionSaver userConnexionSaver)
         {
             var unknownInstructionHandler = new UnknownInstructionHandler();
             var exitInstructionHandler = new ExitInstructionHandler(unknownInstructionHandler);
@@ -15,8 +12,9 @@ namespace Chatbot.Business
             var postInstructionHandler = new PostInstructionHandler(clock, messageSaver, timelineInstructionHandler);
             var wallInstructionHandler = new WallInstructionHandler(postInstructionHandler, followedUserRetriever,
                 multipleUserMessageRetriever, messageDisplayer, messageAgeFormatter);
+            var followInstructionHandler = new FollowInstructionHandler(wallInstructionHandler, userConnexionSaver);
             return new StatusInstructionHandler(messageDisplayer, clock, messageCounter, userConnexionCounter,
-                wallInstructionHandler);
+                followInstructionHandler);
         }
     }
 }
