@@ -4,7 +4,7 @@ namespace Chatbot.Business
 {
     public interface IUserConnexionSaver
     {
-        void SaveConnexion(string follower, string followed);
+        void Save(string follower, string followed);
     }
 
     public class FollowCommandHandler : ICommandHandler
@@ -29,7 +29,7 @@ namespace Chatbot.Business
             var follower = match.Groups["follower"].Value;
             var followed = match.Groups["followed"].Value;
 
-            _userConnexionSaver.SaveConnexion(follower, followed);
+            _userConnexionSaver.Save(follower, followed);
 
             return State.Continue;
         }

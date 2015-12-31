@@ -4,11 +4,11 @@ using Chatbot.Business;
 
 namespace Chatbot.Adapters
 {
-    public class MessageStore : IMessageCounter, IUserMessageRetriever, IMessageSaver, IMultipleUserMessageRetriever
+    public class InMemoryMessages : IMessageCounter, IUserMessageRetriever, IMessageSaver, IMultipleUserMessageRetriever
     {
         private readonly List<Message> _messages = new List<Message>();
 
-        public int CountMessages() => _messages.Count;
+        public int Count() => _messages.Count;
 
         public IEnumerable<Message> RetrieveUserMessages(string user) =>
             _messages.Where(m => m.User == user).OrderByDescending(m => m.SentOn);

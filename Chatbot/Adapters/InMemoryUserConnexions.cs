@@ -4,13 +4,13 @@ using Chatbot.Business;
 
 namespace Chatbot.Adapters
 {
-    public class UserConnexionStore : IUserConnexionCounter, IFollowedUserRetriever, IUserConnexionSaver
+    public class InMemoryUserConnexions : IUserConnexionCounter, IFollowedUserRetriever, IUserConnexionSaver
     {
         private readonly ISet<UserConnexion> _userConnexions = new HashSet<UserConnexion>();
 
-        public int CountUserConnexions() => _userConnexions.Count;
+        public int Count() => _userConnexions.Count;
 
-        public void SaveConnexion(string follower, string followed) =>
+        public void Save(string follower, string followed) =>
             _userConnexions.Add(new UserConnexion(follower, followed));
 
         public IEnumerable<string> RetrieveFollowedUsers(string user) =>

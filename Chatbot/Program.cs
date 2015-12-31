@@ -11,8 +11,8 @@ namespace Chatbot
         {
             var consoleIo = new ConsoleIo();
             var systemClock = new SystemClock();
-            var messageStore = new MessageStore();
-            var userConnexionStore = new UserConnexionStore();
+            var messageStore = new InMemoryMessages();
+            var userConnexionStore = new InMemoryUserConnexions();
             var commandHandler = CommandHandler.With(consoleIo, systemClock, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore);
             UserInterface = new UserInterface(consoleIo, commandHandler);
         }

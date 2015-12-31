@@ -32,8 +32,8 @@ namespace Chatbot.Tests.Business
 
         public DateTime Now => new DateTime(2015, 12, 28, 17, 36, 0);
 
-        public int CountMessages() => 35;
+        int IMessageCounter.Count() => 35;
 
-        public int CountUserConnexions() => 46;
+        int IUserConnexionCounter.Count() => 46;
     }
 }

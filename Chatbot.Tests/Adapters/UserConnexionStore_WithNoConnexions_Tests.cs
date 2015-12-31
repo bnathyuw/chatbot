@@ -6,12 +6,12 @@ namespace Chatbot.Tests.Adapters
     [TestFixture]
     public class UserConnexionStore_WithNoConnexions_Tests
     {
-        private UserConnexionStore _userConnexionStore;
+        private InMemoryUserConnexions _userConnexions;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp() => _userConnexionStore = new UserConnexionStore();
+        public void OneTimeSetUp() => _userConnexions = new InMemoryUserConnexions();
 
         [Test]
-        public void Counts_zero_messages() => Assert.That(_userConnexionStore.CountUserConnexions(), Is.EqualTo(0));
+        public void Counts_zero_messages() => Assert.That(_userConnexions.Count(), Is.EqualTo(0));
     }
 }

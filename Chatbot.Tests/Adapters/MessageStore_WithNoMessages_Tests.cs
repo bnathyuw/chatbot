@@ -6,12 +6,12 @@ namespace Chatbot.Tests.Adapters
     [TestFixture]
     public class MessageStore_WithNoMessages_Tests
     {
-        private MessageStore _messageStore;
+        private InMemoryMessages _Messages;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp() => _messageStore = new MessageStore();
+        public void OneTimeSetUp() => _Messages = new InMemoryMessages();
 
         [Test]
-        public void Counts_zero_messages() => Assert.That(_messageStore.CountMessages(), Is.EqualTo(0));
+        public void Counts_zero_messages() => Assert.That(_Messages.Count(), Is.EqualTo(0));
     }
 }

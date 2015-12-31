@@ -2,12 +2,12 @@ namespace Chatbot.Business
 {
     public interface IMessageCounter
     {
-        int CountMessages();
+        int Count();
     }
 
     public interface IUserConnexionCounter
     {
-        int CountUserConnexions();
+        int Count();
     }
 
     public class StatusCommandHandler : ICommandHandler
@@ -42,8 +42,8 @@ namespace Chatbot.Business
         {
             _messageDisplayer.ShowMessage("Status: ok");
             _messageDisplayer.ShowMessage($"Current time: {_clock.Now:HH:mm, d MMMM yyyy}");
-            _messageDisplayer.ShowMessage($"Messages sent: {_messageStore.CountMessages()}");
-            _messageDisplayer.ShowMessage($"User connexions: {_userConnexionStore.CountUserConnexions()}");
+            _messageDisplayer.ShowMessage($"Messages sent: {_messageStore.Count()}");
+            _messageDisplayer.ShowMessage($"User connexions: {_userConnexionStore.Count()}");
         }
     }
 }

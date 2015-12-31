@@ -24,7 +24,7 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Returns_continue_state() => Assert.That(_state, Is.EqualTo(State.Continue));
 
-        public void SaveConnexion(string follower, string followed) =>
+        public void Save(string follower, string followed) =>
             _actualConnexion = new Tuple<string, string>(follower, followed);
     }
 }

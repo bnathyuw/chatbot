@@ -15,8 +15,8 @@ namespace Chatbot.Tests.Specs
         public TestableChatbot()
         {
             _messagesDisplayed = new Queue<string>();
-            var messageStore = new MessageStore();
-            var userConnexionStore = new UserConnexionStore();
+            var messageStore = new InMemoryMessages();
+            var userConnexionStore = new InMemoryUserConnexions();
             var statusCommandHandler = CommandHandler.With(this, this, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore);
             _userInterface = new UserInterface(this, statusCommandHandler);
         }
