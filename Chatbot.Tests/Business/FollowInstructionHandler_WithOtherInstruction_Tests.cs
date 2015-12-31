@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void SetUp()
         {
             _actualInstruction = null;
-            _followInstructionHandler = new FollowInstructionHandler(this);
+            _followInstructionHandler = new FollowInstructionHandler(this, null);
         }
 
         [TestCase(SampleInstructions.Status)]

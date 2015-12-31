@@ -58,6 +58,7 @@
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
     <Compile Include="Business\ExitInstructionHandler_WithExitInstruction_Tests.cs" />
     <Compile Include="Business\ExitInstructionHandler_WithOtherInstruction_Tests.cs" />
+    <Compile Include="Business\FollowInstructionHandler_WithFollowInstruction_Tests.cs" />
     <Compile Include="Business\FollowInstructionHandler_WithOtherInstruction_Tests.cs" />
     <Compile Include="Business\MessageAgeFormatter_Tests.cs" />
     <Compile Include="Business\PostInstructionHandler_WithOtherInstruction_Tests.cs" />
