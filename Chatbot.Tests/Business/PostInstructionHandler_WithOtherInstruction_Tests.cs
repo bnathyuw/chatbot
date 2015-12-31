@@ -21,6 +21,8 @@ namespace Chatbot.Tests.Business
         [TestCase(SampleInstructions.Exit)]
         [TestCase(SampleInstructions.Status)]
         [TestCase(SampleInstructions.Timeline)]
+        [TestCase(SampleInstructions.Follow)]
+        [TestCase(SampleInstructions.Wall)]
         public void Passes_instruction_to_successor(string instruction)
         {
             _postInstructionHandler.HandleInstruction(instruction);
