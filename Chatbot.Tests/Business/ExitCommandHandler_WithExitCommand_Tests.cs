@@ -12,7 +12,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             var exitCommandHandler = new ExitCommandHandler(null);
-            _state = exitCommandHandler.HandleCommand(SampleCommands.Exit);
+            _state = exitCommandHandler.Handle(SampleCommands.Exit);
         }
 
         [Test]

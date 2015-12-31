@@ -32,11 +32,11 @@ namespace Chatbot.Business
             _messageAgeFormatter = messageAgeFormatter;
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             var match = _regex.Match(command);
             if(!match.Success)
-                return _successor.HandleCommand(command);
+                return _successor.Handle(command);
 
             var user = match.Groups["user"].Value;
             var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);

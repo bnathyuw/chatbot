@@ -17,7 +17,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             var postCommandHandler = new PostCommandHandler(null, this, this);
-            _state = postCommandHandler.HandleCommand($"{ExpectedUser} -> {ExpectedText}");
+            _state = postCommandHandler.Handle($"{ExpectedUser} -> {ExpectedText}");
         }
 
         [Test]

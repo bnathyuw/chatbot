@@ -27,10 +27,10 @@ namespace Chatbot.Business
             _successor = successor;
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             if (!CanHandle(command))
-                return _successor.HandleCommand(command);
+                return _successor.Handle(command);
 
             ShowStatusMessage();
             return State.Continue;

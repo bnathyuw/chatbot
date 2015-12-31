@@ -19,12 +19,12 @@ namespace Chatbot.Business
             _userConnexionSaver = userConnexionSaver;
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             var match = _regex.Match(command);
 
             if(!match.Success)
-                return _successor.HandleCommand(command);
+                return _successor.Handle(command);
 
             var follower = match.Groups["follower"].Value;
             var followed = match.Groups["followed"].Value;

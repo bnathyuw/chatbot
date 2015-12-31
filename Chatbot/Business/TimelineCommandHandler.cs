@@ -30,10 +30,10 @@ namespace Chatbot.Business
             _messageAgeFormatter = messageAgeFormatter;
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             if (!CanHandle(command))
-                return _successor.HandleCommand(command);
+                return _successor.Handle(command);
 
             DisplayUsersMessages(command);
             return State.Continue;

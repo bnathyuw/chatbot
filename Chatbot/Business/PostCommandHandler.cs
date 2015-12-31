@@ -21,12 +21,12 @@ namespace Chatbot.Business
             _successor = successor;
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             var match = _regex.Match(command);
 
             if (!match.Success)
-                return _successor.HandleCommand(command);
+                return _successor.Handle(command);
 
             var message = ParseMessage(match);
             _messageSaver.SaveMessage(message);

@@ -37,7 +37,7 @@ namespace Chatbot.Tests.Business
             return ExpectedCommand;
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             _actualCommand = command;
             return ExpectedState;

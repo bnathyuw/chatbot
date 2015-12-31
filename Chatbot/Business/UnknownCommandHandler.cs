@@ -2,7 +2,7 @@
 {
     public class UnknownCommandHandler : ICommandHandler
     {
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             return State.Continue;
         }

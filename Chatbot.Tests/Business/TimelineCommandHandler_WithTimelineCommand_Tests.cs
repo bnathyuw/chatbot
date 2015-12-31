@@ -18,7 +18,7 @@ namespace Chatbot.Tests.Business
             _actualMessages = new List<string>();
             _actualUser = null;
             var timelineCommandHandler = new TimelineCommandHandler(null, this, this, this);
-            _state = timelineCommandHandler.HandleCommand(ExpectedUser);
+            _state = timelineCommandHandler.Handle(ExpectedUser);
         }
 
         [Test]

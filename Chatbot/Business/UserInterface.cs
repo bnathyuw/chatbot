@@ -13,7 +13,7 @@
 
     public interface ICommandHandler
     {
-        State HandleCommand(string command);
+        State Handle(string command);
     }
 
     public class UserInterface
@@ -30,7 +30,7 @@
         public State ProcessNextCommand()
         {
             var command = _commandReader.ReadCommand();
-            return _statusCommandHandler.HandleCommand(command);
+            return _statusCommandHandler.Handle(command);
         }
     }
 }

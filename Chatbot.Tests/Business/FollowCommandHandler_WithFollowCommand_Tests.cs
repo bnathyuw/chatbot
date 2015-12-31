@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             var followCommandHandler = new FollowCommandHandler(null, this);
-            _state = followCommandHandler.HandleCommand("Alice follows Bob");
+            _state = followCommandHandler.Handle("Alice follows Bob");
         }
 
         [Test]

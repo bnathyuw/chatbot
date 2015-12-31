@@ -25,18 +25,18 @@ namespace Chatbot.Tests.Business
         [TestCase(SampleCommands.Wall)]
         public void Passes_command_to_successor(string command)
         {
-            _exitCommandHandler.HandleCommand(command);
+            _exitCommandHandler.Handle(command);
             Assert.That(_actualCommand, Is.EqualTo(command));
         }
 
         [Test]
         public void Returns_state_from_successor()
         {
-            var state = _exitCommandHandler.HandleCommand(SampleCommands.Unknown);
+            var state = _exitCommandHandler.Handle(SampleCommands.Unknown);
             Assert.That(state, Is.EqualTo(ExpectedState));
         }
 
-        public State HandleCommand(string command)
+        public State Handle(string command)
         {
             _actualCommand = command;
             return ExpectedState;

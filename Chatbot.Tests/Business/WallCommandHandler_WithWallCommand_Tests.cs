@@ -29,7 +29,7 @@ namespace Chatbot.Tests.Business
             _actualUsers = new List<string>();
             _actualMessages = new List<string>();
             var wallCommandHandler = new WallCommandHandler(null, this, this, this, this);
-            _actualState = wallCommandHandler.HandleCommand("Daphne wall");
+            _actualState = wallCommandHandler.Handle("Daphne wall");
         }
 
         [Test]
