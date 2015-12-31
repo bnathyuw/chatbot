@@ -28,7 +28,7 @@ namespace Chatbot.Tests.Business
             _actualUser = null;
             _actualUsers = new List<string>();
             _actualMessages = new List<string>();
-            var wallCommandHandler = new WallCommandHandler(null, this, this, this, this);
+            var wallCommandHandler = new WallCommandHandler(null, this, this, new FormattedMessageDisplayer(this, this));
             _actualState = wallCommandHandler.Handle("Daphne wall");
         }
 

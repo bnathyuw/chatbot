@@ -2,18 +2,16 @@ namespace Chatbot.Business
 {
     public static class CommandHandler
     {
-        public static ICommandHandler With(IMessageDisplayer messageDisplayer, IMessageCounter messageCounter, IUserConnexionCounter userConnexionCounter, IUserMessageRetriever userMessageRetriever, IMessageSaver messageSaver, IMultipleUserMessageRetriever multipleUserMessageRetriever, IFollowedUserRetriever followedUserRetriever, IUserConnexionSaver userConnexionSaver, ClockTime messageAgeCalculator, ClockTime timestamper, ClockTime timeDisplayer)
+        public static ICommandHandler With(IMessageCounter messageCounter, IUserConnexionCounter userConnexionCounter, IUserMessageRetriever userMessageRetriever, IMessageSaver messageSaver, IMultipleUserMessageRetriever multipleUserMessageRetriever, IFollowedUserRetriever followedUserRetriever, IUserConnexionSaver userConnexionSaver, ClockTime timestamper, ClockTime timeDisplayer, ITimelineMessageDisplayer timelineMessageDisplayer, IWallMessageDisplayer wallMessageDisplayer, IStatusDisplayer statusDisplayer)
         {
             var unknownCommandHandler = new UnknownCommandHandler();
             var exitCommandHandler = new ExitCommandHandler(unknownCommandHandler);
-            var messageAgeFormatter = new MessageAgeFormatter(messageAgeCalculator);
-            var timelineCommandHandler = new TimelineCommandHandler(exitCommandHandler,
-                messageDisplayer, userMessageRetriever, messageAgeFormatter);
+            var timelineCommandHandler = new TimelineCommandHandler(exitCommandHandler, userMessageRetriever, timelineMessageDisplayer);
             var postCommandHandler = new PostCommandHandler(timelineCommandHandler, messageSaver, timestamper);
             var wallCommandHandler = new WallCommandHandler(postCommandHandler, followedUserRetriever,
-                multipleUserMessageRetriever, messageDisplayer, messageAgeFormatter);
+                multipleUserMessageRetriever, wallMessageDisplayer);
             var followCommandHandler = new FollowCommandHandler(wallCommandHandler, userConnexionSaver);
-            return new StatusCommandHandler(followCommandHandler, messageDisplayer, messageCounter, userConnexionCounter, timeDisplayer);
+            return new StatusCommandHandler(followCommandHandler, messageCounter, userConnexionCounter, timeDisplayer, statusDisplayer);
         }
     }
 }

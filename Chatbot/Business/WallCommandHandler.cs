@@ -14,22 +14,25 @@ namespace Chatbot.Business
         IEnumerable<Message> RetrieveUsersMessages(IEnumerable<string> users);
     }
 
+    public interface IWallMessageDisplayer
+    {
+        void DisplayWallMessage(Message message);
+    }
+
     public class WallCommandHandler : ICommandHandler
     {
         private readonly ICommandHandler _successor;
         private readonly IFollowedUserRetriever _followedUserRetriever;
         private readonly IMultipleUserMessageRetriever _multipleUserMessageRetriever;
-        private readonly IMessageDisplayer _messageDisplayer;
-        private readonly IMessageAgeFormatter _messageAgeFormatter;
         private readonly Regex _regex = new Regex("^(?<user>[A-Za-z]*) wall");
+        private readonly IWallMessageDisplayer _wallMessageDisplayer;
 
-        public WallCommandHandler(ICommandHandler successor, IFollowedUserRetriever followedUserRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IMessageDisplayer messageDisplayer, IMessageAgeFormatter messageAgeFormatter)
+        public WallCommandHandler(ICommandHandler successor, IFollowedUserRetriever followedUserRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IWallMessageDisplayer wallMessageDisplayer)
         {
             _successor = successor;
             _followedUserRetriever = followedUserRetriever;
             _multipleUserMessageRetriever = multipleUserMessageRetriever;
-            _messageDisplayer = messageDisplayer;
-            _messageAgeFormatter = messageAgeFormatter;
+            _wallMessageDisplayer = wallMessageDisplayer;
         }
 
         public State Handle(string command)
@@ -44,8 +47,7 @@ namespace Chatbot.Business
 
             foreach (var message in messages)
             {
-                var age = _messageAgeFormatter.FormatAge(message);
-                _messageDisplayer.ShowMessage($"{message.User} - {message.Text} ({age})");
+                _wallMessageDisplayer.DisplayWallMessage(message);
             }
 
             return State.Continue;

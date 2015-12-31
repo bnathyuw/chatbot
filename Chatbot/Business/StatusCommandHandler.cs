@@ -15,17 +15,22 @@ namespace Chatbot.Business
         string Display { get; }
     }
 
+    public interface IStatusDisplayer
+    {
+        void DisplayStatus(string time, int messageCount, int userConnexionCount);
+    }
+
     public class StatusCommandHandler : ICommandHandler
     {
-        private readonly IMessageDisplayer _messageDisplayer;
         private readonly IMessageCounter _messageStore;
         private readonly IUserConnexionCounter _userConnexionStore;
         private readonly ICommandHandler _successor;
         private readonly ITimeDisplayer _timeDisplayer;
+        private readonly IStatusDisplayer _statusDisplayer;
 
-        public StatusCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ITimeDisplayer timeDisplayer)
+        public StatusCommandHandler(ICommandHandler successor, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ITimeDisplayer timeDisplayer, IStatusDisplayer statusDisplayer)
         {
-            _messageDisplayer = messageDisplayer;
+            _statusDisplayer = statusDisplayer;
             _timeDisplayer = timeDisplayer;
             _messageStore = messageStore;
             _userConnexionStore = userConnexionStore;
@@ -45,10 +50,10 @@ namespace Chatbot.Business
 
         private void ShowStatusMessage()
         {
-            _messageDisplayer.ShowMessage("Status: ok");
-            _messageDisplayer.ShowMessage($"Current time: {_timeDisplayer.Display}");
-            _messageDisplayer.ShowMessage($"Messages sent: {_messageStore.Count()}");
-            _messageDisplayer.ShowMessage($"User connexions: {_userConnexionStore.Count()}");
+            var time = _timeDisplayer.Display;
+            var messageCount = _messageStore.Count();
+            var userConnexionCount = _userConnexionStore.Count();
+            _statusDisplayer.DisplayStatus(time, messageCount, userConnexionCount);
         }
     }
 }

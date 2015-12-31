@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _actualCommand = null;
-            _wallCommandHandler = new WallCommandHandler(this, null, null, null, null);
+            _wallCommandHandler = new WallCommandHandler(this, null, null, null);
         }
 
         [TestCase(SampleCommands.Unknown)]

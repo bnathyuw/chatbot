@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Chatbot.Business
@@ -9,25 +8,23 @@ namespace Chatbot.Business
         IEnumerable<Message> RetrieveUserMessages(string user);
     }
 
-    public interface IMessageAgeFormatter
+   public interface ITimelineMessageDisplayer
     {
-        string FormatAge(Message message);
+        void DisplayTimelineMessage(Message message);
     }
 
     public class TimelineCommandHandler : ICommandHandler
     {
-        private readonly IMessageDisplayer _messageDisplayer;
         private readonly ICommandHandler _successor;
         private readonly IUserMessageRetriever _userMessageRetriever;
         private readonly Regex _regex = new Regex("^[A-Za-z]*$");
-        private readonly IMessageAgeFormatter _messageAgeFormatter;
+        private readonly ITimelineMessageDisplayer _timelineMessageDisplayer;
 
-        public TimelineCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IUserMessageRetriever userMessageRetriever, IMessageAgeFormatter messageAgeFormatter)
+        public TimelineCommandHandler(ICommandHandler successor, IUserMessageRetriever userMessageRetriever, ITimelineMessageDisplayer timelineMessageDisplayer)
         {
-            _messageDisplayer = messageDisplayer;
+            _timelineMessageDisplayer = timelineMessageDisplayer;
             _successor = successor;
             _userMessageRetriever = userMessageRetriever;
-            _messageAgeFormatter = messageAgeFormatter;
         }
 
         public State Handle(string command)
@@ -47,15 +44,10 @@ namespace Chatbot.Business
         private void DisplayUsersMessages(string command)
         {
             var messages = _userMessageRetriever.RetrieveUserMessages(command);
-            foreach (var output in messages.Select(FormatMessage))
+            foreach (var message in messages)
             {
-                _messageDisplayer.ShowMessage(output);
+                _timelineMessageDisplayer.DisplayTimelineMessage(message);
             }
-        }
-
-        private string FormatMessage(Message message)
-        {
-            return $"{message.Text} ({_messageAgeFormatter.FormatAge(message)})";
         }
     }
 }

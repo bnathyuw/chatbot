@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _actualCommand = null;
-            _timelineCommandHandler = new TimelineCommandHandler(this, null, null, null);
+            _timelineCommandHandler = new TimelineCommandHandler(this, null, null);
         }
 
         [TestCase(SampleCommands.Unknown)]

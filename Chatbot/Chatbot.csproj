@@ -49,7 +49,6 @@
     <Compile Include="Adapters\InMemoryUserConnexions.cs" />
     <Compile Include="Business\ExitCommandHandler.cs" />
     <Compile Include="Business\FollowCommandHandler.cs" />
-    <Compile Include="Business\IMessageDisplayer.cs" />
     <Compile Include="Business\CommandHandler.cs" />
     <Compile Include="Business\Message.cs" />
     <Compile Include="Business\ClockTime.cs" />
@@ -57,6 +56,7 @@
     <Compile Include="Business\PostCommandHandler.cs" />
     <Compile Include="Business\StatusCommandHandler.cs" />
     <Compile Include="Business\TimelineCommandHandler.cs" />
+    <Compile Include="Business\FormattedMessageDisplayer.cs" />
     <Compile Include="Business\UnknownCommandHandler.cs" />
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Business\WallCommandHandler.cs" />
