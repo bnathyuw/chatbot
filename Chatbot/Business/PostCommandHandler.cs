@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Chatbot.Business
 {
@@ -7,16 +8,21 @@ namespace Chatbot.Business
         void SaveMessage(Message message);
     }
 
+    public interface ITimestamper
+    {
+        DateTime Timestamp { get; }
+    }
+
     public class PostCommandHandler : ICommandHandler
     {
-        private readonly IClock _clock;
         private readonly IMessageSaver _messageSaver;
         private readonly ICommandHandler _successor;
         private readonly Regex _regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
+        private readonly ITimestamper _timestamper;
 
-        public PostCommandHandler(ICommandHandler successor, IClock clock, IMessageSaver messageSaver)
+        public PostCommandHandler(ICommandHandler successor, IMessageSaver messageSaver, ITimestamper timestamper)
         {
-            _clock = clock;
+            _timestamper = timestamper;
             _messageSaver = messageSaver;
             _successor = successor;
         }
@@ -39,7 +45,7 @@ namespace Chatbot.Business
             {
                 User = match.Groups["user"].Value,
                 Text = match.Groups["text"].Value,
-                SentOn = _clock.Now
+                SentOn = _timestamper.Timestamp
             };
         }
     }

@@ -10,18 +10,23 @@ namespace Chatbot.Business
         int Count();
     }
 
+    public interface ITimeDisplayer
+    {
+        string Display { get; }
+    }
+
     public class StatusCommandHandler : ICommandHandler
     {
         private readonly IMessageDisplayer _messageDisplayer;
-        private readonly IClock _clock;
         private readonly IMessageCounter _messageStore;
         private readonly IUserConnexionCounter _userConnexionStore;
         private readonly ICommandHandler _successor;
+        private readonly ITimeDisplayer _timeDisplayer;
 
-        public StatusCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IClock clock, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore)
+        public StatusCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ClockTime timeDisplayer)
         {
             _messageDisplayer = messageDisplayer;
-            _clock = clock;
+            _timeDisplayer = timeDisplayer;
             _messageStore = messageStore;
             _userConnexionStore = userConnexionStore;
             _successor = successor;
@@ -41,7 +46,7 @@ namespace Chatbot.Business
         private void ShowStatusMessage()
         {
             _messageDisplayer.ShowMessage("Status: ok");
-            _messageDisplayer.ShowMessage($"Current time: {_clock.Now:HH:mm, d MMMM yyyy}");
+            _messageDisplayer.ShowMessage($"Current time: {_timeDisplayer.Display}");
             _messageDisplayer.ShowMessage($"Messages sent: {_messageStore.Count()}");
             _messageDisplayer.ShowMessage($"User connexions: {_userConnexionStore.Count()}");
         }

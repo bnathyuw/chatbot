@@ -12,7 +12,7 @@ namespace Chatbot.Tests.Business
         private readonly DateTime _now = new DateTime(2015, 12, 29, 17, 40, 0);
 
         [OneTimeSetUp]
-        public void OneTimeSetUp() => _messageAgeFormatter = new MessageAgeFormatter(this);
+        public void OneTimeSetUp() => _messageAgeFormatter = new MessageAgeFormatter(new ClockTime(this));
 
         [TestCase(1, "1 minute ago")]
         [TestCase(2, "2 minutes ago")]

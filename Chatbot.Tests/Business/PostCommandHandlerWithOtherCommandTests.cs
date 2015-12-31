@@ -14,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _actualCommand = null;
-            _postCommandHandler = new PostCommandHandler(this, null, null);
+            _postCommandHandler = new PostCommandHandler(this, null, new ClockTime(null));
         }
 
         [TestCase(SampleCommands.Unknown)]

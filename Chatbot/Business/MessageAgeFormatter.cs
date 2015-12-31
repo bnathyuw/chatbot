@@ -2,28 +2,28 @@
 
 namespace Chatbot.Business
 {
+    public interface IMessageAgeCalculator
+    {
+        TimeSpan CalculateAge(Message message);
+    }
+
     public class MessageAgeFormatter : IMessageAgeFormatter
     {
-        private readonly IClock _clock;
+        private readonly IMessageAgeCalculator _messageAgeCalculator;
 
-        public MessageAgeFormatter(IClock clock)
+        public MessageAgeFormatter(IMessageAgeCalculator messageAgeCalculator)
         {
-            _clock = clock;
+            _messageAgeCalculator = messageAgeCalculator;
         }
 
         public string FormatAge(Message message)
         {
-            var timeDifference = GetTimeDifference(message);
+            var timeDifference = _messageAgeCalculator.CalculateAge(message);
 
             if (timeDifference.Minutes > 0)
                 return FormatWithUnit(timeDifference.Minutes, "minute");
 
             return FormatWithUnit(timeDifference.Seconds, "second");
-        }
-
-        private TimeSpan GetTimeDifference(Message message)
-        {
-            return _clock.Now - message.SentOn;
         }
 
         private static string FormatWithUnit(int count, string unitName)
