@@ -15,7 +15,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _actualMessages = new List<string>();
-            var statusCommandHandler = new StatusCommandHandler(this, this, this, this, null);
+            var statusCommandHandler = new StatusCommandHandler(null, this, this, this, this);
             _state = statusCommandHandler.HandleCommand(SampleCommands.Status);
         }
 

@@ -22,7 +22,7 @@ namespace Chatbot.Business
         private readonly Regex _regex = new Regex("^[A-Za-z]*$");
         private readonly IMessageAgeFormatter _messageAgeFormatter;
 
-        public TimelineCommandHandler(IMessageDisplayer messageDisplayer, ICommandHandler successor, IUserMessageRetriever userMessageRetriever, IMessageAgeFormatter messageAgeFormatter)
+        public TimelineCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IUserMessageRetriever userMessageRetriever, IMessageAgeFormatter messageAgeFormatter)
         {
             _messageDisplayer = messageDisplayer;
             _successor = successor;

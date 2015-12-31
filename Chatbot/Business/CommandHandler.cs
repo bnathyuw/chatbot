@@ -7,14 +7,13 @@ namespace Chatbot.Business
             var unknownCommandHandler = new UnknownCommandHandler();
             var exitCommandHandler = new ExitCommandHandler(unknownCommandHandler);
             var messageAgeFormatter = new MessageAgeFormatter(clock);
-            var timelineCommandHandler = new TimelineCommandHandler(messageDisplayer, exitCommandHandler,
-                userMessageRetriever, messageAgeFormatter);
-            var postCommandHandler = new PostCommandHandler(clock, messageSaver, timelineCommandHandler);
+            var timelineCommandHandler = new TimelineCommandHandler(exitCommandHandler,
+                messageDisplayer, userMessageRetriever, messageAgeFormatter);
+            var postCommandHandler = new PostCommandHandler(timelineCommandHandler, clock, messageSaver);
             var wallCommandHandler = new WallCommandHandler(postCommandHandler, followedUserRetriever,
                 multipleUserMessageRetriever, messageDisplayer, messageAgeFormatter);
             var followCommandHandler = new FollowCommandHandler(wallCommandHandler, userConnexionSaver);
-            return new StatusCommandHandler(messageDisplayer, clock, messageCounter, userConnexionCounter,
-                followCommandHandler);
+            return new StatusCommandHandler(followCommandHandler, messageDisplayer, clock, messageCounter, userConnexionCounter);
         }
     }
 }

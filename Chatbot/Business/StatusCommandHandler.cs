@@ -18,7 +18,7 @@ namespace Chatbot.Business
         private readonly IUserConnexionCounter _userConnexionStore;
         private readonly ICommandHandler _successor;
 
-        public StatusCommandHandler(IMessageDisplayer messageDisplayer, IClock clock, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ICommandHandler successor)
+        public StatusCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IClock clock, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore)
         {
             _messageDisplayer = messageDisplayer;
             _clock = clock;

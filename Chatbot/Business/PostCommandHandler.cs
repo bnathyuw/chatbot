@@ -14,7 +14,7 @@ namespace Chatbot.Business
         private readonly ICommandHandler _successor;
         private readonly Regex _regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
 
-        public PostCommandHandler(IClock clock, IMessageSaver messageSaver, ICommandHandler successor)
+        public PostCommandHandler(ICommandHandler successor, IClock clock, IMessageSaver messageSaver)
         {
             _clock = clock;
             _messageSaver = messageSaver;
