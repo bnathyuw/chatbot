@@ -11,10 +11,11 @@ namespace Chatbot.Tests.Adapters
         private TextReader _stdIn;
         private string _actualCommand;
         private TextWriter _stdOut;
+        private TextWriter _testOut;
         private const string ExpectedCommand = "Expected Command";
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             StubStandardIn();
             StubStandardOut();
@@ -31,11 +32,12 @@ namespace Chatbot.Tests.Adapters
         private void StubStandardOut()
         {
             _stdOut = Console.Out;
-            Console.SetOut(new StringWriter());
+            _testOut = new StringWriter();
+            Console.SetOut(_testOut);
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
         {
             RestoreStandardInput();
             RestoreStandardOutput();
@@ -48,5 +50,8 @@ namespace Chatbot.Tests.Adapters
         [Test]
         public void Reads_command_from_standard_input() =>
             Assert.That(_actualCommand, Is.EqualTo(ExpectedCommand));
+
+        [Test]
+        public void Prompts_for_input() => Assert.That(_testOut.ToString(), Is.EqualTo("> "));
     }
 }
