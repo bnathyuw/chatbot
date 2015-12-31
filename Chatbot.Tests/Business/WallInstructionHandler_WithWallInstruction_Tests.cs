@@ -6,7 +6,7 @@ using NUnit.Framework.Constraints;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class WallInstructionHandler_WithWallInstruction_Tests : IUserFollowListRetriever, IMultipleUserMessageRetriever, IMessageDisplayer, IMessageAgeFormatter
+    public class WallInstructionHandler_WithWallInstruction_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IMessageDisplayer, IMessageAgeFormatter
     {
         private readonly IEnumerable<string> _expectedFollowList = new List<string> {"Emile", "Farouk", "Gita"};
         private readonly IEnumerable<Message> _expectedMessages = new List<Message>
@@ -55,7 +55,7 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Returns_continue_state() => Assert.That(_actualState, Is.EqualTo(State.Continue));
 
-        public IEnumerable<string> RetrieveUserFollowList(string user)
+        public IEnumerable<string> RetrieveFollowedUsers(string user)
         {
             _actualUser = user;
             return _expectedFollowList;

@@ -11,14 +11,14 @@ namespace Chatbot.Business
             var messageAgeFormatter = new MessageAgeFormatter(clock);
             var timelineInstructionHandler = new TimelineInstructionHandler(messageDisplayer, exitInstructionHandler, userMessageRetriever, messageAgeFormatter);
             var postInstructionHandler = new PostInstructionHandler(clock, messageSaver, timelineInstructionHandler);
-            var wallInstructionHandler = new WallInstructionHandler(postInstructionHandler, new FakeUserFollowListRetriever(), multipleUserMessageRetriever, messageDisplayer, messageAgeFormatter);
+            var wallInstructionHandler = new WallInstructionHandler(postInstructionHandler, new FakeFollowedUserRetriever(), multipleUserMessageRetriever, messageDisplayer, messageAgeFormatter);
             return new StatusInstructionHandler(messageDisplayer, clock, messageCounter, userConnexionCounter,
                 wallInstructionHandler);
         }
 
-        private class FakeUserFollowListRetriever : IUserFollowListRetriever
+        private class FakeFollowedUserRetriever : IFollowedUserRetriever
         {
-            public IEnumerable<string> RetrieveUserFollowList(string user)
+            public IEnumerable<string> RetrieveFollowedUsers(string user)
             {
                 yield return "Alice";
             }

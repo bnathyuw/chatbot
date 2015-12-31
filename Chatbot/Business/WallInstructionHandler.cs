@@ -4,9 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Chatbot.Business
 {
-    public interface IUserFollowListRetriever
+    public interface IFollowedUserRetriever
     {
-        IEnumerable<string> RetrieveUserFollowList(string user);
+        IEnumerable<string> RetrieveFollowedUsers(string user);
     }
 
     public interface IMultipleUserMessageRetriever
@@ -17,16 +17,16 @@ namespace Chatbot.Business
     public class WallInstructionHandler : IInstructionHandler
     {
         private readonly IInstructionHandler _successor;
-        private readonly IUserFollowListRetriever _userFollowListRetriever;
+        private readonly IFollowedUserRetriever _followedUserRetriever;
         private readonly IMultipleUserMessageRetriever _multipleUserMessageRetriever;
         private readonly IMessageDisplayer _messageDisplayer;
         private readonly IMessageAgeFormatter _messageAgeFormatter;
         private readonly Regex _regex = new Regex("^(?<user>[A-Za-z]*) wall");
 
-        public WallInstructionHandler(IInstructionHandler successor, IUserFollowListRetriever userFollowListRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IMessageDisplayer messageDisplayer, IMessageAgeFormatter messageAgeFormatter)
+        public WallInstructionHandler(IInstructionHandler successor, IFollowedUserRetriever followedUserRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IMessageDisplayer messageDisplayer, IMessageAgeFormatter messageAgeFormatter)
         {
             _successor = successor;
-            _userFollowListRetriever = userFollowListRetriever;
+            _followedUserRetriever = followedUserRetriever;
             _multipleUserMessageRetriever = multipleUserMessageRetriever;
             _messageDisplayer = messageDisplayer;
             _messageAgeFormatter = messageAgeFormatter;
@@ -39,7 +39,7 @@ namespace Chatbot.Business
                 return _successor.HandleInstruction(instruction);
 
             var user = match.Groups["user"].Value;
-            var followedUsers = _userFollowListRetriever.RetrieveUserFollowList(user);
+            var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
             var messages = _multipleUserMessageRetriever.RetrieveUsersMessages(new List<string> {user}.Concat(followedUsers));
 
             foreach (var message in messages)
