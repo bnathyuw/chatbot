@@ -1,38 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Chatbot.Business;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class StatusCommandHandler_WithStatusCommand_Tests : IMessageDisplayer, IMessageCounter, IUserConnexionCounter, ITimeDisplayer
+    public class StatusCommandHandler_WithStatusCommand_Tests : IMessageCounter, IUserConnexionCounter, ITimeDisplayer, IStatusDisplayer
     {
-        private IList<string> _actualMessages;
+        private const string ExpectedTime = "17:36, 28 December 2015";
+        private const int ExpectedMessageCount = 35;
+        private const int ExpectedConnexionCount = 46;
         private State _state;
+        private Tuple<string, int, int> _actualValues;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _actualMessages = new List<string>();
-            var statusCommandHandler = new StatusCommandHandler(null, this, this, this, new FormattedMessageDisplayer(this, null));
+            var statusCommandHandler = new StatusCommandHandler(null, this, this, this, this);
             _state = statusCommandHandler.Handle(SampleCommands.Status);
         }
 
-        [TestCase("Status: ok")]
-        [TestCase("Current time: 17:36, 28 December 2015")]
-        [TestCase("Messages sent: 35")]
-        [TestCase("User connexions: 46")]
-        public void Displays_expected_messages(string message) => Assert.That(_actualMessages, Does.Contain(message));
+        [Test]
+        public void Displays_status_with_expected_values() => 
+            Assert.That(_actualValues, Is.EqualTo(new Tuple<string, int, int>(ExpectedTime, ExpectedMessageCount, ExpectedConnexionCount)));
 
         [Test]
         public void Returns_a_continue_state() => Assert.That(_state, Is.EqualTo(State.Continue));
 
-        public void ShowMessage(string output) => _actualMessages.Add(output);
+        int IMessageCounter.Count() => ExpectedMessageCount;
 
-        int IMessageCounter.Count() => 35;
+        int IUserConnexionCounter.Count() => ExpectedConnexionCount;
 
-        int IUserConnexionCounter.Count() => 46;
+        string ITimeDisplayer.Display => ExpectedTime;
 
-        public string Display => "17:36, 28 December 2015";
+        public void DisplayStatus(string time, int messageCount, int userConnexionCount) => _actualValues = new Tuple<string, int, int>(time, messageCount, userConnexionCount);
     }
 }
