@@ -10,8 +10,8 @@ namespace Chatbot.Tests.Business
         private WallCommandHandler _wallCommandHandler;
         private const State ExpectedState = State.Exit;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _actualCommand = null;
             _wallCommandHandler = new WallCommandHandler(this, null, null, null, null);

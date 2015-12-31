@@ -9,8 +9,8 @@ namespace Chatbot.Tests.Adapters
     {
         private SystemClock _systemClock;
 
-        [SetUp]
-        public void SetUp() => _systemClock = new SystemClock();
+        [OneTimeSetUp]
+        public void OneTimeSetUp() => _systemClock = new SystemClock();
 
         [Test]
         public void Tells_the_time() => Assert.That(_systemClock.Now, Is.GreaterThan(DateTime.MinValue));

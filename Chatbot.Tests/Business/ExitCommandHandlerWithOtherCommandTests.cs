@@ -10,8 +10,8 @@ namespace Chatbot.Tests.Business
         private ExitCommandHandler _exitCommandHandler;
         private const State ExpectedState = State.Exit;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _actualCommand = null;
             _exitCommandHandler = new ExitCommandHandler(this);

@@ -12,8 +12,8 @@ namespace Chatbot.Tests.Business
         private State _state;
         private List<string> _actualMessages;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _actualMessages = new List<string>();
             _actualUser = null;

@@ -10,8 +10,8 @@ namespace Chatbot.Tests.Business
         private TimelineCommandHandler _timelineCommandHandler;
         private const State ExpectedState = State.Exit;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _actualCommand = null;
             _timelineCommandHandler = new TimelineCommandHandler(null, this, null, null);

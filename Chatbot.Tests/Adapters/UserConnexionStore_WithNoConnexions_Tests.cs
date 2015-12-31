@@ -8,8 +8,8 @@ namespace Chatbot.Tests.Adapters
     {
         private UserConnexionStore _userConnexionStore;
 
-        [SetUp]
-        public void SetUp() => _userConnexionStore = new UserConnexionStore();
+        [OneTimeSetUp]
+        public void OneTimeSetUp() => _userConnexionStore = new UserConnexionStore();
 
         [Test]
         public void Counts_zero_messages() => Assert.That(_userConnexionStore.CountUserConnexions(), Is.EqualTo(0));

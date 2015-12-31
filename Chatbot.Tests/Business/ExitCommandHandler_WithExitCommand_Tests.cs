@@ -8,8 +8,8 @@ namespace Chatbot.Tests.Business
     {
         private State _state;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             var exitCommandHandler = new ExitCommandHandler(null);
             _state = exitCommandHandler.HandleCommand(SampleCommands.Exit);

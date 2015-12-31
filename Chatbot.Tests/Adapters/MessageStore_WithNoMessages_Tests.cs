@@ -8,8 +8,8 @@ namespace Chatbot.Tests.Adapters
     {
         private MessageStore _messageStore;
 
-        [SetUp]
-        public void SetUp() => _messageStore = new MessageStore();
+        [OneTimeSetUp]
+        public void OneTimeSetUp() => _messageStore = new MessageStore();
 
         [Test]
         public void Counts_zero_messages() => Assert.That(_messageStore.CountMessages(), Is.EqualTo(0));

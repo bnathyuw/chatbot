@@ -10,8 +10,8 @@ namespace Chatbot.Tests.Business
         private FollowCommandHandler _followCommandHandler;
         private const State ExpectedState = State.Exit;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _actualCommand = null;
             _followCommandHandler = new FollowCommandHandler(this, null);

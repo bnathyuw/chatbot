@@ -12,8 +12,8 @@ namespace Chatbot.Tests.Adapters
         private StringWriter _testOut;
         private const string ExpectedMessage = "Expected Message";
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             InterceptStandardOut();
             var messageDisplayer = new ConsoleIo();
@@ -27,8 +27,8 @@ namespace Chatbot.Tests.Adapters
             Console.SetOut(_testOut);
         }
 
-        [TearDown]
-        public void TearDown() => RestoreStandardOut();
+        [OneTimeTearDown]
+        public void OneTimeTearDown() => RestoreStandardOut();
 
         private void RestoreStandardOut() => Console.SetOut(_stdOut);
 

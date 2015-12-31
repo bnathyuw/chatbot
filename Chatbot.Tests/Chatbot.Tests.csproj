@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="Adapters\ConsoleIo_CommandReader_Tests.cs" />
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
-    <Compile Include="Adapters\MessageStore_WithThreeMessages_Tests.cs" />
+    <Compile Include="Adapters\MessageStore_WithMessages_Tests.cs" />
     <Compile Include="Adapters\MessageStore_WithNoMessages_Tests.cs" />
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\UserConnexionStore_WithConnexions_Tests.cs" />

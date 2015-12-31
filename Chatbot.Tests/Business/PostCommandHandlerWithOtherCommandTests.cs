@@ -10,8 +10,8 @@ namespace Chatbot.Tests.Business
         private PostCommandHandler _postCommandHandler;
         private const State ExpectedState = State.Exit;
 
-        [SetUp]
-        public void SetUp()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             _actualCommand = null;
             _postCommandHandler = new PostCommandHandler(null, null, this);
