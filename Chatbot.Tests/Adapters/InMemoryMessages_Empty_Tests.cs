@@ -1,5 +1,4 @@
 ﻿using Chatbot.Adapters;
-using Chatbot.Business;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
@@ -7,7 +6,7 @@ namespace Chatbot.Tests.Adapters
     [TestFixture]
     public class InMemoryMessages_Empty_Tests
     {
-        private IMessageCounter _messages;
+        private InMemoryMessages _messages;
 
         [OneTimeSetUp]
         public void OneTimeSetUp() => _messages = new InMemoryMessages();
