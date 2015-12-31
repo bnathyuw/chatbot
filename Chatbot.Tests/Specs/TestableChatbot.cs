@@ -17,7 +17,8 @@ namespace Chatbot.Tests.Specs
             _messagesDisplayed = new Queue<string>();
             var messageStore = new MessageStore();
             var userConnexionStore = new UserConnexionStore();
-            var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore, messageStore, messageStore);
+            userConnexionStore.SaveConnexion("Charlie", "Alice");
+            var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore);
             _userInterface = new UserInterface(this, statusInstructionHandler);
         }
 
