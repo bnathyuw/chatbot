@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class StatusInstructionHandler_WithStatusInstruction_Tests : IMessageDisplayer, IClock, IMessageCounter, IUserConnexionCounter
+    public class StatusCommandHandler_WithStatusCommand_Tests : IMessageDisplayer, IClock, IMessageCounter, IUserConnexionCounter
     {
         private IList<string> _actualMessages;
         private State _state;
@@ -15,8 +15,8 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _actualMessages = new List<string>();
-            var statusInstructionHandler = new StatusInstructionHandler(this, this, this, this, null);
-            _state = statusInstructionHandler.HandleInstruction(SampleInstructions.Status);
+            var statusCommandHandler = new StatusCommandHandler(this, this, this, this, null);
+            _state = statusCommandHandler.HandleCommand(SampleCommands.Status);
         }
 
         [TestCase("Status: ok")]

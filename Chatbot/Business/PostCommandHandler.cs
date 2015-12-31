@@ -7,26 +7,26 @@ namespace Chatbot.Business
         void SaveMessage(Message message);
     }
 
-    public class PostInstructionHandler : IInstructionHandler
+    public class PostCommandHandler : ICommandHandler
     {
         private readonly IClock _clock;
         private readonly IMessageSaver _messageSaver;
-        private readonly IInstructionHandler _successor;
+        private readonly ICommandHandler _successor;
         private readonly Regex _regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
 
-        public PostInstructionHandler(IClock clock, IMessageSaver messageSaver, IInstructionHandler successor)
+        public PostCommandHandler(IClock clock, IMessageSaver messageSaver, ICommandHandler successor)
         {
             _clock = clock;
             _messageSaver = messageSaver;
             _successor = successor;
         }
 
-        public State HandleInstruction(string instruction)
+        public State HandleCommand(string command)
         {
-            var match = _regex.Match(instruction);
+            var match = _regex.Match(command);
 
             if (!match.Success)
-                return _successor.HandleInstruction(instruction);
+                return _successor.HandleCommand(command);
 
             var message = ParseMessage(match);
             _messageSaver.SaveMessage(message);

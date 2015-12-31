@@ -6,26 +6,26 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class ConsoleIo_InstructionReader_Tests
+    public class ConsoleIo_CommandReader_Tests
     {
         private TextReader _stdIn;
-        private string _actualInstruction;
+        private string _actualCommand;
         private TextWriter _stdOut;
-        private const string ExpectedInstruction = "Expected Instruction";
+        private const string ExpectedCommand = "Expected Command";
 
         [SetUp]
         public void SetUp()
         {
             StubStandardIn();
             StubStandardOut();
-            var instructionReader = new ConsoleIo();
-            _actualInstruction = instructionReader.ReadInstruction();
+            var commandReader = new ConsoleIo();
+            _actualCommand = commandReader.ReadCommand();
         }
 
         private void StubStandardIn()
         {
             _stdIn = Console.In;
-            Console.SetIn(new StringReader(ExpectedInstruction));
+            Console.SetIn(new StringReader(ExpectedCommand));
         }
 
         private void StubStandardOut()
@@ -46,7 +46,7 @@ namespace Chatbot.Tests.Adapters
         private void RestoreStandardOutput() => Console.SetOut(_stdOut);
 
         [Test]
-        public void Reads_instruction_from_standard_input() =>
-            Assert.That(_actualInstruction, Is.EqualTo(ExpectedInstruction));
+        public void Reads_command_from_standard_input() =>
+            Assert.That(_actualCommand, Is.EqualTo(ExpectedCommand));
     }
 }

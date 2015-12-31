@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using Chatbot.Business;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class WallInstructionHandler_WithWallInstruction_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IMessageDisplayer, IMessageAgeFormatter
+    public class WallCommandHandler_WithWallCommand_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IMessageDisplayer, IMessageAgeFormatter
     {
         private readonly IEnumerable<string> _expectedFollowList = new List<string> {"Emile", "Farouk", "Gita"};
         private readonly IEnumerable<Message> _expectedMessages = new List<Message>
@@ -29,8 +28,8 @@ namespace Chatbot.Tests.Business
             _actualUser = null;
             _actualUsers = new List<string>();
             _actualMessages = new List<string>();
-            var wallInstructionHandler = new WallInstructionHandler(null, this, this, this, this);
-            _actualState = wallInstructionHandler.HandleInstruction("Daphne wall");
+            var wallCommandHandler = new WallCommandHandler(null, this, this, this, this);
+            _actualState = wallCommandHandler.HandleCommand("Daphne wall");
         }
 
         [Test]

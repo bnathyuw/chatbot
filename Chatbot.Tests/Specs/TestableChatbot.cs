@@ -5,10 +5,10 @@ using Chatbot.Business;
 
 namespace Chatbot.Tests.Specs
 {
-    public class TestableChatbot : IMessageDisplayer, IClock, IInstructionReader
+    public class TestableChatbot : IMessageDisplayer, IClock, ICommandReader
     {
         private readonly UserInterface _userInterface;
-        private string _nextInstruction;
+        private string _nextCommand;
         private readonly Queue<string> _messagesDisplayed;
         private readonly DateTime _referenceTime = new DateTime(2015, 12, 28, 20, 34, 0);
 
@@ -17,16 +17,16 @@ namespace Chatbot.Tests.Specs
             _messagesDisplayed = new Queue<string>();
             var messageStore = new MessageStore();
             var userConnexionStore = new UserConnexionStore();
-            var statusInstructionHandler = InstructionHandler.With(this, this, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore);
-            _userInterface = new UserInterface(this, statusInstructionHandler);
+            var statusCommandHandler = CommandHandler.With(this, this, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore);
+            _userInterface = new UserInterface(this, statusCommandHandler);
         }
 
-        public void ProcessInstruction(string instruction, TimeSpan? timeDifference = null)
+        public void ProcessCommand(string command, TimeSpan? timeDifference = null)
         {
-            Console.WriteLine($"  > {instruction}");
+            Console.WriteLine($"  > {command}");
             Now = _referenceTime.Add(timeDifference ?? TimeSpan.Zero);
-            _nextInstruction = instruction;
-            _userInterface.ProcessNextInstruction();
+            _nextCommand = command;
+            _userInterface.ProcessNextCommand();
         }
 
         public string GetMessage() => _messagesDisplayed.Dequeue();
@@ -39,6 +39,6 @@ namespace Chatbot.Tests.Specs
 
         public DateTime Now { get; private set; }
 
-        public string ReadInstruction() => _nextInstruction;
+        public string ReadCommand() => _nextCommand;
     }
 }

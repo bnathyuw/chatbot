@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class PostInstructionHandler_WithPostInstruction_Tests : IClock, IMessageSaver
+    public class PostCommandHandler_WithPostCommand_Tests : IClock, IMessageSaver
     {
         private const string ExpectedUser = "Alice";
         private const string ExpectedText = "I love the weather today";
@@ -16,8 +16,8 @@ namespace Chatbot.Tests.Business
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var postInstructionHandler = new PostInstructionHandler(this, this, null);
-            _state = postInstructionHandler.HandleInstruction($"{ExpectedUser} -> {ExpectedText}");
+            var postCommandHandler = new PostCommandHandler(this, this, null);
+            _state = postCommandHandler.HandleCommand($"{ExpectedUser} -> {ExpectedText}");
         }
 
         [Test]

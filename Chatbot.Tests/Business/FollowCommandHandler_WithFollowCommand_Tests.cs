@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class FollowInstructionHandler_WithFollowInstruction_Tests : IUserConnexionSaver
+    public class FollowCommandHandler_WithFollowCommand_Tests : IUserConnexionSaver
     {
         private Tuple<string, string> _actualConnexion;
         private State _state;
@@ -13,8 +13,8 @@ namespace Chatbot.Tests.Business
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var followInstructionHandler = new FollowInstructionHandler(null, this);
-            _state = followInstructionHandler.HandleInstruction("Alice follows Bob");
+            var followCommandHandler = new FollowCommandHandler(null, this);
+            _state = followCommandHandler.HandleCommand("Alice follows Bob");
         }
 
         [Test]

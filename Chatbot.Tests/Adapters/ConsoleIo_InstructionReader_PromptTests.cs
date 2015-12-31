@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class ConsoleIo_InstructionReader_PromptTests
+    public class ConsoleIo_CommandReader_PromptTests
     {
         private TextWriter _stdOut;
         private TextReader _stdIn;
@@ -18,7 +18,7 @@ namespace Chatbot.Tests.Adapters
             InterceptStandardOut();
             StubStandardIn();
             var messageDisplayer = new ConsoleIo();
-            messageDisplayer.ReadInstruction();
+            messageDisplayer.ReadCommand();
         }
 
         private void InterceptStandardOut()

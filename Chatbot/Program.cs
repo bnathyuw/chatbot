@@ -13,8 +13,8 @@ namespace Chatbot
             var systemClock = new SystemClock();
             var messageStore = new MessageStore();
             var userConnexionStore = new UserConnexionStore();
-            var instructionHandler = InstructionHandler.With(consoleIo, systemClock, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore);
-            UserInterface = new UserInterface(consoleIo, instructionHandler);
+            var commandHandler = CommandHandler.With(consoleIo, systemClock, messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore);
+            UserInterface = new UserInterface(consoleIo, commandHandler);
         }
 
         static void Main()
@@ -22,7 +22,7 @@ namespace Chatbot
             State state;
             do
             {
-                state = UserInterface.ProcessNextInstruction();
+                state = UserInterface.ProcessNextCommand();
             } while (state == State.Continue);
         }
     }

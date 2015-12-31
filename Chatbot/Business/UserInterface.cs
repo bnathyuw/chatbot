@@ -1,8 +1,8 @@
 ﻿namespace Chatbot.Business
 {
-    public interface IInstructionReader
+    public interface ICommandReader
     {
-        string ReadInstruction();
+        string ReadCommand();
     }
 
     public enum State
@@ -11,26 +11,26 @@
         Exit
     }
 
-    public interface IInstructionHandler
+    public interface ICommandHandler
     {
-        State HandleInstruction(string instruction);
+        State HandleCommand(string command);
     }
 
     public class UserInterface
     {
-        private readonly IInstructionReader _instructionReader;
-        private readonly IInstructionHandler _statusInstructionHandler;
+        private readonly ICommandReader _commandReader;
+        private readonly ICommandHandler _statusCommandHandler;
 
-        public UserInterface(IInstructionReader instructionReader, IInstructionHandler instructionHandler)
+        public UserInterface(ICommandReader commandReader, ICommandHandler commandHandler)
         {
-            _instructionReader = instructionReader;
-            _statusInstructionHandler = instructionHandler;
+            _commandReader = commandReader;
+            _statusCommandHandler = commandHandler;
         }
 
-        public State ProcessNextInstruction()
+        public State ProcessNextCommand()
         {
-            var instruction = _instructionReader.ReadInstruction();
-            return _statusInstructionHandler.HandleInstruction(instruction);
+            var command = _commandReader.ReadCommand();
+            return _statusCommandHandler.HandleCommand(command);
         }
     }
 }

@@ -15,22 +15,22 @@ namespace Chatbot.Tests.Specs
 
         public void SetUpMessages()
         {
-            _testableChatbot.ProcessInstruction("Alice -> I love the weather today", 5.MinutesAgo());
-            _testableChatbot.ProcessInstruction("Bob -> Damn! We lost!", 2.MinutesAgo());
-            _testableChatbot.ProcessInstruction("Bob -> Good game though.", 1.MinuteAgo());
-            _testableChatbot.ProcessInstruction("Charlie -> I'm in New York today! Anyone want to have a coffee?", 2.SecondsAgo());
+            _testableChatbot.ProcessCommand("Alice -> I love the weather today", 5.MinutesAgo());
+            _testableChatbot.ProcessCommand("Bob -> Damn! We lost!", 2.MinutesAgo());
+            _testableChatbot.ProcessCommand("Bob -> Good game though.", 1.MinuteAgo());
+            _testableChatbot.ProcessCommand("Charlie -> I'm in New York today! Anyone want to have a coffee?", 2.SecondsAgo());
         }
 
-        public void ViewUsersTimeline(string user) => _testableChatbot.ProcessInstruction(user);
+        public void ViewUsersTimeline(string user) => _testableChatbot.ProcessCommand(user);
 
         public void UserFollowsAnother(string follower, string followed) => 
-            _testableChatbot.ProcessInstruction($"{follower} follows {followed}");
+            _testableChatbot.ProcessCommand($"{follower} follows {followed}");
 
         public void ViewUsersWall(string user) =>
-            _testableChatbot.ProcessInstruction($"{user} wall");
+            _testableChatbot.ProcessCommand($"{user} wall");
 
         public void ViewUsersWallLater(string user) =>
-            _testableChatbot.ProcessInstruction($"{user} wall", 13.SecondsLater());
+            _testableChatbot.ProcessCommand($"{user} wall", 13.SecondsLater());
 
         public void AssertAlicesMessages() =>
             Assert.That(_testableChatbot.GetMessage(), Is.EqualTo("I love the weather today (5 minutes ago)"));

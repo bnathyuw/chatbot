@@ -4,42 +4,42 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class UserInterface_Tests : IInstructionReader, IInstructionHandler
+    public class UserInterface_Tests : ICommandReader, ICommandHandler
     {
-        private const string ExpectedInstruction = "Expected Instruction";
+        private const string ExpectedCommand = "Expected Command";
         private const State ExpectedState = State.Exit;
         private UserInterface _userInterface;
         private State _state;
-        private bool _instructionWasRead;
-        private string _actualInstruction;
+        private bool _commandWasRead;
+        private string _actualCommand;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _instructionWasRead = false;
-            _actualInstruction = null;
+            _commandWasRead = false;
+            _actualCommand = null;
             _userInterface = new UserInterface(this, this);
-            _state = _userInterface.ProcessNextInstruction();
+            _state = _userInterface.ProcessNextCommand();
         }
 
         [Test]
-        public void Reads_instruction() => Assert.That(_instructionWasRead, Is.True);
+        public void Reads_command() => Assert.That(_commandWasRead, Is.True);
 
         [Test]
-        public void Handles_instruction() => Assert.That(_actualInstruction, Is.EqualTo(ExpectedInstruction));
+        public void Handles_command() => Assert.That(_actualCommand, Is.EqualTo(ExpectedCommand));
 
         [Test]
         public void Returns_expected_state() => Assert.That(_state, Is.EqualTo(ExpectedState));
 
-        public string ReadInstruction()
+        public string ReadCommand()
         {
-            _instructionWasRead = true;
-            return ExpectedInstruction;
+            _commandWasRead = true;
+            return ExpectedCommand;
         }
 
-        public State HandleInstruction(string instruction)
+        public State HandleCommand(string command)
         {
-            _actualInstruction = instruction;
+            _actualCommand = command;
             return ExpectedState;
         }
     }

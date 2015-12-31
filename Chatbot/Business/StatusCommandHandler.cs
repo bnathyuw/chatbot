@@ -10,15 +10,15 @@ namespace Chatbot.Business
         int CountUserConnexions();
     }
 
-    public class StatusInstructionHandler : IInstructionHandler
+    public class StatusCommandHandler : ICommandHandler
     {
         private readonly IMessageDisplayer _messageDisplayer;
         private readonly IClock _clock;
         private readonly IMessageCounter _messageStore;
         private readonly IUserConnexionCounter _userConnexionStore;
-        private readonly IInstructionHandler _successor;
+        private readonly ICommandHandler _successor;
 
-        public StatusInstructionHandler(IMessageDisplayer messageDisplayer, IClock clock, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, IInstructionHandler successor)
+        public StatusCommandHandler(IMessageDisplayer messageDisplayer, IClock clock, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ICommandHandler successor)
         {
             _messageDisplayer = messageDisplayer;
             _clock = clock;
@@ -27,16 +27,16 @@ namespace Chatbot.Business
             _successor = successor;
         }
 
-        public State HandleInstruction(string instruction)
+        public State HandleCommand(string command)
         {
-            if (!CanHandle(instruction))
-                return _successor.HandleInstruction(instruction);
+            if (!CanHandle(command))
+                return _successor.HandleCommand(command);
 
             ShowStatusMessage();
             return State.Continue;
         }
 
-        private static bool CanHandle(string instruction) => instruction == "status";
+        private static bool CanHandle(string command) => command == "status";
 
         private void ShowStatusMessage()
         {

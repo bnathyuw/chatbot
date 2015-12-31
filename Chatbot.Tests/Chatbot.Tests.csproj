@@ -49,30 +49,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\ConsoleIo_InstructionReader_PromptTests.cs" />
-    <Compile Include="Adapters\ConsoleIo_InstructionReader_Tests.cs" />
+    <Compile Include="Adapters\ConsoleIo_CommandReader_Tests.cs" />
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
     <Compile Include="Adapters\MessageStore_WithThreeMessages_Tests.cs" />
     <Compile Include="Adapters\MessageStore_WithNoMessages_Tests.cs" />
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\UserConnexionStore_WithConnexions_Tests.cs" />
     <Compile Include="Adapters\UserConnexionStore_WithNoConnexions_Tests.cs" />
-    <Compile Include="Business\ExitInstructionHandler_WithExitInstruction_Tests.cs" />
-    <Compile Include="Business\ExitInstructionHandler_WithOtherInstruction_Tests.cs" />
-    <Compile Include="Business\FollowInstructionHandler_WithFollowInstruction_Tests.cs" />
-    <Compile Include="Business\FollowInstructionHandler_WithOtherInstruction_Tests.cs" />
+    <Compile Include="Business\ExitCommandHandler_WithExitCommand_Tests.cs" />
+    <Compile Include="Business\ExitCommandHandlerWithOtherCommandTests.cs" />
+    <Compile Include="Business\FollowCommandHandler_WithFollowCommand_Tests.cs" />
+    <Compile Include="Business\FollowCommandHandlerWithOtherCommandTests.cs" />
     <Compile Include="Business\MessageAgeFormatter_Tests.cs" />
-    <Compile Include="Business\PostInstructionHandler_WithOtherInstruction_Tests.cs" />
-    <Compile Include="Business\PostInstructionHandler_WithPostInstruction_Tests.cs" />
+    <Compile Include="Business\PostCommandHandlerWithOtherCommandTests.cs" />
+    <Compile Include="Business\PostCommandHandler_WithPostCommand_Tests.cs" />
     <Compile Include="Business\SampleInstructions.cs" />
-    <Compile Include="Business\StatusInstructionHandler_WithOtherInstruction_Tests.cs" />
-    <Compile Include="Business\TimelineInstructionHandler_WithOtherInstruction_Tests.cs" />
-    <Compile Include="Business\TimelineInstructionHandler_WithTimelineInstruction_Tests.cs" />
+    <Compile Include="Business\StatusCommandHandlerWithOtherCommandTests.cs" />
+    <Compile Include="Business\TimelineCommandHandlerWithOtherCommandTests.cs" />
+    <Compile Include="Business\TimelineCommandHandler_WithTimelineCommand_Tests.cs" />
     <Compile Include="Business\UserInterface_Tests.cs" />
-    <Compile Include="Business\WallInstructionHandler_WithOtherInstruction_Tests.cs" />
-    <Compile Include="Business\WallInstructionHandler_WithWallInstruction_Tests.cs" />
+    <Compile Include="Business\WallCommandHandlerWithOtherCommandTests.cs" />
+    <Compile Include="Business\WallCommandHandler_WithWallCommand_Tests.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Business\StatusInstructionHandler_WithStatusInstruction_Tests.cs" />
+    <Compile Include="Business\StatusCommandHandler_WithStatusCommand_Tests.cs" />
     <Compile Include="Specs\ChatbotContext.cs" />
     <Compile Include="Specs\Following.feature.cs">
       <AutoGen>True</AutoGen>

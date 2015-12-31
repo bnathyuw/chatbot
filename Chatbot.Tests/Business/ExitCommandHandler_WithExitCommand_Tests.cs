@@ -4,15 +4,15 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class ExitInstructionHandler_WithExitInstruction_Tests
+    public class ExitCommandHandler_WithExitCommand_Tests
     {
         private State _state;
 
         [SetUp]
         public void SetUp()
         {
-            var exitInstructionHandler = new ExitInstructionHandler(null);
-            _state = exitInstructionHandler.HandleInstruction(SampleInstructions.Exit);
+            var exitCommandHandler = new ExitCommandHandler(null);
+            _state = exitCommandHandler.HandleCommand(SampleCommands.Exit);
         }
 
         [Test]

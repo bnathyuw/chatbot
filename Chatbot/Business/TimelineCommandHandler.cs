@@ -14,15 +14,15 @@ namespace Chatbot.Business
         string FormatAge(Message message);
     }
 
-    public class TimelineInstructionHandler : IInstructionHandler
+    public class TimelineCommandHandler : ICommandHandler
     {
         private readonly IMessageDisplayer _messageDisplayer;
-        private readonly IInstructionHandler _successor;
+        private readonly ICommandHandler _successor;
         private readonly IUserMessageRetriever _userMessageRetriever;
         private readonly Regex _regex = new Regex("^[A-Za-z]*$");
         private readonly IMessageAgeFormatter _messageAgeFormatter;
 
-        public TimelineInstructionHandler(IMessageDisplayer messageDisplayer, IInstructionHandler successor, IUserMessageRetriever userMessageRetriever, IMessageAgeFormatter messageAgeFormatter)
+        public TimelineCommandHandler(IMessageDisplayer messageDisplayer, ICommandHandler successor, IUserMessageRetriever userMessageRetriever, IMessageAgeFormatter messageAgeFormatter)
         {
             _messageDisplayer = messageDisplayer;
             _successor = successor;
@@ -30,23 +30,23 @@ namespace Chatbot.Business
             _messageAgeFormatter = messageAgeFormatter;
         }
 
-        public State HandleInstruction(string instruction)
+        public State HandleCommand(string command)
         {
-            if (!CanHandle(instruction))
-                return _successor.HandleInstruction(instruction);
+            if (!CanHandle(command))
+                return _successor.HandleCommand(command);
 
-            DisplayUsersMessages(instruction);
+            DisplayUsersMessages(command);
             return State.Continue;
         }
 
-        private bool CanHandle(string instruction)
+        private bool CanHandle(string command)
         {
-            return _regex.IsMatch(instruction) && instruction != "exit" && instruction != "status";
+            return _regex.IsMatch(command) && command != "exit" && command != "status";
         }
 
-        private void DisplayUsersMessages(string instruction)
+        private void DisplayUsersMessages(string command)
         {
-            var messages = _userMessageRetriever.RetrieveUserMessages(instruction);
+            var messages = _userMessageRetriever.RetrieveUserMessages(command);
             foreach (var output in messages.Select(FormatMessage))
             {
                 _messageDisplayer.ShowMessage(output);

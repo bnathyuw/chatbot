@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class TimelineInstructionHandler_WithTimelineInstruction_Tests : IMessageDisplayer, IUserMessageRetriever, IMessageAgeFormatter
+    public class TimelineCommandHandler_WithTimelineCommand_Tests : IMessageDisplayer, IUserMessageRetriever, IMessageAgeFormatter
     {
         private const string ExpectedUser = "Alice";
         private string _actualUser;
@@ -17,8 +17,8 @@ namespace Chatbot.Tests.Business
         {
             _actualMessages = new List<string>();
             _actualUser = null;
-            var timelineInstructionHandler = new TimelineInstructionHandler(this, null, this, this);
-            _state = timelineInstructionHandler.HandleInstruction(ExpectedUser);
+            var timelineCommandHandler = new TimelineCommandHandler(this, null, this, this);
+            _state = timelineCommandHandler.HandleCommand(ExpectedUser);
         }
 
         [Test]
