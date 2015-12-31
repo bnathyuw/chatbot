@@ -23,7 +23,7 @@ namespace Chatbot.Business
         private readonly ICommandHandler _successor;
         private readonly ITimeDisplayer _timeDisplayer;
 
-        public StatusCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ClockTime timeDisplayer)
+        public StatusCommandHandler(ICommandHandler successor, IMessageDisplayer messageDisplayer, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ITimeDisplayer timeDisplayer)
         {
             _messageDisplayer = messageDisplayer;
             _timeDisplayer = timeDisplayer;

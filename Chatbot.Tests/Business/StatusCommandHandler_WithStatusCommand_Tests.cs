@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Chatbot.Business;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class StatusCommandHandler_WithStatusCommand_Tests : IMessageDisplayer, IClock, IMessageCounter, IUserConnexionCounter
+    public class StatusCommandHandler_WithStatusCommand_Tests : IMessageDisplayer, IMessageCounter, IUserConnexionCounter, ITimeDisplayer
     {
         private IList<string> _actualMessages;
         private State _state;
@@ -15,7 +14,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp()
         {
             _actualMessages = new List<string>();
-            var statusCommandHandler = new StatusCommandHandler(null, this, this, this, new ClockTime(this));
+            var statusCommandHandler = new StatusCommandHandler(null, this, this, this, this);
             _state = statusCommandHandler.Handle(SampleCommands.Status);
         }
 
@@ -30,10 +29,10 @@ namespace Chatbot.Tests.Business
 
         public void ShowMessage(string output) => _actualMessages.Add(output);
 
-        public DateTime Now => new DateTime(2015, 12, 28, 17, 36, 0);
-
         int IMessageCounter.Count() => 35;
 
         int IUserConnexionCounter.Count() => 46;
+
+        public string Display => "17:36, 28 December 2015";
     }
 }
