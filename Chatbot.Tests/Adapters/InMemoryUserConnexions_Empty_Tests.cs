@@ -1,4 +1,5 @@
 ﻿using Chatbot.Adapters;
+using Chatbot.Business;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
@@ -6,7 +7,7 @@ namespace Chatbot.Tests.Adapters
     [TestFixture]
     public class InMemoryUserConnexions_Empty_Tests
     {
-        private InMemoryUserConnexions _userConnexions;
+        private IUserConnexionCounter _userConnexions;
 
         [OneTimeSetUp]
         public void OneTimeSetUp() => _userConnexions = new InMemoryUserConnexions();

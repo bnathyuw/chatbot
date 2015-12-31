@@ -49,7 +49,7 @@
     <Compile Include="Adapters\InMemoryUserConnexions.cs" />
     <Compile Include="Business\ExitCommandHandler.cs" />
     <Compile Include="Business\FollowCommandHandler.cs" />
-    <Compile Include="Business\CommandHandler.cs" />
+    <Compile Include="Business\CreateCommandHandler.cs" />
     <Compile Include="Business\Message.cs" />
     <Compile Include="Business\ClockTime.cs" />
     <Compile Include="Business\MessageAgeFormatter.cs" />
