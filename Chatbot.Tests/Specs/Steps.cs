@@ -24,13 +24,20 @@ namespace Chatbot.Tests.Specs
         [Then(@"I should see Bob's messages")]
         public void ThenIShouldSeeBobsMessages() => _context.AssertBobsMessages();
 
-        [Given(@"Charlie has followed Alice")]
-        public void GivenCharlieHasFollowedAlice() => _context.UserFollowsAnother("Charlie", "Alice");
+        [Given(@"([a-zA-Z]*) has followed ([a-zA-Z]*)")]
+        public void GivenUserHasFollowedAnother(string follower, string followed) =>
+            _context.UserFollowsAnother(follower, followed);
 
         [When(@"Charlie views his wall")]
         public void WhenCharlieViewsHisWall() => _context.ViewUsersWall("Charlie");
 
+        [When(@"Charlie views his wall a little later")]
+        public void WhenCharlieViewsHisWallALittleLater() => _context.ViewUsersWallLater("Charlie");
+
         [Then(@"he should see Alice and Charlie's messages")]
         public void ThenHeShouldSeeAliceAndCharlieSMessages() => _context.AssertAliceAndCharliesMessages();
+
+        [Then(@"he should see Alice, Bob and Charlie's messages")]
+        public void ThenHeShouldSeeAliceBobAndCharlieSMessages() => _context.AssertAliceBobAndCharliesMessages();
     }
 }

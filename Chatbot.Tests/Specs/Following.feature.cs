@@ -85,6 +85,29 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Charlie can subscribe to Alice’s and Bob’s timelines, and view an aggregated list" +
+            " of all subscriptions")]
+        public virtual void CharlieCanSubscribeToAliceSAndBobSTimelinesAndViewAnAggregatedListOfAllSubscriptions()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Charlie can subscribe to Alice’s and Bob’s timelines, and view an aggregated list" +
+                    " of all subscriptions", ((string[])(null)));
+#line 12
+this.ScenarioSetup(scenarioInfo);
+#line 13
+ testRunner.Given("Alice, Bob and Charlie have posted to Chatbot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 14
+ testRunner.And("Charlie has followed Alice", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+ testRunner.And("Charlie has followed Bob", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
+ testRunner.When("Charlie views his wall a little later", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+ testRunner.Then("he should see Alice, Bob and Charlie\'s messages", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
