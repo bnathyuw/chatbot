@@ -1,38 +1,40 @@
-﻿using Chatbot.Business;
+﻿using Chatbot.Commands;
+using Chatbot.Control;
+using Chatbot.Tests.Business;
 using NUnit.Framework;
 
-namespace Chatbot.Tests.Business
+namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class FollowCommandHandlerWithOtherCommandTests : ICommandHandler
+    public class StatusCommandHandlerWithOtherCommandTests : ICommandHandler
     {
         private string _actualCommand;
-        private FollowCommandHandler _followCommandHandler;
+        private StatusCommandHandler _statusCommandHandler;
         private const State ExpectedState = State.Exit;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _actualCommand = null;
-            _followCommandHandler = new FollowCommandHandler(this, null);
+            _statusCommandHandler = new StatusCommandHandler(this, null, null, null, null);
         }
 
-        [TestCase(SampleCommands.Status)]
+        [TestCase(SampleCommands.Exit)]
         [TestCase(SampleCommands.Unknown)]
         [TestCase(SampleCommands.Timeline)]
-        [TestCase(SampleCommands.Unknown)]
-        [TestCase(SampleCommands.Exit)]
+        [TestCase(SampleCommands.Post)]
+        [TestCase(SampleCommands.Follow)]
         [TestCase(SampleCommands.Wall)]
         public void Passes_command_to_successor(string command)
         {
-            _followCommandHandler.Handle(command);
+            _statusCommandHandler.Handle(command);
             Assert.That(_actualCommand, Is.EqualTo(command));
         }
 
         [Test]
         public void Returns_state_from_successor()
         {
-            var state = _followCommandHandler.Handle(SampleCommands.Unknown);
+            var state = _statusCommandHandler.Handle(SampleCommands.Unknown);
             Assert.That(state, Is.EqualTo(ExpectedState));
         }
 
@@ -41,6 +43,5 @@ namespace Chatbot.Tests.Business
             _actualCommand = command;
             return ExpectedState;
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Chatbot.Business
+﻿namespace Chatbot.Control
 {
     public interface ICommandReader
     {

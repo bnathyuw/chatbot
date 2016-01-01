@@ -1,4 +1,6 @@
-﻿namespace Chatbot.Business
+﻿using Chatbot.Commands;
+
+namespace Chatbot.Business
 {
     public interface IMessageDisplayer
     {

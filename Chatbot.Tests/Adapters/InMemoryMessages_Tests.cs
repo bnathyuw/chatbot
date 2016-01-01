@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Chatbot.Adapters;
 using Chatbot.Business;
+using Chatbot.Commands;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters

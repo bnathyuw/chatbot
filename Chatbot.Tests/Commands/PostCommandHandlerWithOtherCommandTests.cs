@@ -1,7 +1,9 @@
-using Chatbot.Business;
+using Chatbot.Commands;
+using Chatbot.Control;
+using Chatbot.Tests.Business;
 using NUnit.Framework;
 
-namespace Chatbot.Tests.Business
+namespace Chatbot.Tests.Commands
 {
     [TestFixture]
     public class PostCommandHandlerWithOtherCommandTests : ICommandHandler

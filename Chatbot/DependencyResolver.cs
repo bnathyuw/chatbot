@@ -1,5 +1,7 @@
 using Chatbot.Adapters;
 using Chatbot.Business;
+using Chatbot.Commands;
+using Chatbot.Control;
 
 namespace Chatbot
 {

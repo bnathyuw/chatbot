@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using Chatbot.Control;
 
-namespace Chatbot.Business
+namespace Chatbot.Commands
 {
     public interface IUserConnexionSaver
     {

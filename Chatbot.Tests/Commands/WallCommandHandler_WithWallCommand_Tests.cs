@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using Chatbot.Business;
+using Chatbot.Commands;
+using Chatbot.Control;
 using NUnit.Framework;
 
-namespace Chatbot.Tests.Business
+namespace Chatbot.Tests.Commands
 {
     [TestFixture]
     public class WallCommandHandler_WithWallCommand_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IWallMessageDisplayer

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Chatbot.Business;
+using Chatbot.Control;
 
 namespace Chatbot.Tests.Specs
 {

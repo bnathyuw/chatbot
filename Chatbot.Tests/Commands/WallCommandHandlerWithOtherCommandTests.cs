@@ -1,38 +1,40 @@
-using Chatbot.Business;
+using Chatbot.Commands;
+using Chatbot.Control;
+using Chatbot.Tests.Business;
 using NUnit.Framework;
 
-namespace Chatbot.Tests.Business
+namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class TimelineCommandHandlerWithOtherCommandTests : ICommandHandler
+    public class WallCommandHandlerWithOtherCommandTests : ICommandHandler
     {
         private string _actualCommand;
-        private TimelineCommandHandler _timelineCommandHandler;
+        private WallCommandHandler _wallCommandHandler;
         private const State ExpectedState = State.Exit;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _actualCommand = null;
-            _timelineCommandHandler = new TimelineCommandHandler(this, null, null);
+            _wallCommandHandler = new WallCommandHandler(this, null, null, null);
         }
 
         [TestCase(SampleCommands.Unknown)]
         [TestCase(SampleCommands.Exit)]
         [TestCase(SampleCommands.Status)]
-        [TestCase(SampleCommands.Post)]
+        [TestCase(SampleCommands.Timeline)]
         [TestCase(SampleCommands.Follow)]
-        [TestCase(SampleCommands.Wall)]
+        [TestCase(SampleCommands.Post)]
         public void Passes_command_to_successor(string command)
         {
-            _timelineCommandHandler.Handle(command);
+            _wallCommandHandler.Handle(command);
             Assert.That(_actualCommand, Is.EqualTo(command));
         }
 
         [Test]
         public void Returns_state_from_successor()
         {
-            var state = _timelineCommandHandler.Handle(SampleCommands.Unknown);
+            var state = _wallCommandHandler.Handle(SampleCommands.Unknown);
             Assert.That(state, Is.EqualTo(ExpectedState));
         }
 

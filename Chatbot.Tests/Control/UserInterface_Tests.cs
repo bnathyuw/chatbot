@@ -1,7 +1,7 @@
-﻿using Chatbot.Business;
+﻿using Chatbot.Control;
 using NUnit.Framework;
 
-namespace Chatbot.Tests.Business
+namespace Chatbot.Tests.Control
 {
     [TestFixture]
     public class UserInterface_Tests : ICommandReader, ICommandHandler

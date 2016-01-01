@@ -1,5 +1,6 @@
 using System;
 using Chatbot.Business;
+using Chatbot.Commands;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Business

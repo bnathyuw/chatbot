@@ -1,8 +1,9 @@
 ﻿using System;
-using Chatbot.Business;
+using Chatbot.Commands;
+using Chatbot.Control;
 using NUnit.Framework;
 
-namespace Chatbot.Tests.Business
+namespace Chatbot.Tests.Commands
 {
     [TestFixture]
     public class FollowCommandHandler_WithFollowCommand_Tests : IUserConnexionSaver

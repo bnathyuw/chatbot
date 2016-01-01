@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chatbot.Business
+namespace Chatbot.Commands
 {
     public struct Message
     {

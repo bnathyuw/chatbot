@@ -1,4 +1,6 @@
-﻿namespace Chatbot.Business
+﻿using Chatbot.Control;
+
+namespace Chatbot.Commands
 {
     public class UnknownCommandHandler : ICommandHandler
     {
