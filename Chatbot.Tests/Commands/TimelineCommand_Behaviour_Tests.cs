@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class TimelineCommandHandler_WithTimelineCommand_Tests : IUserMessageRetriever, ITimelineMessageDisplayer
+    public class TimelineCommand_Behaviour_Tests : IUserMessageRetriever, ITimelineMessageDisplayer
     {
         private const string ExpectedUser = "Alice";
         private string _actualUser;
@@ -20,8 +20,8 @@ namespace Chatbot.Tests.Commands
         {
             _actualMessages = new List<string>();
             _actualUser = null;
-            var timelineCommandHandler = new TimelineCommandHandler(null, this, this);
-            _state = timelineCommandHandler.Handle(ExpectedUser);
+            var timelineCommand = new TimelineCommand(this, this);
+            _state = timelineCommand.Do(ExpectedUser);
         }
 
         [Test]

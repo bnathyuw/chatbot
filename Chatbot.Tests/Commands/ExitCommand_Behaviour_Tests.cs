@@ -6,15 +6,15 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class ExitCommandHandler_WithExitCommand_Tests
+    public class ExitCommand_Behaviour_Tests
     {
         private State _state;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var exitCommandHandler = new ExitCommandHandler(null);
-            _state = exitCommandHandler.Handle(SampleCommands.Exit);
+            var exitCommand = new ExitCommand();
+            _state = exitCommand.Do(SampleCommands.Exit);
         }
 
         [Test]

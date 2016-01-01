@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class WallCommandHandler_WithWallCommand_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IWallMessageDisplayer
+    public class WallCommand_Behaviour_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IWallMessageDisplayer
     {
         private readonly IEnumerable<string> _expectedFollowList = new List<string> {"Emile", "Farouk", "Gita"};
         private readonly IEnumerable<Message> _expectedMessages = new List<Message>
@@ -29,8 +29,8 @@ namespace Chatbot.Tests.Commands
             _actualUser = null;
             _actualUsers = new List<string>();
             _actualMessages = new List<string>();
-            var wallCommandHandler = new WallCommandHandler(null, this, this, this);
-            _actualState = wallCommandHandler.Handle("Daphne wall");
+            var wallCommand = new WallCommand(this, this, this);
+            _actualState = wallCommand.Do("Daphne wall");
         }
 
         [Test]

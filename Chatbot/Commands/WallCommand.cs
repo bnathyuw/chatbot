@@ -20,29 +20,23 @@ namespace Chatbot.Commands
         void DisplayWallMessage(Message message);
     }
 
-    public class WallCommandHandler : ICommandHandler
+    public class WallCommand : ICommand
     {
-        private readonly ICommandHandler _successor;
         private readonly IFollowedUserRetriever _followedUserRetriever;
         private readonly IMultipleUserMessageRetriever _multipleUserMessageRetriever;
         private readonly Regex _regex = new Regex("^(?<user>[A-Za-z]*) wall");
         private readonly IWallMessageDisplayer _wallMessageDisplayer;
 
-        public WallCommandHandler(ICommandHandler successor, IFollowedUserRetriever followedUserRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IWallMessageDisplayer wallMessageDisplayer)
+        public WallCommand(IFollowedUserRetriever followedUserRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IWallMessageDisplayer wallMessageDisplayer)
         {
-            _successor = successor;
             _followedUserRetriever = followedUserRetriever;
             _multipleUserMessageRetriever = multipleUserMessageRetriever;
             _wallMessageDisplayer = wallMessageDisplayer;
         }
 
-        public State Handle(string command)
+        public State Do(string command)
         {
-            var match = _regex.Match(command);
-            if(!match.Success)
-                return _successor.Handle(command);
-
-            var user = match.Groups["user"].Value;
+            var user = _regex.Match(command).Groups["user"].Value;
             var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
             var messages = _multipleUserMessageRetriever.RetrieveUsersMessages(new List<string> {user}.Concat(followedUsers));
 
@@ -52,6 +46,11 @@ namespace Chatbot.Commands
             }
 
             return State.Continue;
+        }
+
+        public bool Matches(string command)
+        {
+            return _regex.Match(command).Success;
         }
     }
 }

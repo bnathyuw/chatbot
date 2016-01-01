@@ -22,33 +22,28 @@ namespace Chatbot.Commands
         void DisplayStatus(string time, int messageCount, int userConnexionCount);
     }
 
-    public class StatusCommandHandler : ICommandHandler
+    public class StatusCommand : ICommand
     {
         private readonly IMessageCounter _messageStore;
         private readonly IUserConnexionCounter _userConnexionStore;
-        private readonly ICommandHandler _successor;
         private readonly ITimeDisplayer _timeDisplayer;
         private readonly IStatusDisplayer _statusDisplayer;
 
-        public StatusCommandHandler(ICommandHandler successor, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore, ITimeDisplayer timeDisplayer, IStatusDisplayer statusDisplayer)
+        public StatusCommand(IStatusDisplayer statusDisplayer, ITimeDisplayer timeDisplayer, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore)
         {
             _statusDisplayer = statusDisplayer;
             _timeDisplayer = timeDisplayer;
             _messageStore = messageStore;
             _userConnexionStore = userConnexionStore;
-            _successor = successor;
         }
 
-        public State Handle(string command)
+        public State Do(string command)
         {
-            if (!CanHandle(command))
-                return _successor.Handle(command);
-
             ShowStatusMessage();
             return State.Continue;
         }
 
-        private static bool CanHandle(string command) => command == "status";
+        public bool Matches(string command) => command == "status";
 
         private void ShowStatusMessage()
         {

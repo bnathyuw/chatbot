@@ -8,31 +8,29 @@ namespace Chatbot.Commands
         void Save(string follower, string followed);
     }
 
-    public class FollowCommandHandler : ICommandHandler
+    public class FollowCommand : ICommand
     {
-        private readonly ICommandHandler _successor;
         private readonly IUserConnexionSaver _userConnexionSaver;
         private readonly Regex _regex = new Regex("^(?<follower>[a-zA-Z]*) follows (?<followed>[a-zA-Z]*)$");
 
-        public FollowCommandHandler(ICommandHandler successor, IUserConnexionSaver userConnexionSaver)
+        public FollowCommand(IUserConnexionSaver userConnexionSaver)
         {
-            _successor = successor;
             _userConnexionSaver = userConnexionSaver;
         }
 
-        public State Handle(string command)
+        public State Do(string command)
         {
-            var match = _regex.Match(command);
-
-            if(!match.Success)
-                return _successor.Handle(command);
-
-            var follower = match.Groups["follower"].Value;
-            var followed = match.Groups["followed"].Value;
+            var follower = _regex.Match(command).Groups["follower"].Value;
+            var followed = _regex.Match(command).Groups["followed"].Value;
 
             _userConnexionSaver.Save(follower, followed);
 
             return State.Continue;
+        }
+
+        public bool Matches(string command)
+        {
+            return _regex.Match(command).Success;
         }
     }
 }

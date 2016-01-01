@@ -47,19 +47,20 @@
     <Compile Include="Adapters\InMemoryMessages.cs" />
     <Compile Include="Adapters\SystemClock.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions.cs" />
-    <Compile Include="Commands\ExitCommandHandler.cs" />
-    <Compile Include="Commands\FollowCommandHandler.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\KnownCommandHandler.cs" />
+    <Compile Include="Commands\FollowCommand.cs" />
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="Commands\Message.cs" />
     <Compile Include="Business\ClockTime.cs" />
     <Compile Include="Business\MessageAgeFormatter.cs" />
-    <Compile Include="Commands\PostCommandHandler.cs" />
-    <Compile Include="Commands\StatusCommandHandler.cs" />
-    <Compile Include="Commands\TimelineCommandHandler.cs" />
+    <Compile Include="Commands\PostCommand.cs" />
+    <Compile Include="Commands\StatusCommand.cs" />
+    <Compile Include="Commands\TimelineCommand.cs" />
     <Compile Include="Business\FormattedMessageDisplayer.cs" />
     <Compile Include="Commands\UnknownCommandHandler.cs" />
     <Compile Include="Control\UserInterface.cs" />
-    <Compile Include="Commands\WallCommandHandler.cs" />
+    <Compile Include="Commands\WallCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

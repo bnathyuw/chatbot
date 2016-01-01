@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class StatusCommandHandler_WithStatusCommand_Tests : IMessageCounter, IUserConnexionCounter, ITimeDisplayer, IStatusDisplayer
+    public class StatusCommand_Behaviour_Tests : IMessageCounter, IUserConnexionCounter, ITimeDisplayer, IStatusDisplayer
     {
         private const string ExpectedTime = "17:36, 28 December 2015";
         private const int ExpectedMessageCount = 35;
@@ -18,8 +18,8 @@ namespace Chatbot.Tests.Commands
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var statusCommandHandler = new StatusCommandHandler(null, this, this, this, this);
-            _state = statusCommandHandler.Handle(SampleCommands.Status);
+            var statusCommand = new StatusCommand(this, this, this, this);
+            _state = statusCommand.Do(SampleCommands.Status);
         }
 
         [Test]

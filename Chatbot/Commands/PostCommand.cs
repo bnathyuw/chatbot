@@ -14,30 +14,28 @@ namespace Chatbot.Commands
         DateTime Timestamp { get; }
     }
 
-    public class PostCommandHandler : ICommandHandler
+    public class PostCommand : ICommand
     {
         private readonly IMessageSaver _messageSaver;
-        private readonly ICommandHandler _successor;
         private readonly Regex _regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
         private readonly ITimestamper _timestamper;
 
-        public PostCommandHandler(ICommandHandler successor, IMessageSaver messageSaver, ITimestamper timestamper)
+        public PostCommand(ITimestamper timestamper, IMessageSaver messageSaver)
         {
             _timestamper = timestamper;
             _messageSaver = messageSaver;
-            _successor = successor;
         }
 
-        public State Handle(string command)
+        public State Do(string command)
         {
-            var match = _regex.Match(command);
-
-            if (!match.Success)
-                return _successor.Handle(command);
-
-            var message = ParseMessage(match);
+            var message = ParseMessage(_regex.Match(command));
             _messageSaver.SaveMessage(message);
             return State.Continue;
+        }
+
+        public bool Matches(string command)
+        {
+            return _regex.Match(command).Success;
         }
 
         private Message ParseMessage(Match match)

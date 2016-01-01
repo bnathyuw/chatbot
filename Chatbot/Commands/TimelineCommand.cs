@@ -14,41 +14,37 @@ namespace Chatbot.Commands
         void DisplayTimelineMessage(Message message);
     }
 
-    public class TimelineCommandHandler : ICommandHandler
+    public interface ICommand
     {
-        private readonly ICommandHandler _successor;
+        bool Matches(string command);
+        State Do(string command);
+    }
+
+    public class TimelineCommand : ICommand
+    {
         private readonly IUserMessageRetriever _userMessageRetriever;
         private readonly Regex _regex = new Regex("^[A-Za-z]*$");
         private readonly ITimelineMessageDisplayer _timelineMessageDisplayer;
 
-        public TimelineCommandHandler(ICommandHandler successor, IUserMessageRetriever userMessageRetriever, ITimelineMessageDisplayer timelineMessageDisplayer)
+        public TimelineCommand(ITimelineMessageDisplayer timelineMessageDisplayer, IUserMessageRetriever userMessageRetriever)
         {
             _timelineMessageDisplayer = timelineMessageDisplayer;
-            _successor = successor;
             _userMessageRetriever = userMessageRetriever;
         }
 
-        public State Handle(string command)
-        {
-            if (!CanHandle(command))
-                return _successor.Handle(command);
-
-            DisplayUsersMessages(command);
-            return State.Continue;
-        }
-
-        private bool CanHandle(string command)
+        public bool Matches(string command)
         {
             return _regex.IsMatch(command) && command != "exit" && command != "status";
         }
 
-        private void DisplayUsersMessages(string command)
+        public State Do(string command)
         {
             var messages = _userMessageRetriever.RetrieveUserMessages(command);
             foreach (var message in messages)
             {
                 _timelineMessageDisplayer.DisplayTimelineMessage(message);
             }
+            return State.Continue;
         }
     }
 }
