@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Chatbot.Adapters;
 using Chatbot.Business;
 
 namespace Chatbot.Tests.Specs
@@ -15,13 +14,7 @@ namespace Chatbot.Tests.Specs
         public TestableChatbot()
         {
             _messagesDisplayed = new Queue<string>();
-            var messageStore = new InMemoryMessages();
-            var userConnexionStore = new InMemoryUserConnexions();
-            var clockTime = new ClockTime(this);
-            var messageAgeFormatter = new MessageAgeFormatter(clockTime);
-            var formattedMessageDisplayer = new FormattedMessageDisplayer(this, messageAgeFormatter);
-            var statusCommandHandler = CommandHandler.With(messageStore, userConnexionStore, messageStore, messageStore, messageStore, userConnexionStore, userConnexionStore, clockTime, clockTime, formattedMessageDisplayer, formattedMessageDisplayer, formattedMessageDisplayer);
-            _userInterface = new UserInterface(this, statusCommandHandler);
+            _userInterface = DependencyResolver.CreateUserInterface(this, this, this);
         }
 
         public void ProcessCommand(string command, TimeSpan? timeDifference = null)
