@@ -28,9 +28,6 @@ namespace Chatbot.Commands
             return State.Continue;
         }
 
-        public bool Matches(string command)
-        {
-            return _regex.Match(command).Success;
-        }
+        public bool Matches(string command) => _regex.IsMatch(command);
     }
 }

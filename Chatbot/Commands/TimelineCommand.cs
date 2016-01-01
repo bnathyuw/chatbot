@@ -32,10 +32,7 @@ namespace Chatbot.Commands
             _userMessageRetriever = userMessageRetriever;
         }
 
-        public bool Matches(string command)
-        {
-            return _regex.IsMatch(command) && command != "exit" && command != "status";
-        }
+        public bool Matches(string command) => _regex.IsMatch(command) && command != "exit" && command != "status";
 
         public State Do(string command)
         {

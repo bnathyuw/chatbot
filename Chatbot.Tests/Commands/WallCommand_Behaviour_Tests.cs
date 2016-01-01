@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Chatbot.Commands;
 using Chatbot.Control;
 using NUnit.Framework;
@@ -63,7 +64,7 @@ namespace Chatbot.Tests.Commands
 
         public IEnumerable<Message> RetrieveUsersMessages(IEnumerable<string> users)
         {
-            _actualUsers = users;
+            _actualUsers = users.ToList();
             return _expectedMessages;
         }
 

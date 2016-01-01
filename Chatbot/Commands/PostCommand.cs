@@ -28,18 +28,14 @@ namespace Chatbot.Commands
 
         public State Do(string command)
         {
-            var message = ParseMessage(_regex.Match(command));
+            var message = ParseMessage(command);
             _messageSaver.SaveMessage(message);
             return State.Continue;
         }
 
-        public bool Matches(string command)
+        private Message ParseMessage(string command)
         {
-            return _regex.Match(command).Success;
-        }
-
-        private Message ParseMessage(Match match)
-        {
+            var match = _regex.Match(command);
             return new Message
             {
                 User = match.Groups["user"].Value,
@@ -47,5 +43,7 @@ namespace Chatbot.Commands
                 SentOn = _timestamper.Timestamp
             };
         }
+
+        public bool Matches(string command) => _regex.IsMatch(command);
     }
 }

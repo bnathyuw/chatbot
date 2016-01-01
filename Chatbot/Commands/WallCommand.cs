@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Chatbot.Control;
 
@@ -36,9 +35,8 @@ namespace Chatbot.Commands
 
         public State Do(string command)
         {
-            var user = _regex.Match(command).Groups["user"].Value;
-            var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
-            var messages = _multipleUserMessageRetriever.RetrieveUsersMessages(new List<string> {user}.Concat(followedUsers));
+            var user = ParseUser(command);
+            var messages = GetWallMessages(user);
 
             foreach (var message in messages)
             {
@@ -48,9 +46,21 @@ namespace Chatbot.Commands
             return State.Continue;
         }
 
-        public bool Matches(string command)
+        private string ParseUser(string command) => _regex.Match(command).Groups["user"].Value;
+
+        private IEnumerable<Message> GetWallMessages(string user)
         {
-            return _regex.Match(command).Success;
+            var users = GetUsersOnWall(user);
+            return _multipleUserMessageRetriever.RetrieveUsersMessages(users);
         }
+
+        private IEnumerable<string> GetUsersOnWall(string user)
+        {
+            yield return user;
+            var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
+            foreach (var followedUser in followedUsers) yield return followedUser;
+        }
+
+        public bool Matches(string command) => _regex.IsMatch(command);
     }
 }

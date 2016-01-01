@@ -39,18 +39,14 @@ namespace Chatbot.Commands
 
         public State Do(string command)
         {
-            ShowStatusMessage();
-            return State.Continue;
-        }
-
-        public bool Matches(string command) => command == "status";
-
-        private void ShowStatusMessage()
-        {
             var time = _timeDisplayer.Display;
             var messageCount = _messageStore.Count();
             var userConnexionCount = _userConnexionStore.Count();
             _statusDisplayer.DisplayStatus(time, messageCount, userConnexionCount);
+
+            return State.Continue;
         }
+
+        public bool Matches(string command) => command == "status";
     }
 }
