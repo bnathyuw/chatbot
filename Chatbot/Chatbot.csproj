@@ -47,9 +47,11 @@
     <Compile Include="Adapters\InMemoryMessages.cs" />
     <Compile Include="Adapters\SystemClock.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions.cs" />
+    <Compile Include="Adapters\WallMessages.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\KnownCommandHandler.cs" />
     <Compile Include="Commands\FollowCommand.cs" />
+    <Compile Include="Business\WallMessageRetriever.cs" />
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="Commands\Message.cs" />
     <Compile Include="Business\ClockTime.cs" />

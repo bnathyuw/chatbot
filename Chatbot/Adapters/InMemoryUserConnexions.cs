@@ -14,8 +14,8 @@ namespace Chatbot.Adapters
         public void Save(string follower, string followed) =>
             _userConnexions.Add(new UserConnexion(follower, followed));
 
-        public IEnumerable<string> RetrieveFollowedUsers(string user) =>
-            _userConnexions.Where(c => c.Follower == user).Select(c => c.Followed);
+        public IEnumerable<string> RetrieveFollowedUsers(string follower) =>
+            _userConnexions.Where(c => c.Follower == follower).Select(c => c.Followed);
 
         private struct UserConnexion
         {

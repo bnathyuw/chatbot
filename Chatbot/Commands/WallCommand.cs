@@ -1,65 +1,45 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Chatbot.Control;
 
 namespace Chatbot.Commands
 {
-    public interface IFollowedUserRetriever
-    {
-        IEnumerable<string> RetrieveFollowedUsers(string user);
-    }
-
-    public interface IMultipleUserMessageRetriever
-    {
-        IEnumerable<Message> RetrieveUsersMessages(IEnumerable<string> users);
-    }
-
     public interface IWallMessageDisplayer
     {
         void DisplayWallMessage(Message message);
     }
 
+    public interface IWallMessages
+    {
+        void Display(IWallMessageDisplayer wallMessageDisplayer);
+    }
+
+    public interface IWallMessageRetriever
+    {
+        IWallMessages GetWallMessages(string user);
+    }
+
     public class WallCommand : ICommand
     {
-        private readonly IFollowedUserRetriever _followedUserRetriever;
-        private readonly IMultipleUserMessageRetriever _multipleUserMessageRetriever;
         private readonly Regex _regex = new Regex("^(?<user>[A-Za-z]*) wall");
         private readonly IWallMessageDisplayer _wallMessageDisplayer;
+        private readonly IWallMessageRetriever _wallMessageRetriever;
 
-        public WallCommand(IFollowedUserRetriever followedUserRetriever, IMultipleUserMessageRetriever multipleUserMessageRetriever, IWallMessageDisplayer wallMessageDisplayer)
+        public WallCommand(IWallMessageDisplayer wallMessageDisplayer, IWallMessageRetriever wallMessageRetriever)
         {
-            _followedUserRetriever = followedUserRetriever;
-            _multipleUserMessageRetriever = multipleUserMessageRetriever;
+            _wallMessageRetriever = wallMessageRetriever;
             _wallMessageDisplayer = wallMessageDisplayer;
         }
 
         public State Do(string command)
         {
             var user = ParseUser(command);
-            var messages = GetWallMessages(user);
-
-            foreach (var message in messages)
-            {
-                _wallMessageDisplayer.DisplayWallMessage(message);
-            }
+            var wallMessages = _wallMessageRetriever.GetWallMessages(user);
+            wallMessages.Display(_wallMessageDisplayer);
 
             return State.Continue;
         }
 
         private string ParseUser(string command) => _regex.Match(command).Groups["user"].Value;
-
-        private IEnumerable<Message> GetWallMessages(string user)
-        {
-            var users = GetUsersOnWall(user);
-            return _multipleUserMessageRetriever.RetrieveUsersMessages(users);
-        }
-
-        private IEnumerable<string> GetUsersOnWall(string user)
-        {
-            yield return user;
-            var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
-            foreach (var followedUser in followedUsers) yield return followedUser;
-        }
 
         public bool Matches(string command) => _regex.IsMatch(command);
     }

@@ -12,7 +12,7 @@ namespace Chatbot.Tests.Commands
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _wallCommand = new WallCommand(null, null, null);
+            _wallCommand = new WallCommand(null, null);
         }
 
         [Test]

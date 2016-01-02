@@ -52,10 +52,12 @@
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
     <Compile Include="Adapters\InMemoryMessages_Tests.cs" />
     <Compile Include="Adapters\InMemoryMessages_Empty_Tests.cs" />
+    <Compile Include="Adapters\InMemoryMessages_WallMessage_Tests.cs" />
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions_Tests.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions_Empty_Tests.cs" />
     <Compile Include="Business\ClockTime_Tests.cs" />
+    <Compile Include="Business\WallMessageRetriever_Tests.cs" />
     <Compile Include="Commands\KnownCommandHandler_WithMatchingCommand_Tests.cs" />
     <Compile Include="Commands\ExitCommand_Behaviour_Tests.cs" />
     <Compile Include="Commands\ExitCommand_CommandMatching_Tests.cs" />

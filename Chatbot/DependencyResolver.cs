@@ -23,7 +23,7 @@ namespace Chatbot
             var timelineCommandHandler = new KnownCommandHandler(exitCommandHandler, timelineCommand);
             var postCommand = new PostCommand(clockTime, messages);
             var postCommandHandler = new KnownCommandHandler(timelineCommandHandler, postCommand);
-            var wallCommand = new WallCommand(userConnexions, messages, formattedMessageDisplayer);
+            var wallCommand = new WallCommand(formattedMessageDisplayer, new WallMessageRetriever(userConnexions, messages));
             var wallCommandHandler = new KnownCommandHandler(postCommandHandler, wallCommand);
             var followCommand = new FollowCommand(userConnexions);
             var followCommandHandler = new KnownCommandHandler(wallCommandHandler, followCommand);

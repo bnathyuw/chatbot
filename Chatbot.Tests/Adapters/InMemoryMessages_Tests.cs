@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Chatbot.Adapters;
-using Chatbot.Business;
 using Chatbot.Commands;
 using NUnit.Framework;
 
@@ -34,18 +32,5 @@ namespace Chatbot.Tests.Adapters
         [Test]
         public void Retrieves_most_recent_message_first_for_a_single_user() =>
             Assert.That(_messages.RetrieveUserMessages("Bob").First().Text, Is.EqualTo("Message 3"));
-
-        [TestCase("Alice", 1)]
-        [TestCase("Bob", 2)]
-        public void Retrieves_all_messages_for_one_user_in_a_list(string user, int expectedMessageCount) =>
-            Assert.That(_messages.RetrieveUsersMessages(new List<string> {user}).Count(), Is.EqualTo(expectedMessageCount));
-
-        [Test]
-        public void Retrieves_most_recent_message_first_for_one_user_in_a_list() =>
-                Assert.That(_messages.RetrieveUsersMessages(new List<string> {"Bob"}).First().Text, Is.EqualTo("Message 3"));
-
-        [Test]
-        public void Retrieves_all_messages_for_several_users() =>
-            Assert.That(_messages.RetrieveUsersMessages(new List<string> {"Alice", "Bob"}).Count, Is.EqualTo(3));
     }
 }
