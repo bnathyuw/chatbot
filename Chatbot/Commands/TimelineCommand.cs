@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Chatbot.Control;
 
 namespace Chatbot.Commands
 {
     public interface IUserMessageRetriever
     {
-        IEnumerable<Message> RetrieveUserMessages(string user);
+        ITimelineMessages RetrieveUserMessages(string user);
     }
 
    public interface ITimelineMessageDisplayer
@@ -18,6 +17,11 @@ namespace Chatbot.Commands
     {
         bool Matches(string command);
         State Do(string command);
+    }
+
+    public interface ITimelineMessages
+    {
+        void Display(ITimelineMessageDisplayer timelineMessageDisplayer);
     }
 
     public class TimelineCommand : ICommand
@@ -37,10 +41,7 @@ namespace Chatbot.Commands
         public State Do(string command)
         {
             var messages = _userMessageRetriever.RetrieveUserMessages(command);
-            foreach (var message in messages)
-            {
-                _timelineMessageDisplayer.DisplayTimelineMessage(message);
-            }
+            messages.Display(_timelineMessageDisplayer);
             return State.Continue;
         }
     }

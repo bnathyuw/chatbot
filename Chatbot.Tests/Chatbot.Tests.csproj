@@ -52,6 +52,7 @@
     <Compile Include="Adapters\ConsoleIo_MessageDisplayer_Tests.cs" />
     <Compile Include="Adapters\InMemoryMessages_Tests.cs" />
     <Compile Include="Adapters\InMemoryMessages_Empty_Tests.cs" />
+    <Compile Include="Adapters\InMemoryMessages_TimelineMessages_Tests.cs" />
     <Compile Include="Adapters\InMemoryMessages_WallMessage_Tests.cs" />
     <Compile Include="Adapters\SystemClock_Tests.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions_Tests.cs" />

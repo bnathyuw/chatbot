@@ -11,8 +11,11 @@ namespace Chatbot.Adapters
 
         public int Count() => _messages.Count;
 
-        public IEnumerable<Message> RetrieveUserMessages(string user) =>
-            _messages.Where(m => m.User == user).OrderByDescending(m => m.SentOn);
+        public ITimelineMessages RetrieveUserMessages(string user)
+        {
+            var messages = _messages.Where(m => m.User == user).OrderByDescending(m => m.SentOn);
+            return new TimelineMessages(messages);
+        }
 
         public void SaveMessage(Message message) => _messages.Add(message);
 
