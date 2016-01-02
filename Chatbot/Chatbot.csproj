@@ -44,11 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\ConsoleIO.cs" />
+    <Compile Include="Adapters\FollowedUsers.cs" />
     <Compile Include="Adapters\InMemoryMessages.cs" />
     <Compile Include="Adapters\SystemClock.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions.cs" />
     <Compile Include="Adapters\TimelineMessages.cs" />
     <Compile Include="Adapters\WallMessages.cs" />
+    <Compile Include="Business\TimelineUsers.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\KnownCommandHandler.cs" />
     <Compile Include="Commands\FollowCommand.cs" />

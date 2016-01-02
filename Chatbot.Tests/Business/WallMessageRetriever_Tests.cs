@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
-using Chatbot.Business;
+﻿using Chatbot.Business;
 using Chatbot.Commands;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class WallMessageRetriever_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever
+    public class WallMessageRetriever_Tests : IFollowedUserRetriever, IMultipleUserMessageRetriever, IFollowedUsers
     {
         private const string ExpectedFollower = "Deirdre";
         private string _actualFollower;
-        private IEnumerable<string> _actualUsers;
-        private IWallMessages _expectedMessages;
+        private ITimelineUsers _actualUsers;
         private IWallMessages _actualMessages;
+        private readonly IWallMessages _expectedMessages = new TestWallMessages();
+        private readonly ITimelineUsers _expectedUsers = new TestTimelineUsers();
+        private string _actualCombinedUser;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _actualFollower = null;
-            _actualUsers = new List<string>();
-            _expectedMessages = new TestWallMessages();
+            _actualUsers = null;
             var wallMessageRetriever = new WallMessageRetriever(this, this);
 
             _actualMessages = wallMessageRetriever.GetWallMessages(ExpectedFollower);
@@ -29,31 +29,43 @@ namespace Chatbot.Tests.Business
         public void Retrieves_followed_users() => Assert.That(_actualFollower, Is.EqualTo(ExpectedFollower));
 
         [Test]
-        public void Retrieves_messages_for_the_follower() => Assert.That(_actualUsers, Does.Contain(ExpectedFollower));
+        public void Retrieves_messages_for_the_follower() => Assert.That(_actualCombinedUser, Is.EqualTo(ExpectedFollower));
 
-        [TestCase("Engelbert")]
-        [TestCase("Fionnuala")]
-        public void Retrieves_messages_for_followed_user(string expectedUser) =>
-            Assert.That(_actualUsers, Does.Contain(expectedUser));
+        [Test]
+        public void Retrieves_messages_for_followed_user() => Assert.That(_actualUsers, Is.EqualTo(_expectedUsers));
 
         [Test]
         public void Returns_retrieved_messages() => Assert.That(_actualMessages, Is.EqualTo(_expectedMessages));
 
-        public IEnumerable<string> RetrieveFollowedUsers(string follower)
+        public IFollowedUsers RetrieveFollowedUsers(string follower)
         {
             _actualFollower = follower;
-            return new[] {"Engelbert", "Fionnuala"};
+            return this;
         }
 
-        public IWallMessages RetrieveUsersMessages(IEnumerable<string> users)
+        public ITimelineUsers CombineWith(string user)
         {
-            _actualUsers = users;
+            _actualCombinedUser = user;
+            return _expectedUsers;
+        }
+
+        public IWallMessages RetrieveUsersMessages(ITimelineUsers timelineUsers)
+        {
+            _actualUsers = timelineUsers;
             return _expectedMessages;
         }
 
         private class TestWallMessages : IWallMessages
         {
             public void Display(IWallMessageDisplayer wallMessageDisplayer)
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        private class TestTimelineUsers : ITimelineUsers
+        {
+            public bool Contains(string user)
             {
                 throw new System.NotImplementedException();
             }

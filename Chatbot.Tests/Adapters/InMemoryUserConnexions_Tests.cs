@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Chatbot.Adapters;
+﻿using Chatbot.Adapters;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
@@ -22,15 +21,10 @@ namespace Chatbot.Tests.Adapters
         [Test]
         public void Counts_user_connexions() => Assert.That(_userConnexions.Count(), Is.EqualTo(3));
 
-        [TestCase("Alice", 2)]
-        [TestCase("Charlie", 1)]
-        public void Retrieves_all_connections_for_a_single_user(string user, int expectedConnexionCount) =>
-            Assert.That(_userConnexions.RetrieveFollowedUsers(user).Count(), Is.EqualTo(expectedConnexionCount));
-
         [TestCase("Alice", "Bob")]
         [TestCase("Alice", "Charlie")]
         [TestCase("Charlie", "Bob")]
         public void Retrieves_correct_followed_users(string follower, string followed) =>
-            Assert.That(_userConnexions.RetrieveFollowedUsers(follower), Does.Contain(followed));
+            Assert.That(_userConnexions.RetrieveFollowedUsers(follower).CombineWith("dummy").Contains(followed), Is.True);
     }
 }

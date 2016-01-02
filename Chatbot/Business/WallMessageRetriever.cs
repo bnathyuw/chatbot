@@ -1,17 +1,25 @@
-using System.Collections.Generic;
-using System.Linq;
 using Chatbot.Commands;
 
 namespace Chatbot.Business
 {
     public interface IFollowedUserRetriever
     {
-        IEnumerable<string> RetrieveFollowedUsers(string follower);
+        IFollowedUsers RetrieveFollowedUsers(string follower);
+    }
+
+    public interface ITimelineUsers
+    {
+        bool Contains(string user);
     }
 
     public interface IMultipleUserMessageRetriever
     {
-        IWallMessages RetrieveUsersMessages(IEnumerable<string> users);
+        IWallMessages RetrieveUsersMessages(ITimelineUsers timelineUsers);
+    }
+
+    public interface IFollowedUsers
+    {
+        ITimelineUsers CombineWith(string user);
     }
 
     public class WallMessageRetriever : IWallMessageRetriever
@@ -27,14 +35,14 @@ namespace Chatbot.Business
 
         public IWallMessages GetWallMessages(string user)
         {
-            var users = GetUsersOnWall(user);
-            return _multipleUserMessageRetriever.RetrieveUsersMessages(users);
+            var timelineUsers = TimelineUsers(user);
+            return _multipleUserMessageRetriever.RetrieveUsersMessages(timelineUsers);
         }
 
-        private IEnumerable<string> GetUsersOnWall(string user)
+        private ITimelineUsers TimelineUsers(string user)
         {
             var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
-            return new List<string> {user}.Concat(followedUsers);
+            return followedUsers.CombineWith(user);
         }
     }
 }

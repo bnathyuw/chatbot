@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Chatbot.Adapters;
+using Chatbot.Business;
 using Chatbot.Commands;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
 {
     [TestFixture]
-    public class InMemoryMessages_WallMessage_Tests : IWallMessageDisplayer
+    public class InMemoryMessages_WallMessage_Tests : IWallMessageDisplayer, ITimelineUsers
     {
         private static readonly DateTime Now = new DateTime(2015, 12, 29, 14, 52, 0);
         private List<Message> _actualMessages;
@@ -31,7 +32,7 @@ namespace Chatbot.Tests.Adapters
             inMemoryMessages.SaveMessage(new Message { User = "Charlie", Text = "Message 4", SentOn = Now.AddMinutes(-10) });
             _actualMessages = new List<Message>();
 
-            var messages = inMemoryMessages.RetrieveUsersMessages(new List<string> {"Alice", "Bob"});
+            var messages = inMemoryMessages.RetrieveUsersMessages(this);
             messages.Display(this);
         }
 
@@ -43,9 +44,8 @@ namespace Chatbot.Tests.Adapters
         public void Displays_most_recent_message_first() => 
             Assert.That(_actualMessages.First(), Is.EqualTo(ExpectedMessages.Last()));
 
-        public void DisplayWallMessage(Message message)
-        {
-            _actualMessages.Add(message);
-        }
+        public void DisplayWallMessage(Message message) => _actualMessages.Add(message);
+
+        public bool Contains(string user) => user == "Alice" || user == "Bob";
     }
 }

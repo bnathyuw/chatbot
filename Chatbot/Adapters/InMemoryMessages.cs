@@ -19,9 +19,9 @@ namespace Chatbot.Adapters
 
         public void SaveMessage(Message message) => _messages.Add(message);
 
-        public IWallMessages RetrieveUsersMessages(IEnumerable<string> users)
+        public IWallMessages RetrieveUsersMessages(ITimelineUsers timelineUsers)
         {
-            var messages = _messages.Where(m => users.Contains(m.User)).OrderByDescending(m => m.SentOn);
+            var messages = _messages.Where(m => timelineUsers.Contains(m.User)).OrderByDescending(m => m.SentOn);
             return new WallMessages(messages);
         }
     }
