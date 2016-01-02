@@ -54,7 +54,7 @@
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="Commands\Message.cs" />
     <Compile Include="Business\ClockTime.cs" />
-    <Compile Include="Business\MessageAgeFormatter.cs" />
+    <Compile Include="Business\AgeFormatter.cs" />
     <Compile Include="Commands\PostCommand.cs" />
     <Compile Include="Commands\StatusCommand.cs" />
     <Compile Include="Commands\TimelineCommand.cs" />

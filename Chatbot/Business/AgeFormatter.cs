@@ -1,25 +1,24 @@
 ﻿using System;
-using Chatbot.Commands;
 
 namespace Chatbot.Business
 {
-    public interface IMessageAgeCalculator
+    public interface IAgeCalculator
     {
-        TimeSpan CalculateAge(Message message);
+        TimeSpan CalculateAge(DateTime dateCreated);
     }
 
-    public class MessageAgeFormatter : IMessageAgeFormatter
+    public class AgeFormatter : IAgeFormatter
     {
-        private readonly IMessageAgeCalculator _messageAgeCalculator;
+        private readonly IAgeCalculator _ageCalculator;
 
-        public MessageAgeFormatter(IMessageAgeCalculator messageAgeCalculator)
+        public AgeFormatter(IAgeCalculator ageCalculator)
         {
-            _messageAgeCalculator = messageAgeCalculator;
+            _ageCalculator = ageCalculator;
         }
 
-        public string FormatAge(Message message)
+        public string FormatAge(DateTime dateCreated)
         {
-            var timeDifference = _messageAgeCalculator.CalculateAge(message);
+            var timeDifference = _ageCalculator.CalculateAge(dateCreated);
 
             if (timeDifference.Minutes > 0)
                 return FormatWithUnit(timeDifference.Minutes, "minute");

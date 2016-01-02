@@ -1,6 +1,5 @@
 ﻿using System;
 using Chatbot.Business;
-using Chatbot.Commands;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Business
@@ -19,7 +18,7 @@ namespace Chatbot.Tests.Business
 
         [Test]
         public void Calculates_age_of_a_message() =>
-            Assert.That(_clockTime.CalculateAge(new Message {SentOn = _now.AddMinutes(-10)}), Is.EqualTo(TimeSpan.FromMinutes(10)));
+            Assert.That(_clockTime.CalculateAge(_now.AddMinutes(-10)), Is.EqualTo(TimeSpan.FromMinutes(10)));
 
         [Test]
         public void Gives_timestamp() => Assert.That(_clockTime.Timestamp, Is.EqualTo(_now));

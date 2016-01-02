@@ -65,7 +65,7 @@
     <Compile Include="Commands\FollowCommand_Behaviour_Tests.cs" />
     <Compile Include="Commands\FollowCommand_CommandMatching_Tests.cs" />
     <Compile Include="Business\FormattedMessageDisplayer_Tests.cs" />
-    <Compile Include="Business\MessageAgeFormatter_Tests.cs" />
+    <Compile Include="Business\AgeFormatterTests.cs" />
     <Compile Include="Commands\KnownCommandHandler_WithNonMatchingCommand_Tests.cs" />
     <Compile Include="Commands\PostCommand_Behaviour_Tests.cs" />
     <Compile Include="Business\SampleInstructions.cs" />

@@ -8,7 +8,7 @@ namespace Chatbot.Business
         DateTime Now { get; }
     }
 
-    public class ClockTime : IMessageAgeCalculator, ITimestamper, ITimeDisplayer
+    public class ClockTime : IAgeCalculator, ITimestamper, ITimeDisplayer
     {
         private readonly IClock _clock;
 
@@ -17,7 +17,7 @@ namespace Chatbot.Business
             _clock = clock;
         }
 
-        public TimeSpan CalculateAge(Message message) => _clock.Now - message.SentOn;
+        public TimeSpan CalculateAge(DateTime dateCreated) => _clock.Now - dateCreated;
 
         public DateTime Timestamp => _clock.Now;
 

@@ -13,7 +13,7 @@ namespace Chatbot
             var userConnexions = new InMemoryUserConnexions();
 
             var clockTime = new ClockTime(systemClock);
-            var messageAgeFormatter = new MessageAgeFormatter(clockTime);
+            var messageAgeFormatter = new AgeFormatter(clockTime);
             var formattedMessageDisplayer = new FormattedMessageDisplayer(messageDisplayer, messageAgeFormatter);
 
             var unknownCommandHandler = new UnknownCommandHandler();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Chatbot.Business;
 using Chatbot.Commands;
 using NUnit.Framework;
@@ -6,10 +7,11 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Business
 {
     [TestFixture]
-    public class FormattedMessageDisplayer_Tests : IMessageDisplayer, IMessageAgeFormatter
+    public class FormattedMessageDisplayer_Tests : IMessageDisplayer, IAgeFormatter
     {
         private FormattedMessageDisplayer _formattedMessageDisplayer;
         private List<string> _actualMessages;
+        private readonly DateTime _dateCreated = new DateTime(2016, 1, 2);
 
         [OneTimeSetUp]
         public void OneTimeSetUp() => _formattedMessageDisplayer = new FormattedMessageDisplayer(this, this);
@@ -33,19 +35,19 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Displays_expected_timeline_message()
         {
-            _formattedMessageDisplayer.DisplayTimelineMessage(new Message {Text = "Message 1"});
-            Assert.That(_actualMessages, Does.Contain("Message 1 (age of Message 1)"));
+            _formattedMessageDisplayer.DisplayTimelineMessage(new Message {Text = "Message 1", SentOn = _dateCreated});
+            Assert.That(_actualMessages, Does.Contain("Message 1 (2016 01 02)"));
         }
 
         [Test]
         public void Displays_expected_wall_message()
         {
-            _formattedMessageDisplayer.DisplayWallMessage(new Message {User = "User", Text = "Message 1"});
-            Assert.That(_actualMessages, Does.Contain("User - Message 1 (age of Message 1)"));
+            _formattedMessageDisplayer.DisplayWallMessage(new Message {User = "User", Text = "Message 1", SentOn = _dateCreated});
+            Assert.That(_actualMessages, Does.Contain("User - Message 1 (2016 01 02)"));
         }
 
         public void ShowMessage(string output) => _actualMessages.Add(output);
 
-        public string FormatAge(Message message) => $"age of {message.Text}";
+        public string FormatAge(DateTime dateCreated) => $"{dateCreated:yyyy MM dd}";
     }
 }

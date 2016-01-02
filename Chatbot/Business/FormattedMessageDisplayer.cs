@@ -1,4 +1,5 @@
-﻿using Chatbot.Commands;
+﻿using System;
+using Chatbot.Commands;
 
 namespace Chatbot.Business
 {
@@ -7,20 +8,20 @@ namespace Chatbot.Business
         void ShowMessage(string output);
     }
 
-    public interface IMessageAgeFormatter
+    public interface IAgeFormatter
     {
-        string FormatAge(Message message);
+        string FormatAge(DateTime dateCreated);
     }
 
     public class FormattedMessageDisplayer : IStatusDisplayer, ITimelineMessageDisplayer, IWallMessageDisplayer
     {
         private readonly IMessageDisplayer _messageDisplayer;
-        private readonly IMessageAgeFormatter _messageAgeFormatter;
+        private readonly IAgeFormatter _ageFormatter;
 
-        public FormattedMessageDisplayer(IMessageDisplayer messageDisplayer, IMessageAgeFormatter messageAgeFormatter)
+        public FormattedMessageDisplayer(IMessageDisplayer messageDisplayer, IAgeFormatter ageFormatter)
         {
             _messageDisplayer = messageDisplayer;
-            _messageAgeFormatter = messageAgeFormatter;
+            _ageFormatter = ageFormatter;
         }
 
         public void DisplayStatus(string time, int messageCount, int userConnexionCount)
@@ -33,14 +34,14 @@ namespace Chatbot.Business
 
         public void DisplayTimelineMessage(Message message)
         {
-            var age = _messageAgeFormatter.FormatAge(message);
+            var age = _ageFormatter.FormatAge(message.SentOn);
             var output = $"{message.Text} ({age})";
             _messageDisplayer.ShowMessage(output);
         }
 
         public void DisplayWallMessage(Message message)
         {
-            var age = _messageAgeFormatter.FormatAge(message);
+            var age = _ageFormatter.FormatAge(message.SentOn);
             var output = $"{message.User} - {message.Text} ({age})";
             _messageDisplayer.ShowMessage(output);
         }
