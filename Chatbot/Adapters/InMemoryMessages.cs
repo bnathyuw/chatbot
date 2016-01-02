@@ -14,7 +14,7 @@ namespace Chatbot.Adapters
         public ITimelineMessages RetrieveUserMessages(string user)
         {
             var messages = _messages.Where(m => m.User == user).OrderByDescending(m => m.SentOn);
-            return new TimelineMessages(messages);
+            return new Messages(messages);
         }
 
         public void SaveMessage(Message message) => _messages.Add(message);
@@ -22,7 +22,33 @@ namespace Chatbot.Adapters
         public IWallMessages RetrieveUsersMessages(ITimelineUsers timelineUsers)
         {
             var messages = _messages.Where(m => timelineUsers.Contains(m.User)).OrderByDescending(m => m.SentOn);
-            return new WallMessages(messages);
+            return new Messages(messages);
+        }
+
+        private class Messages : ITimelineMessages, IWallMessages
+        {
+            private readonly IEnumerable<Message> _messages;
+
+            public Messages(IEnumerable<Message> messages)
+            {
+                _messages = messages;
+            }
+
+            public void Display(ITimelineMessageDisplayer timelineMessageDisplayer)
+            {
+                foreach (var message in _messages)
+                {
+                    timelineMessageDisplayer.DisplayTimelineMessage(message);
+                }
+            }
+
+            public void Display(IWallMessageDisplayer wallMessageDisplayer)
+            {
+                foreach (var message in _messages)
+                {
+                    wallMessageDisplayer.DisplayWallMessage(message);
+                }
+            }
         }
     }
 }

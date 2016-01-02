@@ -31,5 +31,35 @@ namespace Chatbot.Adapters
                 Followed = followed;
             }
         }
+
+        private class FollowedUsers : IFollowedUsers
+        {
+            private readonly IEnumerable<string> _followedUsers;
+
+            public FollowedUsers(IEnumerable<string> followedUsers)
+            {
+                _followedUsers = followedUsers;
+            }
+
+            public ITimelineUsers CombineWith(string user)
+            {
+                var users = new List<string> { user }.Concat(_followedUsers);
+                return new TimelineUsers(users);
+            }
+
+            private class TimelineUsers : ITimelineUsers
+            {
+                private readonly IEnumerable<string> _users;
+
+                public TimelineUsers(IEnumerable<string> users)
+                {
+                    _users = users;
+                }
+
+                public bool Contains(string user) => _users.Contains(user);
+            }
+
+        }
+
     }
 }
