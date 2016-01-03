@@ -57,14 +57,13 @@
     <Compile Include="Adapters\InMemoryUserConnexions_Tests.cs" />
     <Compile Include="Business\ClockTime_Tests.cs" />
     <Compile Include="Business\WallMessageRetriever_Tests.cs" />
-    <Compile Include="Commands\KnownCommandHandler_WithMatchingCommand_Tests.cs" />
+    <Compile Include="Commands\CollectionCommandHandler_WithNonMatchingCommand_Tests.cs" />
     <Compile Include="Commands\ExitCommand_Behaviour_Tests.cs" />
     <Compile Include="Commands\ExitCommand_CommandMatching_Tests.cs" />
     <Compile Include="Commands\FollowCommand_Behaviour_Tests.cs" />
     <Compile Include="Commands\FollowCommand_CommandMatching_Tests.cs" />
     <Compile Include="Business\FormattedMessageDisplayer_Tests.cs" />
     <Compile Include="Business\AgeFormatter_Tests.cs" />
-    <Compile Include="Commands\KnownCommandHandler_WithNonMatchingCommand_Tests.cs" />
     <Compile Include="Commands\PostCommand_Behaviour_Tests.cs" />
     <Compile Include="Business\SampleInstructions.cs" />
     <Compile Include="Commands\PostCommand_CommandMatching_Tests.cs" />

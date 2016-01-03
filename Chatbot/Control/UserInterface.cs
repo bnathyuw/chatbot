@@ -13,7 +13,7 @@
 
     public interface ICommandHandler
     {
-        State Handle(string command);
+        State Handle(string commandString);
     }
 
     public class UserInterface

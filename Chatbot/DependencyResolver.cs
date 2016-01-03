@@ -16,19 +16,14 @@ namespace Chatbot
             var messageAgeFormatter = new AgeFormatter(clockTime);
             var formattedMessageDisplayer = new FormattedMessageDisplayer(messageDisplayer, messageAgeFormatter);
 
-            var unknownCommandHandler = new UnknownCommandHandler();
             var exitCommand = new ExitCommand();
-            var exitCommandHandler = new KnownCommandHandler(unknownCommandHandler, exitCommand);
             var timelineCommand = new TimelineCommand(formattedMessageDisplayer, messages);
-            var timelineCommandHandler = new KnownCommandHandler(exitCommandHandler, timelineCommand);
             var postCommand = new PostCommand(clockTime, messages);
-            var postCommandHandler = new KnownCommandHandler(timelineCommandHandler, postCommand);
             var wallCommand = new WallCommand(formattedMessageDisplayer, new WallMessageRetriever(userConnexions, messages));
-            var wallCommandHandler = new KnownCommandHandler(postCommandHandler, wallCommand);
             var followCommand = new FollowCommand(userConnexions);
-            var followCommandHandler = new KnownCommandHandler(wallCommandHandler, followCommand);
             var statusCommand = new StatusCommand(formattedMessageDisplayer, clockTime, messages, userConnexions);
-            var commandHandler = new KnownCommandHandler(followCommandHandler, statusCommand);
+
+            var commandHandler = new CollectionCommandHandler(exitCommand, timelineCommand, postCommand, wallCommand, followCommand, statusCommand);
 
             return new UserInterface(commandReader, commandHandler);
         }
