@@ -24,7 +24,7 @@ namespace Chatbot.Tests.Commands
         [Test]
         public void Saves_the_message_with_a_timestamp()
         {
-            var expectedMessage = new Message { User = ExpectedUser, Text = ExpectedText, SentOn = _now };
+            var expectedMessage = new Message(ExpectedUser, ExpectedText, _now);
             Assert.That(_messageSaved, Is.EqualTo(expectedMessage));
         }
 

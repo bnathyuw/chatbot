@@ -15,9 +15,9 @@ namespace Chatbot.Tests.Adapters
         public void OneTimeSetUp()
         {
             _messages = new InMemoryMessages();
-            _messages.SaveMessage(new Message { User = "Alice", Text = "Message 1", SentOn = _now.AddMinutes(-20) });
-            _messages.SaveMessage(new Message { User = "Bob", Text = "Message 2", SentOn = _now.AddMinutes(-15) });
-            _messages.SaveMessage(new Message { User = "Bob", Text = "Message 3", SentOn = _now.AddMinutes(-12) });
+            _messages.SaveMessage(new Message("Alice", "Message 1", _now.AddMinutes(-20)));
+            _messages.SaveMessage(new Message("Bob", "Message 2", _now.AddMinutes(-15)));
+            _messages.SaveMessage(new Message("Bob", "Message 3", _now.AddMinutes(-12)));
         }
 
         [Test]

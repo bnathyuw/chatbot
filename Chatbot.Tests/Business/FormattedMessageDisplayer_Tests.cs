@@ -32,14 +32,14 @@ namespace Chatbot.Tests.Business
         [Test]
         public void Displays_expected_timeline_message()
         {
-            _formattedMessageDisplayer.DisplayTimelineMessage(new Message {Text = "Message 1", SentOn = _dateCreated});
+            _formattedMessageDisplayer.DisplayTimelineMessage(new Message(null, "Message 1", _dateCreated));
             Assert.That(_actualMessages, Does.Contain("Message 1 (2016 01 02)"));
         }
 
         [Test]
         public void Displays_expected_wall_message()
         {
-            _formattedMessageDisplayer.DisplayWallMessage(new Message {User = "User", Text = "Message 1", SentOn = _dateCreated});
+            _formattedMessageDisplayer.DisplayWallMessage(new Message("User", "Message 1", _dateCreated));
             Assert.That(_actualMessages, Does.Contain("User - Message 1 (2016 01 02)"));
         }
 

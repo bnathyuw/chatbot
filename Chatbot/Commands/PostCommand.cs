@@ -37,12 +37,9 @@ namespace Chatbot.Commands
         private Message ParseMessage(string command)
         {
             var match = _regex.Match(command);
-            return new Message
-            {
-                User = match.Groups["user"].Value,
-                Text = match.Groups["text"].Value,
-                SentOn = _timestamper.Timestamp
-            };
+            var user = match.Groups["user"].Value;
+            var text = match.Groups["text"].Value;
+            return new Message(user, text, _timestamper.Timestamp);
         }
 
         public bool Matches(string command) => _regex.IsMatch(command);

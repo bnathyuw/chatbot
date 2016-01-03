@@ -15,8 +15,8 @@ namespace Chatbot.Tests.Adapters
 
         private static readonly IEnumerable<Message> ExpectedMessages = new List<Message>
         {
-            new Message {User = "Bob", Text = "Message 2", SentOn = Now.AddMinutes(-15)},
-            new Message {User = "Bob", Text = "Message 3", SentOn = Now.AddMinutes(-12)}
+            new Message("Bob", "Message 2", Now.AddMinutes(-15)),
+            new Message("Bob", "Message 3", Now.AddMinutes(-12))
         };
 
         [OneTimeSetUp]
@@ -24,7 +24,7 @@ namespace Chatbot.Tests.Adapters
         {
             _actualMessages = new List<Message>();
             var inMemoryMessages = new InMemoryMessages();
-            inMemoryMessages.SaveMessage(new Message {User = "Alice", Text = "Message 1", SentOn = Now.AddMinutes(-20)});
+            inMemoryMessages.SaveMessage(new Message("Alice", "Message 1", Now.AddMinutes(-20)));
             foreach (var message in ExpectedMessages)
             {
                 inMemoryMessages.SaveMessage(message);

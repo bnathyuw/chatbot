@@ -16,9 +16,9 @@ namespace Chatbot.Tests.Adapters
 
         private static readonly IEnumerable<Message> ExpectedMessages = new List<Message>
         {
-            new Message {User = "Alice", Text = "Message 1", SentOn = Now.AddMinutes(-20)},
-            new Message {User = "Bob", Text = "Message 2", SentOn = Now.AddMinutes(-15)},
-            new Message {User = "Bob", Text = "Message 3", SentOn = Now.AddMinutes(-12)}
+            new Message("Alice", "Message 1", Now.AddMinutes(-20)),
+            new Message("Bob", "Message 2", Now.AddMinutes(-15)),
+            new Message("Bob", "Message 3", Now.AddMinutes(-12))
         };
 
         [OneTimeSetUp]
@@ -29,7 +29,7 @@ namespace Chatbot.Tests.Adapters
             {
                 inMemoryMessages.SaveMessage(message);
             }
-            inMemoryMessages.SaveMessage(new Message { User = "Charlie", Text = "Message 4", SentOn = Now.AddMinutes(-10) });
+            inMemoryMessages.SaveMessage(new Message("Charlie", "Message 4", Now.AddMinutes(-10)));
             _actualMessages = new List<Message>();
 
             var messages = inMemoryMessages.RetrieveUsersMessages(this);
@@ -37,11 +37,11 @@ namespace Chatbot.Tests.Adapters
         }
 
         [TestCaseSource(nameof(ExpectedMessages))]
-        public void Retrieves_all_messages_for_several_users(Message message) => 
+        public void Retrieves_all_messages_for_several_users(Message message) =>
             Assert.That(_actualMessages, Does.Contain(message));
 
         [Test]
-        public void Displays_most_recent_message_first() => 
+        public void Displays_most_recent_message_first() =>
             Assert.That(_actualMessages.First(), Is.EqualTo(ExpectedMessages.Last()));
 
         public void DisplayWallMessage(Message message) => _actualMessages.Add(message);
