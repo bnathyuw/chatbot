@@ -1,12 +1,13 @@
-﻿using Chatbot.Commands;
+using Chatbot.Commands;
 using Chatbot.Control;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Commands
 {
-    public class CollectionCommandHandler_WithNonMatchingCommand_Tests : ICommand
+    public class CollectionCommandHandler_WithMatchingCommand_Tests : ICommand
     {
         private const string ExpectedCommand = "Command";
+        private const State ExpectedState = State.Exit;
         private bool _wasCalled;
         private State _actualState;
         private string _actualCommand;
@@ -23,21 +24,21 @@ namespace Chatbot.Tests.Commands
         public void Checks_if_the_command_matches() => Assert.That(_actualCommand, Is.EqualTo(ExpectedCommand));
 
         [Test]
-        public void Does_not_call_command() => Assert.That(_wasCalled, Is.False);
+        public void Calls_command() => Assert.That(_wasCalled, Is.True);
 
         [Test]
-        public void Returns_continue_state() => Assert.That(_actualState, Is.EqualTo(State.Continue));
+        public void Returns_state_from_command() => Assert.That(_actualState, Is.EqualTo(ExpectedState));
 
         public bool Matches(string command)
         {
             _actualCommand = command;
-            return false;
+            return true;
         }
 
         public State Do(string command)
         {
             _wasCalled = true;
-            return State.Exit;
+            return ExpectedState;
         }
 
         private class TestNonMatchingCommand : ICommand

@@ -57,6 +57,7 @@
     <Compile Include="Adapters\InMemoryUserConnexions_Tests.cs" />
     <Compile Include="Business\ClockTime_Tests.cs" />
     <Compile Include="Business\WallMessageRetriever_Tests.cs" />
+    <Compile Include="Commands\CollectionCommandHandler_WithMatchingCommand_Tests.cs" />
     <Compile Include="Commands\CollectionCommandHandler_WithNonMatchingCommand_Tests.cs" />
     <Compile Include="Commands\ExitCommand_Behaviour_Tests.cs" />
     <Compile Include="Commands\ExitCommand_CommandMatching_Tests.cs" />
