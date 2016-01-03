@@ -10,10 +10,7 @@ namespace Chatbot.Tests.Commands
         private PostCommand _postCommand;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            _postCommand = new PostCommand(null, null);
-        }
+        public void OneTimeSetUp() => _postCommand = new PostCommand(null, null);
 
         [Test]
         public void Matches_post_command() => Assert.That(_postCommand.Matches(SampleCommands.Post), Is.True);

@@ -16,8 +16,9 @@ namespace Chatbot.Commands
 
     public class PostCommand : ICommand
     {
-        private readonly IMessageSaver _messageSaver;
         private readonly Regex _regex = new Regex("^(?<user>[a-zA-Z]*) -> (?<text>.*)$");
+
+        private readonly IMessageSaver _messageSaver;
         private readonly ITimestamper _timestamper;
 
         public PostCommand(ITimestamper timestamper, IMessageSaver messageSaver)

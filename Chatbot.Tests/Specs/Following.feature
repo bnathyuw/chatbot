@@ -1,5 +1,5 @@
 ﻿Feature: Following
-	In order to keep up to date on my friend's lives
+	In order to keep up to date on my friends' lives
 	As a Chatbot user
 	I want to have a convenient way of seeing all the posts by my friends
 	

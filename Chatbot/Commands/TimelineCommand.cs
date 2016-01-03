@@ -26,8 +26,9 @@ namespace Chatbot.Commands
 
     public class TimelineCommand : ICommand
     {
-        private readonly IUserMessageRetriever _userMessageRetriever;
         private readonly Regex _regex = new Regex("^[A-Za-z]*$");
+
+        private readonly IUserMessageRetriever _userMessageRetriever;
         private readonly ITimelineMessageDisplayer _timelineMessageDisplayer;
 
         public TimelineCommand(ITimelineMessageDisplayer timelineMessageDisplayer, IUserMessageRetriever userMessageRetriever)

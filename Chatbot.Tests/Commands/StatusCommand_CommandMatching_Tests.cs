@@ -10,10 +10,7 @@ namespace Chatbot.Tests.Commands
         private StatusCommand _statusCommand;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            _statusCommand = new StatusCommand(null, null, null, null);
-        }
+        public void OneTimeSetUp() => _statusCommand = new StatusCommand(null, null, null, null);
 
         [Test]
         public void Matches_status_command() => Assert.That(_statusCommand.Matches(SampleCommands.Status), Is.True);

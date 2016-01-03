@@ -11,13 +11,13 @@ namespace Chatbot.Adapters
 
         public int Count() => _messages.Count;
 
+        public void SaveMessage(Message message) => _messages.Add(message);
+
         public ITimelineMessages RetrieveUserMessages(string user)
         {
             var messages = _messages.Where(m => m.User == user).OrderByDescending(m => m.SentOn);
             return new Messages(messages);
         }
-
-        public void SaveMessage(Message message) => _messages.Add(message);
 
         public IWallMessages RetrieveUsersMessages(ITimelineUsers timelineUsers)
         {

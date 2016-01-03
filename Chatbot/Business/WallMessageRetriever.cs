@@ -35,14 +35,9 @@ namespace Chatbot.Business
 
         public IWallMessages GetWallMessages(string user)
         {
-            var timelineUsers = TimelineUsers(user);
-            return _multipleUserMessageRetriever.RetrieveUsersMessages(timelineUsers);
-        }
-
-        private ITimelineUsers TimelineUsers(string user)
-        {
             var followedUsers = _followedUserRetriever.RetrieveFollowedUsers(user);
-            return followedUsers.CombineWith(user);
+            var timelineUsers = followedUsers.CombineWith(user);
+            return _multipleUserMessageRetriever.RetrieveUsersMessages(timelineUsers);
         }
     }
 }

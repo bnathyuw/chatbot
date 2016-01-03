@@ -32,7 +32,7 @@ namespace Chatbot.Tests.Specs
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Following", "In order to keep up to date on my friend\'s lives\nAs a Chatbot user\nI want to have" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Following", "In order to keep up to date on my friends\' lives\nAs a Chatbot user\nI want to have" +
                     " a convenient way of seeing all the posts by my friends", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }

@@ -11,8 +11,7 @@ namespace Chatbot
         {
             var consoleIo = new ConsoleIo();
             var systemClock = new SystemClock();
-            var userInterface = DependencyResolver.CreateUserInterface(systemClock, consoleIo, consoleIo);
-            UserInterface = userInterface;
+            UserInterface = DependencyResolver.CreateUserInterface(systemClock, consoleIo, consoleIo);
         }
 
         static void Main()

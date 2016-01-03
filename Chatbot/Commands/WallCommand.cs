@@ -21,6 +21,7 @@ namespace Chatbot.Commands
     public class WallCommand : ICommand
     {
         private readonly Regex _regex = new Regex("^(?<user>[A-Za-z]*) wall");
+
         private readonly IWallMessageDisplayer _wallMessageDisplayer;
         private readonly IWallMessageRetriever _wallMessageRetriever;
 

@@ -10,10 +10,7 @@ namespace Chatbot.Tests.Commands
         private WallCommand _wallCommand;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            _wallCommand = new WallCommand(null, null);
-        }
+        public void OneTimeSetUp() => _wallCommand = new WallCommand(null, null);
 
         [Test]
         public void Matches_wall_command() => Assert.That(_wallCommand.Matches(SampleCommands.Wall), Is.True);

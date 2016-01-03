@@ -11,10 +11,7 @@ namespace Chatbot.Tests.Business
         private ClockTime _clockTime;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            _clockTime = new ClockTime(this);
-        }
+        public void OneTimeSetUp() => _clockTime = new ClockTime(this);
 
         [Test]
         public void Calculates_age_of_a_message() =>

@@ -17,10 +17,7 @@ namespace Chatbot.Tests.Business
         public void OneTimeSetUp() => _formattedMessageDisplayer = new FormattedMessageDisplayer(this, this);
 
         [SetUp]
-        public void SetUp()
-        {
-            _actualMessages = new List<string>();
-        }
+        public void SetUp() => _actualMessages = new List<string>();
 
         [TestCase("Status: ok")]
         [TestCase("Current time: time")]

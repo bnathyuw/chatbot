@@ -20,20 +20,35 @@ namespace Chatbot.Business
         {
             var timeDifference = _ageCalculator.CalculateAge(dateCreated);
 
+            var timeUnit = GetMostSignificantUnit(timeDifference);
+
+            return timeUnit.ToString();
+
+        }
+
+        private static TimeUnit GetMostSignificantUnit(TimeSpan timeDifference)
+        {
             if (timeDifference.Minutes > 0)
-                return FormatWithUnit(timeDifference.Minutes, "minute");
-
-            return FormatWithUnit(timeDifference.Seconds, "second");
+                return new TimeUnit(timeDifference.Minutes, "minute");
+            return new TimeUnit(timeDifference.Seconds, "second");
         }
 
-        private static string FormatWithUnit(int count, string unitName)
+        private class TimeUnit
         {
-            return $"{count} {PluraliseIfNecessary(count, unitName)} ago";
-        }
+            private readonly int _count;
+            private readonly string _unitName;
 
-        private static string PluraliseIfNecessary(int count, string unitName)
-        {
-            return count == 1 ? unitName : unitName + "s";
+            public TimeUnit(int count, string unitName)
+            {
+                _count = count;
+                _unitName = unitName;
+            }
+
+            public override string ToString() => 
+                $"{_count} {PluraliseIfNecessary(_count, _unitName)} ago";
+
+            private static string PluraliseIfNecessary(int count, string unitName) =>
+                count == 1 ? unitName : unitName + "s";
         }
     }
 }

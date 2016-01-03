@@ -10,10 +10,7 @@ namespace Chatbot.Tests.Commands
         private TimelineCommand _timelineCommand;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-            _timelineCommand = new TimelineCommand(null, null);
-        }
+        public void OneTimeSetUp() => _timelineCommand = new TimelineCommand(null, null);
 
         [Test]
         public void Matches_timeline_command() => Assert.That(_timelineCommand.Matches(SampleCommands.Timeline), Is.True);

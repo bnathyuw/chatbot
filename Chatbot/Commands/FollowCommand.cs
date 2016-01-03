@@ -10,8 +10,9 @@ namespace Chatbot.Commands
 
     public class FollowCommand : ICommand
     {
-        private readonly IUserConnexionSaver _userConnexionSaver;
         private readonly Regex _regex = new Regex("^(?<follower>[a-zA-Z]*) follows (?<followed>[a-zA-Z]*)$");
+
+        private readonly IUserConnexionSaver _userConnexionSaver;
 
         public FollowCommand(IUserConnexionSaver userConnexionSaver)
         {
