@@ -24,12 +24,12 @@ namespace Chatbot.Business
             _ageFormatter = ageFormatter;
         }
 
-        public void DisplayStatus(string time, int messageCount, int userConnexionCount)
+        public void DisplayStatus(Status status)
         {
             _messageDisplayer.ShowMessage("Status: ok");
-            _messageDisplayer.ShowMessage($"Current time: {time}");
-            _messageDisplayer.ShowMessage($"Messages sent: {messageCount}");
-            _messageDisplayer.ShowMessage($"User connexions: {userConnexionCount}");
+            _messageDisplayer.ShowMessage($"Current time: {status.Time}");
+            _messageDisplayer.ShowMessage($"Messages sent: {status.MessageCount}");
+            _messageDisplayer.ShowMessage($"User connexions: {status.UserConnexionCount}");
         }
 
         public void DisplayTimelineMessage(Message message)

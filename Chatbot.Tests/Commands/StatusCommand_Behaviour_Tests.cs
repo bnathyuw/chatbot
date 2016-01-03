@@ -1,5 +1,4 @@
-﻿using System;
-using Chatbot.Commands;
+﻿using Chatbot.Commands;
 using Chatbot.Control;
 using Chatbot.Tests.Business;
 using NUnit.Framework;
@@ -7,34 +6,30 @@ using NUnit.Framework;
 namespace Chatbot.Tests.Commands
 {
     [TestFixture]
-    public class StatusCommand_Behaviour_Tests : IMessageCounter, IUserConnexionCounter, ITimeDisplayer, IStatusDisplayer
+    public class StatusCommand_Behaviour_Tests : IStatusDisplayer, IStatusQuery
     {
         private const string ExpectedTime = "17:36, 28 December 2015";
         private const int ExpectedMessageCount = 35;
         private const int ExpectedConnexionCount = 46;
         private State _state;
-        private Tuple<string, int, int> _actualValues;
+        private Status _actualStatus;
+        private readonly Status _expectedStatus = new Status(ExpectedTime, ExpectedMessageCount, ExpectedConnexionCount);
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var statusCommand = new StatusCommand(this, this, this, this);
+            var statusCommand = new StatusCommand(this, this);
             _state = statusCommand.Do(SampleCommands.Status);
         }
 
         [Test]
-        public void Displays_status_with_expected_values() => 
-            Assert.That(_actualValues, Is.EqualTo(new Tuple<string, int, int>(ExpectedTime, ExpectedMessageCount, ExpectedConnexionCount)));
+        public void Displays_status_from_query() => Assert.That(_actualStatus, Is.EqualTo(_expectedStatus));
 
         [Test]
         public void Returns_a_continue_state() => Assert.That(_state, Is.EqualTo(State.Continue));
 
-        int IMessageCounter.Count() => ExpectedMessageCount;
+        public void DisplayStatus(Status status) => _actualStatus = status;
 
-        int IUserConnexionCounter.Count() => ExpectedConnexionCount;
-
-        string ITimeDisplayer.Display => ExpectedTime;
-
-        public void DisplayStatus(string time, int messageCount, int userConnexionCount) => _actualValues = new Tuple<string, int, int>(time, messageCount, userConnexionCount);
+        public Status GetStatus() => _expectedStatus;
     }
 }

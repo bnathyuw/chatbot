@@ -25,7 +25,7 @@ namespace Chatbot.Tests.Business
         [TestCase("User connexions: 24")]
         public void Displays_expected_status_messages(string expectedMessage)
         {
-            _formattedMessageDisplayer.DisplayStatus("time", 12, 24);
+            _formattedMessageDisplayer.DisplayStatus(new Status("time", 12, 24));
             Assert.That(_actualMessages, Does.Contain(expectedMessage));
         }
 

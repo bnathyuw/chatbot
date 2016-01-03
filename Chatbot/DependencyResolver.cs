@@ -21,7 +21,7 @@ namespace Chatbot
             var postCommand = new PostCommand(clockTime, messages);
             var wallCommand = new WallCommand(formattedMessageDisplayer, new WallMessageRetriever(userConnexions, messages));
             var followCommand = new FollowCommand(userConnexions);
-            var statusCommand = new StatusCommand(formattedMessageDisplayer, clockTime, messages, userConnexions);
+            var statusCommand = new StatusCommand(formattedMessageDisplayer, new StatusQuery(clockTime, messages, userConnexions));
 
             var commandHandler = new CollectionCommandHandler(exitCommand, timelineCommand, postCommand, wallCommand, followCommand, statusCommand);
 

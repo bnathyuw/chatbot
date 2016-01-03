@@ -69,6 +69,7 @@
     <Compile Include="Business\SampleInstructions.cs" />
     <Compile Include="Commands\PostCommand_CommandMatching_Tests.cs" />
     <Compile Include="Commands\StatusCommand_CommandMatching_Tests.cs" />
+    <Compile Include="Business\StatusQuery_Tests.cs" />
     <Compile Include="Commands\TimelineCommand_Behaviour_Tests.cs" />
     <Compile Include="Commands\TimelineCommand_CommandMatching_Tests.cs" />
     <Compile Include="Commands\WallCommand_CommandMatching_Tests.cs" />

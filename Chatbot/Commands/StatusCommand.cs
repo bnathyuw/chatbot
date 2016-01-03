@@ -2,47 +2,47 @@ using Chatbot.Control;
 
 namespace Chatbot.Commands
 {
-    public interface IMessageCounter
+    public struct Status
     {
-        int Count();
-    }
+        public Status(string time, int messageCount, int userConnexionCount)
+        {
+            Time = time;
+            MessageCount = messageCount;
+            UserConnexionCount = userConnexionCount;
+        }
 
-    public interface IUserConnexionCounter
-    {
-        int Count();
-    }
+        public string Time { get; }
 
-    public interface ITimeDisplayer
-    {
-        string Display { get; }
+        public int MessageCount { get; }
+
+        public int UserConnexionCount { get; }
     }
 
     public interface IStatusDisplayer
     {
-        void DisplayStatus(string time, int messageCount, int userConnexionCount);
+        void DisplayStatus(Status status);
+    }
+
+    public interface IStatusQuery
+    {
+        Status GetStatus();
     }
 
     public class StatusCommand : ICommand
     {
-        private readonly IMessageCounter _messageStore;
-        private readonly IUserConnexionCounter _userConnexionStore;
-        private readonly ITimeDisplayer _timeDisplayer;
         private readonly IStatusDisplayer _statusDisplayer;
+        private readonly IStatusQuery _statusQuery;
 
-        public StatusCommand(IStatusDisplayer statusDisplayer, ITimeDisplayer timeDisplayer, IMessageCounter messageStore, IUserConnexionCounter userConnexionStore)
+        public StatusCommand(IStatusDisplayer statusDisplayer, IStatusQuery statusQuery)
         {
             _statusDisplayer = statusDisplayer;
-            _timeDisplayer = timeDisplayer;
-            _messageStore = messageStore;
-            _userConnexionStore = userConnexionStore;
+            _statusQuery = statusQuery;
         }
 
         public State Do(string command)
         {
-            var time = _timeDisplayer.Display;
-            var messageCount = _messageStore.Count();
-            var userConnexionCount = _userConnexionStore.Count();
-            _statusDisplayer.DisplayStatus(time, messageCount, userConnexionCount);
+            var status = _statusQuery.GetStatus();
+            _statusDisplayer.DisplayStatus(status);
 
             return State.Continue;
         }

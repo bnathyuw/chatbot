@@ -47,6 +47,7 @@
     <Compile Include="Adapters\InMemoryMessages.cs" />
     <Compile Include="Adapters\SystemClock.cs" />
     <Compile Include="Adapters\InMemoryUserConnexions.cs" />
+    <Compile Include="Business\StatusQuery.cs" />
     <Compile Include="Commands\CollectionCommandHandler.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\FollowCommand.cs" />
