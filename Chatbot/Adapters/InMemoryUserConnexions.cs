@@ -17,36 +17,25 @@ namespace Chatbot.Adapters
         public IFollowedUsers RetrieveFollowedUsers(string follower)
         {
             var users = _userConnexions.Where(c => c.Follower == follower).Select(c => c.Followed);
-            return new FollowedUsers(users);
+            return new Users(users);
         }
 
-        private class FollowedUsers : IFollowedUsers
+        private class Users : IFollowedUsers, ITimelineUsers
         {
-            private readonly IEnumerable<string> _followedUsers;
+            private readonly IEnumerable<string> _users;
 
-            public FollowedUsers(IEnumerable<string> followedUsers)
+            public Users(IEnumerable<string> users)
             {
-                _followedUsers = followedUsers;
+                _users = users;
             }
 
             public ITimelineUsers CombineWith(string user)
             {
-                var users = new List<string> { user }.Concat(_followedUsers);
-                return new TimelineUsers(users);
+                var users = new List<string> { user }.Concat(_users);
+                return new Users(users);
             }
 
-            private class TimelineUsers : ITimelineUsers
-            {
-                private readonly IEnumerable<string> _users;
-
-                public TimelineUsers(IEnumerable<string> users)
-                {
-                    _users = users;
-                }
-
-                public bool Contains(string user) => _users.Contains(user);
-            }
-
+            public bool Contains(string user) => _users.Contains(user);
         }
 
     }
