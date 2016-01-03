@@ -1,4 +1,5 @@
 ﻿using Chatbot.Adapters;
+using Chatbot.Commands;
 using NUnit.Framework;
 
 namespace Chatbot.Tests.Adapters
@@ -13,9 +14,9 @@ namespace Chatbot.Tests.Adapters
         {
             _userConnexions = new InMemoryUserConnexions();
 
-            _userConnexions.Save("Alice", "Bob");
-            _userConnexions.Save("Alice", "Charlie");
-            _userConnexions.Save("Charlie", "Bob");
+            _userConnexions.Save(new UserConnexion("Alice", "Bob"));
+            _userConnexions.Save(new UserConnexion("Alice", "Charlie"));
+            _userConnexions.Save(new UserConnexion("Charlie", "Bob"));
         }
 
         [Test]

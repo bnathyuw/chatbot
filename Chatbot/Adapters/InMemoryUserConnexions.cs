@@ -11,25 +11,13 @@ namespace Chatbot.Adapters
 
         public int Count() => _userConnexions.Count;
 
-        public void Save(string follower, string followed) =>
-            _userConnexions.Add(new UserConnexion(follower, followed));
+        public void Save(UserConnexion userConnexion) =>
+            _userConnexions.Add(userConnexion);
 
         public IFollowedUsers RetrieveFollowedUsers(string follower)
         {
             var users = _userConnexions.Where(c => c.Follower == follower).Select(c => c.Followed);
             return new FollowedUsers(users);
-        }
-
-        private struct UserConnexion
-        {
-            public string Follower { get; }
-            public string Followed { get; }
-
-            public UserConnexion(string follower, string followed)
-            {
-                Follower = follower;
-                Followed = followed;
-            }
         }
 
         private class FollowedUsers : IFollowedUsers
